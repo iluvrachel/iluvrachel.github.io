@@ -1,0 +1,796 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java Web," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="DataBaseUtils 数据库工具类（续上）使用完数据库后要关闭连接，释放资源123456789101112131415/** * 关闭资源 * @param connection * @param statement * @param rs */public static void closeConnection(Connection connection,PreparedStatement">
+<meta name="keywords" content="Java Web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java Web项目实战-三">
+<meta property="og:url" content="http://yoursite.com/2017/03/16/Java-Web项目实战-三/index.html">
+<meta property="og:site_name" content="Lin">
+<meta property="og:description" content="DataBaseUtils 数据库工具类（续上）使用完数据库后要关闭连接，释放资源123456789101112131415/** * 关闭资源 * @param connection * @param statement * @param rs */public static void closeConnection(Connection connection,PreparedStatement">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-02-12T14:17:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java Web项目实战-三">
+<meta name="twitter:description" content="DataBaseUtils 数据库工具类（续上）使用完数据库后要关闭连接，释放资源123456789101112131415/** * 关闭资源 * @param connection * @param statement * @param rs */public static void closeConnection(Connection connection,PreparedStatement">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/16/Java-Web项目实战-三/"/>
+
+
+
+
+
+  <title> Java Web项目实战-三 | Lin </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lin</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">就算生活表里不一,鱼香茄子里没有鱼,也津津有味的过吧</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/16/Java-Web项目实战-三/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="L IN">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://i.dimg.cc/dc/51/d9/5a/1f/ea/cb/d1/18/74/b7/3d/50/9c/ee/bb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lin">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Java Web项目实战-三
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-16T00:40:41+08:00">
+                2017-03-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程相关/" itemprop="url" rel="index">
+                    <span itemprop="name">编程相关</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="DataBaseUtils-数据库工具类（续上）"><a href="#DataBaseUtils-数据库工具类（续上）" class="headerlink" title="DataBaseUtils 数据库工具类（续上）"></a>DataBaseUtils 数据库工具类（续上）</h4><h5 id="使用完数据库后要关闭连接，释放资源"><a href="#使用完数据库后要关闭连接，释放资源" class="headerlink" title="使用完数据库后要关闭连接，释放资源"></a>使用完数据库后要关闭连接，释放资源</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 关闭资源</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> connection</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> statement</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> rs</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">closeConnection</span><span class="params">(Connection connection,PreparedStatement statement,ResultSet rs)</span></span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(rs!=<span class="keyword">null</span>)rs.close();</span><br><span class="line">        <span class="keyword">if</span>(statement!=<span class="keyword">null</span>)statement.close();</span><br><span class="line">        <span class="keyword">if</span>(connection!=<span class="keyword">null</span>)connection.close();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.fillInStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h5 id="数据库操作（查改增删）"><a href="#数据库操作（查改增删）" class="headerlink" title="数据库操作（查改增删）"></a>数据库操作（查改增删）</h5><p>把各种操作的语句串封装为一个方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * DML操作</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> sql</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> objects</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(String sql,Object...objects)</span></span>&#123;</span><br><span class="line">    Connection connection = getConnection();</span><br><span class="line">    PreparedStatement statement = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        statement = (PreparedStatement) connection.prepareStatement(sql);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; objects.length; i++) &#123;</span><br><span class="line">            statement.setObject(i+<span class="number">1</span>, objects[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        statement.executeUpdate();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">        closeConnection(connection, statement, <span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试<br>修改DatabaseUtil.java的Main方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String id = UUID.randomUUID() + <span class="string">""</span>;</span><br><span class="line">String createTime = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd"</span>).format(<span class="keyword">new</span> Date());</span><br><span class="line">update(<span class="string">"INSERT INTO t_user(id,username,password) "</span></span><br><span class="line">        + <span class="string">"VALUES (?, ?, ?)"</span>, id,<span class="string">"张三"</span>,<span class="number">123456</span>);</span><br></pre></td></tr></table></figure></p>
+<p>mysql&gt; select * from t_user; 显示表中所有数据</p>
+<p>然后 发现数据是有了，但是乱码啊,why?<br>mysql&gt; show variables like “%char%”;  查一下数据库编码也全是utf8没错啊<br>打开MySQL根目录下的my.ini文件里面的配置也是utf8<br>算了，先不管它，毕竟理论上取出来的数据还会是原来的样子<br>研究了一下，估计是控制台不支持utf8编码，改起来可能比较麻烦，后面暂时就不用中文数据了</p>
+<h4 id="几种查询返回方法"><a href="#几种查询返回方法" class="headerlink" title="几种查询返回方法"></a>几种查询返回方法</h4><h5 id="queryForList-amp-amp-queryForMap"><a href="#queryForList-amp-amp-queryForMap" class="headerlink" title="queryForList&amp;&amp;queryForMap"></a>queryForList&amp;&amp;queryForMap</h5><p>理论上讲这两个东西常见的框架里面是有的，只是我还不太会用框架，关于框架的东西之后会再单独拿出来写。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 查询出数据，并且list返回</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> sql</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> objects</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> SQLException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> List&lt;Map&lt;String,Object&gt;&gt; queryForList(String sql,Object...objects)&#123;</span><br><span class="line">        List&lt;Map&lt;String,Object&gt;&gt; result = <span class="keyword">new</span> ArrayList&lt;Map&lt;String,Object&gt;&gt;();</span><br><span class="line">        Connection connection = getConnection();</span><br><span class="line">        PreparedStatement statement = <span class="keyword">null</span>;</span><br><span class="line">        ResultSet rs = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            statement = connection.prepareStatement(sql);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; objects.length; i++) &#123;</span><br><span class="line">                statement.setObject(i+<span class="number">1</span>, objects[i]);</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        rs = statement.executeQuery();</span><br><span class="line">        <span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line">            ResultSetMetaData resultSetMetaData = rs.getMetaData();</span><br><span class="line">            <span class="keyword">int</span> count = resultSetMetaData.getColumnCount(); <span class="comment">//获取列数</span></span><br><span class="line">            Map&lt;String,Object&gt; map = <span class="keyword">new</span> HashMap&lt;String, Object&gt;();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">                map.put(resultSetMetaData.getColumnName(i+<span class="number">1</span>), rs.getObject(resultSetMetaData.getColumnName(i+<span class="number">1</span>)));</span><br><span class="line">            &#125;</span><br><span class="line">            result.add(map);</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">        closeConnection(connection, statement, rs);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 查询出数据，并且map返回</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> sql</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> objects</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> SQLException</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Map&lt;String,Object&gt; <span class="title">queryForMap</span><span class="params">(String sql,Object...objects)</span> <span class="keyword">throws</span> SQLException</span>&#123;</span><br><span class="line">    Map&lt;String,Object&gt; result = <span class="keyword">new</span> HashMap&lt;String,Object&gt;();</span><br><span class="line">    List&lt;Map&lt;String,Object&gt;&gt; list = queryForList(sql, objects);</span><br><span class="line">    <span class="keyword">if</span>(list.size() != <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    result = list.get(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>测试<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DataBaseUtils.config(<span class="string">"jdbc.properties"</span>);</span><br><span class="line">List list = DataBaseUtils.queryForList(<span class="string">"select * from t_user"</span>);</span><br><span class="line">System.out.println(list);</span><br></pre></td></tr></table></figure></p>
+<h5 id="queryForBean"><a href="#queryForBean" class="headerlink" title="queryForBean"></a>queryForBean</h5><p>把从数据库取到的数据转化为一个Java bean也即Java对象<br>具体代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 查询出数据，并且返回一个JavaBean</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> sql</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> clazz</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> objects</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> NoSuchFieldException</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> SecurityException</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt;<span class="function">T <span class="title">queryForBean</span><span class="params">(String sql,Class clazz,Object...objects)</span></span>&#123;</span><br><span class="line">    T obj = <span class="keyword">null</span>;</span><br><span class="line">    Map&lt;String,Object&gt; map = <span class="keyword">null</span>;</span><br><span class="line">    Field field = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        obj = (T) clazz.newInstance();   <span class="comment">//创建一个新的Bean实例</span></span><br><span class="line">        map = queryForMap(sql, objects); <span class="comment">//先将结果集放在一个Map中</span></span><br><span class="line">    &#125; <span class="keyword">catch</span> (InstantiationException | IllegalAccessException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(map == <span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//遍历Map</span></span><br><span class="line">    <span class="keyword">for</span> (String columnName : map.keySet()) &#123;</span><br><span class="line">        Method method = <span class="keyword">null</span>;</span><br><span class="line">        String propertyName = StringUtils.columnToProperty(columnName); <span class="comment">//属性名称</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        field = clazz.getDeclaredField(propertyName);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (NoSuchFieldException e1) &#123;</span><br><span class="line">        e1.printStackTrace();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (SecurityException e1) &#123;</span><br><span class="line">        e1.printStackTrace();</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="comment">//获取JavaBean中的字段</span></span><br><span class="line">    String fieldType = field.toString().split(<span class="string">" "</span>)[<span class="number">1</span>]; <span class="comment">//获取该字段的类型</span></span><br><span class="line">    <span class="comment">//System.out.println(fieldType);</span></span><br><span class="line">    Object value = map.get(columnName);</span><br><span class="line">    <span class="keyword">if</span>(value == <span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**获取set方法的名字* */</span></span><br><span class="line">    String setMethodName = <span class="string">"set"</span> + StringUtils.upperCaseFirstCharacter(propertyName);</span><br><span class="line">    <span class="comment">//System.out.println(setMethodName);</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">/**获取值的类型* */</span></span><br><span class="line">        String valueType = value.getClass().getName();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">/**查看类型是否匹配* */</span></span><br><span class="line">        <span class="keyword">if</span>(!fieldType.equalsIgnoreCase(valueType))&#123;</span><br><span class="line">            <span class="comment">//System.out.println("类型不匹配");</span></span><br><span class="line">            <span class="keyword">if</span>(fieldType.equalsIgnoreCase(<span class="string">"java.lang.Integer"</span>))&#123;</span><br><span class="line">                value = Integer.parseInt(String.valueOf(value));</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(fieldType.equalsIgnoreCase(<span class="string">"java.lang.String"</span>))&#123;</span><br><span class="line">                value = String.valueOf(value);</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(fieldType.equalsIgnoreCase(<span class="string">"java.util.Date"</span>))&#123;</span><br><span class="line">                valueType = <span class="string">"java.util.Date"</span>;</span><br><span class="line">                <span class="comment">//将value转换成java.util.Date</span></span><br><span class="line">                String dateStr = String.valueOf(value);</span><br><span class="line">                Timestamp ts = Timestamp.valueOf(dateStr);</span><br><span class="line">                Date date = <span class="keyword">new</span> Date(ts.getTime());</span><br><span class="line">                value = date;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">/**获取set方法* */</span></span><br><span class="line">        <span class="comment">//System.out.println(valueType);</span></span><br><span class="line">        method = clazz.getDeclaredMethod(setMethodName,Class.forName(fieldType));</span><br><span class="line">        <span class="comment">/**执行set方法* */</span></span><br><span class="line">        method.invoke(obj, value);</span><br><span class="line">    &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">        <span class="comment">/**如果报错，基本上是因为类型不匹配* */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//System.out.println(obj);</span></span><br><span class="line"><span class="keyword">return</span> obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>代码有点复杂，主要运用了Java的反射机制和泛型，通过反射来得到set方法，具体参考 <em>@剽悍一小兔</em> 的博客<a href="http://www.cnblogs.com/skyblue-li/p/5933571.html" target="_blank" rel="noopener">http://www.cnblogs.com/skyblue-li/p/5933571.html</a></p>
+<h3 id="controller和service"><a href="#controller和service" class="headerlink" title="controller和service"></a>controller和service</h3><p>DataBaseUtil工具类就暂时告一段落，有需要再增加其他的方法<br>接下来完善一下loginController<br>导入对应的包：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=<span class="string">"java"</span> <span class="keyword">import</span>=<span class="string">"java.util.*,service.LoginService,util.StringUtils,bean.*"</span> pageEncoding=<span class="string">"UTF-8"</span>%&gt;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    &lt;%</span><br><span class="line">    <span class="comment">//设置请求的编码</span></span><br><span class="line">    <span class="comment">//request.setCharacterEncoding("UTF-8");</span></span><br><span class="line">    <span class="comment">//获取客户端传递过来参数</span></span><br><span class="line">    String username = request.getParameter(<span class="string">"username"</span>);</span><br><span class="line">    String password = request.getParameter(<span class="string">"password"</span>);</span><br><span class="line">    <span class="comment">//System.out.println(username);</span></span><br><span class="line">    <span class="comment">//System.out.println(password);</span></span><br><span class="line">    <span class="comment">//如果用户名和密码不为空</span></span><br><span class="line">    <span class="keyword">if</span>(StringUtils.isEmpty(username) || StringUtils.isEmpty(password))&#123;</span><br><span class="line">        out.print(<span class="string">"-1"</span>);<span class="comment">//错误码-1 :   用户名和密码不能为空！</span></span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="comment">//初始化LoginService</span></span><br><span class="line">        LoginService loginService = <span class="keyword">new</span> LoginService();</span><br><span class="line">        <span class="comment">//接下来判断用户名是否存在</span></span><br><span class="line">        User user = loginService.getUser(username);</span><br><span class="line">        <span class="keyword">if</span>(user == <span class="keyword">null</span>)&#123;</span><br><span class="line">            out.print(<span class="string">"-2"</span>);<span class="comment">//错误码-2 :   用户名不存在！</span></span><br><span class="line">        &#125;<span class="keyword">else</span></span><br><span class="line">            <span class="comment">//如果用户名存在，那么验证用户名和密码是否匹配</span></span><br><span class="line">            <span class="keyword">if</span>(!username.equals(user.getUsername()) || !password.equals(user.getPassword()))&#123;</span><br><span class="line">                out.print(<span class="string">"-3"</span>);<span class="comment">//错误码-3 :   用户名或密码错误！</span></span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">//如果能到这一步，就说明用户的确存在，而且账号密码也正确。那么就把user放在session中</span></span><br><span class="line">                out.print(<span class="string">"1"</span>);</span><br><span class="line">                session.setAttribute(<span class="string">"user"</span>, user);</span><br><span class="line">                session.setAttribute(<span class="string">"username"</span>, user.getUsername());</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    %&gt;</span><br></pre></td></tr></table></figure></p>
+<p>其中StringUtil.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> util;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringUtils</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 判断字符串是否为空</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> str</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span> == str  || str.equals(<span class="string">""</span>)</span><br><span class="line">                || str.matches(<span class="string">"\\s*"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 给输入的字符串设置默认值</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> content</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> defaultValue</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">defaultValue</span><span class="params">(String content,String defaultValue)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(isEmpty(content))&#123;</span><br><span class="line">            <span class="keyword">return</span> defaultValue;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> content;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 把数据库字段名改为驼峰方式</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> column</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">columnToProperty</span><span class="params">(String column)</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**如果字段名为空，就返回空字符串* */</span></span><br><span class="line">    <span class="keyword">if</span>(isEmpty(column)) <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    <span class="comment">/**获取字段的长度，一般来说字段长度不可能有几百个字节的，所以用Byte就行了* */</span></span><br><span class="line">    Byte length = (<span class="keyword">byte</span>) column.length();</span><br><span class="line">    </span><br><span class="line">    StringBuilder sb = <span class="keyword">new</span> StringBuilder(length);</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">/**遍历字段的每一个字符* */</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; length; j++) &#123;</span><br><span class="line">         <span class="comment">/**匹配到第一个_* */</span></span><br><span class="line">        <span class="keyword">if</span> (column.charAt(j) == <span class="string">'_'</span>) &#123;</span><br><span class="line">            <span class="comment">/**如果后面还有_,也就是连续的_,那么j就需要自增一个单位，直到后面不是_为止* */</span></span><br><span class="line">            <span class="keyword">while</span> (column.charAt(j + <span class="number">1</span>) == <span class="string">'_'</span>) &#123;</span><br><span class="line">                j += <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            sb.append((<span class="string">""</span> + column.charAt(++j)).toUpperCase());</span><br><span class="line">            </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">             <span class="comment">/**如果循环到的字符不是_,那么就保存下来* */</span></span><br><span class="line">                sb.append(column.charAt(j));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> sb.toString();</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 将一个字符串的首字母改成大写</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> str</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">upperCaseFirstCharacter</span><span class="params">(String str)</span></span>&#123;</span><br><span class="line">    StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">    <span class="keyword">char</span>[] arr = str.toCharArray();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(i==<span class="number">0</span>) sb.append((arr[i] + <span class="string">""</span>).toUpperCase());</span><br><span class="line">        <span class="keyword">else</span> sb.append((arr[i]+<span class="string">""</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sb.toString();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="LoginService"><a href="#LoginService" class="headerlink" title="LoginService"></a>LoginService</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> service;</span><br><span class="line"><span class="keyword">import</span> bean.User;</span><br><span class="line"><span class="keyword">import</span> util.DataBaseUtils;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 用户登录的服务类</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> lenovo</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginService</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">getUser</span><span class="params">(String username)</span></span>&#123;</span><br><span class="line">        String sql = <span class="string">"select * from t_user where username = ?"</span>;</span><br><span class="line">        User user = DataBaseUtils.queryForBean(sql, User.class, username);</span><br><span class="line">        <span class="keyword">if</span>(user == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//System.out.println(user);</span></span><br><span class="line">        <span class="keyword">return</span> user;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="login-jsp逻辑"><a href="#login-jsp逻辑" class="headerlink" title="login.jsp逻辑"></a>login.jsp逻辑</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    </span></span><br><span class="line"><span class="undefined">    function login()&#123;</span></span><br><span class="line"><span class="undefined">        var username = $('#username').val();</span></span><br><span class="line"><span class="undefined">        var password = $('#password').val();</span></span><br><span class="line"><span class="undefined">        $.ajax(&#123;</span></span><br><span class="line"><span class="undefined">            type:"post",//请求方式</span></span><br><span class="line"><span class="undefined">            url:"$&#123;basePath&#125;/controller/loginController.jsp",//请求地址</span></span><br><span class="line"><span class="undefined">            data:&#123;"username":username,"password":password&#125;,//传递给controller的json数据</span></span><br><span class="line"><span class="undefined">            error:function()&#123;//如果出错了，将事件重新绑定</span></span><br><span class="line"><span class="undefined">                alert("登陆出错！");</span></span><br><span class="line"><span class="undefined">            &#125;,</span></span><br><span class="line"><span class="undefined">            success:function(data)&#123; //返回成功执行回调函数。</span></span><br><span class="line"><span class="undefined">                if(data == -1)&#123;</span></span><br><span class="line"><span class="undefined">                    alert('用户名和密码不能为空！');</span></span><br><span class="line"><span class="undefined">                &#125;else if(data == -2)&#123;</span></span><br><span class="line"><span class="undefined">                    alert('用户名不存在！');</span></span><br><span class="line"><span class="undefined">                &#125;else if(data == -3)&#123;</span></span><br><span class="line"><span class="undefined">                    alert('用户名或密码错误！');</span></span><br><span class="line"><span class="undefined">                &#125;else&#123;</span></span><br><span class="line"><span class="undefined">                    //登录成功后返回首页</span></span><br><span class="line"><span class="undefined">                    window.location.href = "$&#123;basePath&#125;"; </span></span><br><span class="line"><span class="undefined">                &#125;</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="undefined">        &#125;);</span></span><br><span class="line"><span class="undefined">        </span></span><br><span class="line"><span class="undefined">        </span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">    </span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>测试一下又出了问题，无论用户密码正确与否，都回调error<br>具体原因我研究研究</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java-Web/" rel="tag"># Java Web</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/13/MySQL学习笔记/" rel="next" title="MySQL学习笔记">
+                <i class="fa fa-chevron-left"></i> MySQL学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/26/MySQL学习笔记-2/" rel="prev" title="MySQL学习笔记-2">
+                MySQL学习笔记-2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://i.dimg.cc/dc/51/d9/5a/1f/ea/cb/d1/18/74/b7/3d/50/9c/ee/bb.jpg"
+               alt="L IN" />
+          <p class="site-author-name" itemprop="name">L IN</p>
+           
+              <p class="site-description motion-element" itemprop="description">就算生活表里不一,鱼香茄子里没有鱼,也津津有味的过吧</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yizhi-jiao-41/activities" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-zhihu"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/iluvrachel" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#DataBaseUtils-数据库工具类（续上）"><span class="nav-number">1.</span> <span class="nav-text">DataBaseUtils 数据库工具类（续上）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用完数据库后要关闭连接，释放资源"><span class="nav-number">1.1.</span> <span class="nav-text">使用完数据库后要关闭连接，释放资源</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库操作（查改增删）"><span class="nav-number">1.2.</span> <span class="nav-text">数据库操作（查改增删）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#几种查询返回方法"><span class="nav-number">2.</span> <span class="nav-text">几种查询返回方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#queryForList-amp-amp-queryForMap"><span class="nav-number">2.1.</span> <span class="nav-text">queryForList&amp;&amp;queryForMap</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#queryForBean"><span class="nav-number">2.2.</span> <span class="nav-text">queryForBean</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#controller和service"><span class="nav-number"></span> <span class="nav-text">controller和service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LoginService"><span class="nav-number"></span> <span class="nav-text">LoginService</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#login-jsp逻辑"><span class="nav-number"></span> <span class="nav-text">login.jsp逻辑</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">L IN</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> <script type="text/javascript" src="/js/src/fireworks.js"></script>  
+</body>
+</html>
