@@ -271,6 +271,169 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/05/论文笔记-End-to-End-Human-Mesh-Recovery/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="L IN">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://i.dimg.cc/dc/51/d9/5a/1f/ea/cb/d1/18/74/b7/3d/50/9c/ee/bb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lin">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/08/05/论文笔记-End-to-End-Human-Mesh-Recovery/" itemprop="url">
+                  [论文笔记]End-to-End Human Mesh Recovery
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-05T15:32:47+08:00">
+                2018-08-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/读论文/" itemprop="url" rel="index">
+                    <span itemprop="name">读论文</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<h1 id="INTRODUCTION"><a href="#INTRODUCTION" class="headerlink" title="INTRODUCTION"></a>INTRODUCTION</h1><p>此paper提出了一个以端到端的方法实现从二维人体图像恢复出三维人体模型的框架。在此之前，绝大多数的方法或是只关心三维骨架的重建，或是采用两段式的方法，即先从二维图像推断出2D-joint location，再从2D-joint来预测三维模型或计算三维参数。<br>以端到端的方法来实现这一目的，在数据集方面有几个挑战需要面对。一是，缺少足够数量的带有ground truth 3D annotation的自然获取的实况图像，目前已有的自带3D结构注解的图像都是在特定的实验环境下获得的，并不足以反映真实世界可能出现的所有情况。二是，从二维到三维存在着固有的模棱两可性，因为缺少了深度信息，许多不同的三维模型都可以映射为同一个二维图像，而由二维图像映射到三维时，也不一定能够符合人体结构学。该文章将着重解决这几个问题。<br>对于第一个难题，解决方案思路出发点是使用两个数据集来进行训练，一个是带有2D annotation的实况二维图像集，另一个是人体的3D mesh模型集，这两个数据集是没有配对关系的。当获得一副图像，先预测该图像对应的3D mesh参数，然后使推断出来的3D mesh的3D Joint映射到2D时能够与原图的2D-joint契合。通过这样一个从2D到3D再到2D的过程，我们就可以使用海量的不带三维信息的二维图像来作为数据集进行训练。在预测模型参数方面，以前的多数方法是把这个问题当做分类问题来处理，这样做得到的误差是离散化的，所以在精度上有不足。这篇paper在参数预测上则采用了iterative regression with feedback的方法。<br>对于第二个问题，为了使生成的模型符合真实的人体结构，使用GAN的网络结构，把生成模型的参数输入到一个Discriminator中，Discriminator在训练中学习每个joint之间的角度限制，由Discriminator来判断模型是否真实。</p>
+<p>所以，总结一下该文章提出的方案比其他方法屌在哪里：</p>
+<ol>
+<li>一步到位</li>
+<li>输出的是三维模型而非单纯的骨架</li>
+<li>精度和运行时间的提升</li>
+<li>不需要有配对的2D-3D数据集</li>
+</ol>
+<h1 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h1><h2 id="SMPL（A-Skinned-Multi-Person-Linear-Model）"><a href="#SMPL（A-Skinned-Multi-Person-Linear-Model）" class="headerlink" title="SMPL（A Skinned Multi-Person Linear Model）"></a>SMPL（A Skinned Multi-Person Linear Model）</h2><p>2015年提出了这一模型，该模型可分离为shape和pose，只需要输入一个10-D的vector β（代表shape，由PCA对数据集人体进行主成分分析得到）和一个3K-D的vector θ（代表pose，其中K为骨架节点数，3是每个关节具有的3个自由度），就可以输出对应的三维人体模型。<br>SMPL骨架的节点个数为14，标注了人体影响姿态的几个主要关节，即：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">smpl_names = [</span><br><span class="line">               &apos;Left_Hip&apos;, &apos;Right_Hip&apos;, &apos;Waist&apos;, &apos;Left_Knee&apos;, &apos;Right_Knee&apos;,</span><br><span class="line">               &apos;Upper_Waist&apos;, &apos;Left_Ankle&apos;, &apos;Right_Ankle&apos;, &apos;Chest&apos;,</span><br><span class="line">               &apos;Left_Toe&apos;, &apos;Right_Toe&apos;, &apos;Base_Neck&apos;, &apos;Left_Shoulder&apos;,</span><br><span class="line">               &apos;Right_Shoulder&apos;, &apos;Upper_Neck&apos;, &apos;Left_Arm&apos;, &apos;Right_Arm&apos;,</span><br><span class="line">               &apos;Left_Elbow&apos;, &apos;Right_Elbow&apos;, &apos;Left_Wrist&apos;, &apos;Right_Wrist&apos;,</span><br><span class="line">               &apos;Left_Finger&apos;, &apos;Right_Finger&apos;</span><br><span class="line">           ]</span><br></pre></td></tr></table></figure></p>
+<p>加上camera的三个维度，则该模型最终总的输入就是10+3+3x14=85-D的数据。<br>根据输入的数据，对标准模型进行一步步的变化，具体公式我就不列了，大概流程就是：</p>
+<ol>
+<li>Add shape blend shapes（缩放）</li>
+<li>Infer shape-dependent joint locations.（根据shape调整joint）</li>
+<li>Add pose blend shapes（胖瘦变形）</li>
+<li>Get the global joint location（摆pose）</li>
+<li>Do skinning（给骨架包裹外皮）<br>最终生成的模型是具有6980个顶点的mesh。<br>关于SMPL，可以参考论文SMPL: A Skinned Multi-Person Linear Model</li>
+</ol>
+<h2 id="Iterative-3D-Regression-with-Feedback"><a href="#Iterative-3D-Regression-with-Feedback" class="headerlink" title="Iterative 3D Regression with Feedback"></a>Iterative 3D Regression with Feedback</h2><p>文章使用此方法来得到β和θ，先将前一步得到的三维模型重投影到二维图像上，计算与原图pose的误差，通过误差的feedback逐步逼近，直至收敛。<br>关于iterative error feedback (IEF)，可以参考论文Human pose estimation with iterative error feedback.</p>
+<h2 id="Factorized-Adversarial-Prior"><a href="#Factorized-Adversarial-Prior" class="headerlink" title="Factorized Adversarial Prior"></a>Factorized Adversarial Prior</h2><p>先验对抗。如果不使用判别器来对生成的模型进行进行约束，就会产生一些奇奇怪怪的结果，搞得有点寄生兽既视感。所以采用了GAN。由于SMPL的可分离特性，我们可以对shape和pose分别单独训练Discriminator，以此来降低网络的复杂度，提高学习效率。对于shape参数，设计一个Discriminator，对于每一个joint各设计一个Discriminator，为了分析各个节点对骨架结构的贡献，对所有的joint再设计一个Discriminator，最终一共是K+2个判别器。然后作者表达了一下训练过程之漫长，1080ti 显卡也跑了五天之久。（我用我自己的戴尔图形工作站，懒得去配GPU环境，作死用CPU跑，两天还是三天跑了百分之一。。。）</p>
+<h2 id="Evaluation"><a href="#Evaluation" class="headerlink" title="Evaluation"></a>Evaluation</h2><p>之后作者用了将近三分之一的长篇大论来阐述该方法的结果多么多么好。然后还稍微提了一下人体图像语义分割，然而在代码中并没有找到相关实现。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/12/论文笔记-Embedded-Deformation-for-Shape-Manipulation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -369,11 +532,14 @@
 
       
         
-          
-            <p>siggraph上的一篇老文章，主要是实现了三维模型的直接操控变形，支持细节保留、粒子系统变形及模型局部变化。</p>
-<h1 id="Deformation-Graph"><a href="#Deformation-Graph" class="headerlink" title="Deformation Graph"></a>Deformation Graph</h1><p>一种新型的可变形模型，可作用于所有欧式三维空间$\boldsymbol{R}^3$的点，空间中的变形由一系列仿射变换所定义，仿射变换包含了旋转项和位移项，定义为旋转矩阵$R_{j}$(3<em>3)和位移向量$\vec{t_{j}}$(3</em>1)，同时模型上每个点p的位置都受到全部其他顶点$g_{j}, j\in1…m$的影响，变形后的位置$\tilde{p}$由以下公式得到: $\tilde{p} = \R_{j}(p-g_{j})+g_{j}+\vec{t_{j}} \qquad(1)$</p>
-
-          
+          <p>siggraph上的一篇老文章，主要是通过建立一个Deformation Graph以及计算变形模型操作过程中仿射变换的最优值，来实现三维模型的直接操控变形，支持细节保留、粒子系统变形及模型局部变化。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/12/论文笔记-Embedded-Deformation-for-Shape-Manipulation/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1560,153 +1726,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/09/python中的闭包-Closure/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="L IN">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://i.dimg.cc/dc/51/d9/5a/1f/ea/cb/d1/18/74/b7/3d/50/9c/ee/bb.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lin">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/02/09/python中的闭包-Closure/" itemprop="url">
-                  python中的闭包(Closure)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-09T21:15:16+08:00">
-                2018-02-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程相关/" itemprop="url" rel="index">
-                    <span itemprop="name">编程相关</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>python学习笔记<br></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/09/python中的闭包-Closure/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1756,7 +1775,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

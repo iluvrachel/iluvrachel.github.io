@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="python," />
+  <meta name="keywords" content="CG," />
 
 
 
@@ -87,18 +87,18 @@
 
 
 
-<meta name="description" content="python学习笔记">
-<meta name="keywords" content="python">
+<meta name="description" content="INTRODUCTION此paper提出了一个以端到端的方法实现从二维人体图像恢复出三维人体模型的框架。在此之前，绝大多数的方法或是只关心三维骨架的重建，或是采用两段式的方法，即先从二维图像推断出2D-joint location，再从2D-joint来预测三维模型或计算三维参数。以端到端的方法来实现这一目的，在数据集方面有几个挑战需要面对。一是，缺少足够数量的带有ground truth 3D">
+<meta name="keywords" content="CG">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于装饰器@property">
-<meta property="og:url" content="http://yoursite.com/2018/02/28/关于装饰器-property/index.html">
+<meta property="og:title" content="[论文笔记]End-to-End Human Mesh Recovery">
+<meta property="og:url" content="http://yoursite.com/2018/08/05/论文笔记-End-to-End-Human-Mesh-Recovery/index.html">
 <meta property="og:site_name" content="Lin">
-<meta property="og:description" content="python学习笔记">
+<meta property="og:description" content="INTRODUCTION此paper提出了一个以端到端的方法实现从二维人体图像恢复出三维人体模型的框架。在此之前，绝大多数的方法或是只关心三维骨架的重建，或是采用两段式的方法，即先从二维图像推断出2D-joint location，再从2D-joint来预测三维模型或计算三维参数。以端到端的方法来实现这一目的，在数据集方面有几个挑战需要面对。一是，缺少足够数量的带有ground truth 3D">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-28T15:36:38.000Z">
+<meta property="og:updated_time" content="2018-08-05T07:36:22.350Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于装饰器@property">
-<meta name="twitter:description" content="python学习笔记">
+<meta name="twitter:title" content="[论文笔记]End-to-End Human Mesh Recovery">
+<meta name="twitter:description" content="INTRODUCTION此paper提出了一个以端到端的方法实现从二维人体图像恢复出三维人体模型的框架。在此之前，绝大多数的方法或是只关心三维骨架的重建，或是采用两段式的方法，即先从二维图像推断出2D-joint location，再从2D-joint来预测三维模型或计算三维参数。以端到端的方法来实现这一目的，在数据集方面有几个挑战需要面对。一是，缺少足够数量的带有ground truth 3D">
 
 
 
@@ -126,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/02/28/关于装饰器-property/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/08/05/论文笔记-End-to-End-Human-Mesh-Recovery/"/>
 
 
 
 
 
-  <title> 关于装饰器@property | Lin </title>
+  <title> [论文笔记]End-to-End Human Mesh Recovery | Lin </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -271,7 +271,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/28/关于装饰器-property/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/05/论文笔记-End-to-End-Human-Mesh-Recovery/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="L IN">
@@ -292,7 +292,7 @@
             
             
               
-                关于装饰器@property
+                [论文笔记]End-to-End Human Mesh Recovery
               
             
           </h1>
@@ -307,8 +307,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-28T20:14:18+08:00">
-                2018-02-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-05T15:32:47+08:00">
+                2018-08-05
               </time>
             
 
@@ -330,8 +330,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程相关/" itemprop="url" rel="index">
-                    <span itemprop="name">编程相关</span>
+                  <a href="/categories/读论文/" itemprop="url" rel="index">
+                    <span itemprop="name">读论文</span>
                   </a>
                 </span>
 
@@ -370,19 +370,27 @@
       
 
       
-        <p>python学习笔记<br><a id="more"></a><br>来源：<a href="https://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/0014186131194415d50558b7a1c424f9fb52b84dc9c965c000" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/0014186131194415d50558b7a1c424f9fb52b84dc9c965c000</a></p>
-<p>在绑定属性时，如果我们直接把属性暴露出去，虽然写起来很简单，但是，没办法检查参数，导致可以把成绩随便改：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = Student()</span><br><span class="line">s.score = <span class="number">9999</span></span><br></pre></td></tr></table></figure></p>
-<p>这显然不合逻辑。为了限制score的范围，可以通过一个set_score()方法来设置成绩，再通过一个get_score()来获取成绩，这样，在set_score()方法里，就可以检查参数：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_score</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self._score</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_score</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> isinstance(value, int):</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'score must be an integer!'</span>)</span><br><span class="line">        <span class="keyword">if</span> value &lt; <span class="number">0</span> <span class="keyword">or</span> value &gt; <span class="number">100</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'score must between 0 ~ 100!'</span>)</span><br><span class="line">        self._score = value</span><br></pre></td></tr></table></figure></p>
-<p>现在，对任意的Student实例进行操作，就不能随心所欲地设置score了：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = Student()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.set_score(<span class="number">60</span>) <span class="comment"># ok!</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.get_score()</span><br><span class="line"><span class="number">60</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.set_score(<span class="number">9999</span>)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">ValueError: score must between <span class="number">0</span> ~ <span class="number">100</span>!</span><br></pre></td></tr></table></figure></p>
-<p>但是，上面的调用方法又略显复杂，没有直接用属性这么直接简单。</p>
-<p>有没有既能检查参数，又可以用类似属性这样简单的方式来访问类的变量呢？对于追求完美的Python程序员来说，这是必须要做到的！</p>
-<p>还记得装饰器（decorator）可以给函数动态加上功能吗？对于类的方法，装饰器一样起作用。Python内置的@property装饰器就是负责把一个方法变成属性调用的：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self._score</span><br><span class="line"></span><br><span class="line"><span class="meta">    @score.setter</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> isinstance(value, int):</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'score must be an integer!'</span>)</span><br><span class="line">        <span class="keyword">if</span> value &lt; <span class="number">0</span> <span class="keyword">or</span> value &gt; <span class="number">100</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'score must between 0 ~ 100!'</span>)</span><br><span class="line">        self._score = value</span><br></pre></td></tr></table></figure></p>
-<p>@property的实现比较复杂，我们先考察如何使用。把一个getter方法变成属性，只需要加上@property就可以了，此时，@property本身又创建了另一个装饰器@score.setter，负责把一个setter方法变成属性赋值，于是，我们就拥有一个可控的属性操作：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = Student()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.score = <span class="number">60</span> <span class="comment"># OK，实际转化为s.set_score(60)</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.score <span class="comment"># OK，实际转化为s.get_score()</span></span><br><span class="line"><span class="number">60</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.score = <span class="number">9999</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">ValueError: score must between <span class="number">0</span> ~ <span class="number">100</span>!</span><br></pre></td></tr></table></figure></p>
-<p>注意到这个神奇的@property，我们在对实例属性操作的时候，就知道该属性很可能不是直接暴露的，而是通过getter和setter方法来实现的。</p>
-<p>还可以定义只读属性，只定义getter方法，不定义setter方法就是一个只读属性：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">birth</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self._birth</span><br><span class="line"></span><br><span class="line"><span class="meta">    @birth.setter</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">birth</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        self._birth = value</span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">age</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">2014</span> - self._birth</span><br></pre></td></tr></table></figure></p>
-<p>上面的birth是可读写属性，而age就是一个只读属性，因为age可以根据birth和当前时间计算出来。</p>
-<p>小结</p>
-<p>@property广泛应用在类的定义中，可以让调用者写出简短的代码，同时保证对参数进行必要的检查，这样，程序运行时就减少了出错的可能性。</p>
+        <a id="more"></a>
+<h1 id="INTRODUCTION"><a href="#INTRODUCTION" class="headerlink" title="INTRODUCTION"></a>INTRODUCTION</h1><p>此paper提出了一个以端到端的方法实现从二维人体图像恢复出三维人体模型的框架。在此之前，绝大多数的方法或是只关心三维骨架的重建，或是采用两段式的方法，即先从二维图像推断出2D-joint location，再从2D-joint来预测三维模型或计算三维参数。<br>以端到端的方法来实现这一目的，在数据集方面有几个挑战需要面对。一是，缺少足够数量的带有ground truth 3D annotation的自然获取的实况图像，目前已有的自带3D结构注解的图像都是在特定的实验环境下获得的，并不足以反映真实世界可能出现的所有情况。二是，从二维到三维存在着固有的模棱两可性，因为缺少了深度信息，许多不同的三维模型都可以映射为同一个二维图像，而由二维图像映射到三维时，也不一定能够符合人体结构学。该文章将着重解决这几个问题。<br>对于第一个难题，解决方案思路出发点是使用两个数据集来进行训练，一个是带有2D annotation的实况二维图像集，另一个是人体的3D mesh模型集，这两个数据集是没有配对关系的。当获得一副图像，先预测该图像对应的3D mesh参数，然后使推断出来的3D mesh的3D Joint映射到2D时能够与原图的2D-joint契合。通过这样一个从2D到3D再到2D的过程，我们就可以使用海量的不带三维信息的二维图像来作为数据集进行训练。在预测模型参数方面，以前的多数方法是把这个问题当做分类问题来处理，这样做得到的误差是离散化的，所以在精度上有不足。这篇paper在参数预测上则采用了iterative regression with feedback的方法。<br>对于第二个问题，为了使生成的模型符合真实的人体结构，使用GAN的网络结构，把生成模型的参数输入到一个Discriminator中，Discriminator在训练中学习每个joint之间的角度限制，由Discriminator来判断模型是否真实。</p>
+<p>所以，总结一下该文章提出的方案比其他方法屌在哪里：</p>
+<ol>
+<li>一步到位</li>
+<li>输出的是三维模型而非单纯的骨架</li>
+<li>精度和运行时间的提升</li>
+<li>不需要有配对的2D-3D数据集</li>
+</ol>
+<h1 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h1><h2 id="SMPL（A-Skinned-Multi-Person-Linear-Model）"><a href="#SMPL（A-Skinned-Multi-Person-Linear-Model）" class="headerlink" title="SMPL（A Skinned Multi-Person Linear Model）"></a>SMPL（A Skinned Multi-Person Linear Model）</h2><p>2015年提出了这一模型，该模型可分离为shape和pose，只需要输入一个10-D的vector β（代表shape，由PCA对数据集人体进行主成分分析得到）和一个3K-D的vector θ（代表pose，其中K为骨架节点数，3是每个关节具有的3个自由度），就可以输出对应的三维人体模型。<br>SMPL骨架的节点个数为14，标注了人体影响姿态的几个主要关节，即：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">smpl_names = [</span><br><span class="line">               &apos;Left_Hip&apos;, &apos;Right_Hip&apos;, &apos;Waist&apos;, &apos;Left_Knee&apos;, &apos;Right_Knee&apos;,</span><br><span class="line">               &apos;Upper_Waist&apos;, &apos;Left_Ankle&apos;, &apos;Right_Ankle&apos;, &apos;Chest&apos;,</span><br><span class="line">               &apos;Left_Toe&apos;, &apos;Right_Toe&apos;, &apos;Base_Neck&apos;, &apos;Left_Shoulder&apos;,</span><br><span class="line">               &apos;Right_Shoulder&apos;, &apos;Upper_Neck&apos;, &apos;Left_Arm&apos;, &apos;Right_Arm&apos;,</span><br><span class="line">               &apos;Left_Elbow&apos;, &apos;Right_Elbow&apos;, &apos;Left_Wrist&apos;, &apos;Right_Wrist&apos;,</span><br><span class="line">               &apos;Left_Finger&apos;, &apos;Right_Finger&apos;</span><br><span class="line">           ]</span><br></pre></td></tr></table></figure></p>
+<p>加上camera的三个维度，则该模型最终总的输入就是10+3+3x14=85-D的数据。<br>根据输入的数据，对标准模型进行一步步的变化，具体公式我就不列了，大概流程就是：</p>
+<ol>
+<li>Add shape blend shapes（缩放）</li>
+<li>Infer shape-dependent joint locations.（根据shape调整joint）</li>
+<li>Add pose blend shapes（胖瘦变形）</li>
+<li>Get the global joint location（摆pose）</li>
+<li>Do skinning（给骨架包裹外皮）<br>最终生成的模型是具有6980个顶点的mesh。<br>关于SMPL，可以参考论文SMPL: A Skinned Multi-Person Linear Model</li>
+</ol>
+<h2 id="Iterative-3D-Regression-with-Feedback"><a href="#Iterative-3D-Regression-with-Feedback" class="headerlink" title="Iterative 3D Regression with Feedback"></a>Iterative 3D Regression with Feedback</h2><p>文章使用此方法来得到β和θ，先将前一步得到的三维模型重投影到二维图像上，计算与原图pose的误差，通过误差的feedback逐步逼近，直至收敛。<br>关于iterative error feedback (IEF)，可以参考论文Human pose estimation with iterative error feedback.</p>
+<h2 id="Factorized-Adversarial-Prior"><a href="#Factorized-Adversarial-Prior" class="headerlink" title="Factorized Adversarial Prior"></a>Factorized Adversarial Prior</h2><p>先验对抗。如果不使用判别器来对生成的模型进行进行约束，就会产生一些奇奇怪怪的结果，搞得有点寄生兽既视感。所以采用了GAN。由于SMPL的可分离特性，我们可以对shape和pose分别单独训练Discriminator，以此来降低网络的复杂度，提高学习效率。对于shape参数，设计一个Discriminator，对于每一个joint各设计一个Discriminator，为了分析各个节点对骨架结构的贡献，对所有的joint再设计一个Discriminator，最终一共是K+2个判别器。然后作者表达了一下训练过程之漫长，1080ti 显卡也跑了五天之久。（我用我自己的戴尔图形工作站，懒得去配GPU环境，作死用CPU跑，两天还是三天跑了百分之一。。。）</p>
+<h2 id="Evaluation"><a href="#Evaluation" class="headerlink" title="Evaluation"></a>Evaluation</h2><p>之后作者用了将近三分之一的长篇大论来阐述该方法的结果多么多么好。然后还稍微提了一下人体图像语义分割，然而在代码中并没有找到相关实现。</p>
 
       
     </div>
@@ -412,7 +420,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/python/" rel="tag"># python</a>
+            <a href="/tags/CG/" rel="tag"># CG</a>
           
         </div>
       
@@ -425,8 +433,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/28/暗中燃烧的篝火-来自新世界/" rel="next" title="暗中燃烧的篝火--来自新世界">
-                <i class="fa fa-chevron-left"></i> 暗中燃烧的篝火--来自新世界
+              <a href="/2018/07/12/论文笔记-Embedded-Deformation-for-Shape-Manipulation/" rel="next" title="论文笔记: Embedded Deformation for Shape Manipulation">
+                <i class="fa fa-chevron-left"></i> 论文笔记: Embedded Deformation for Shape Manipulation
               </a>
             
           </div>
@@ -434,10 +442,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/06/一些有用的资料（持续更新）/" rel="prev" title="一些有用的资料（持续更新）">
-                一些有用的资料（持续更新） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -484,8 +488,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://i.dimg.cc/dc/51/d9/5a/1f/ea/cb/d1/18/74/b7/3d/50/9c/ee/bb.jpg"
@@ -567,6 +580,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#INTRODUCTION"><span class="nav-number">1.</span> <span class="nav-text">INTRODUCTION</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Related-Work"><span class="nav-number">2.</span> <span class="nav-text">Related Work</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SMPL（A-Skinned-Multi-Person-Linear-Model）"><span class="nav-number">2.1.</span> <span class="nav-text">SMPL（A Skinned Multi-Person Linear Model）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Iterative-3D-Regression-with-Feedback"><span class="nav-number">2.2.</span> <span class="nav-text">Iterative 3D Regression with Feedback</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Factorized-Adversarial-Prior"><span class="nav-number">2.3.</span> <span class="nav-text">Factorized Adversarial Prior</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Evaluation"><span class="nav-number">2.4.</span> <span class="nav-text">Evaluation</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
