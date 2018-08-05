@@ -87,18 +87,18 @@
 
 
 
-<meta name="description" content="INTRODUCTION此paper提出了一个以端到端的方法实现从二维人体图像恢复出三维人体模型的框架。在此之前，绝大多数的方法或是只关心三维骨架的重建，或是采用两段式的方法，即先从二维图像推断出2D-joint location，再从2D-joint来预测三维模型或计算三维参数。以端到端的方法来实现这一目的，在数据集方面有几个挑战需要面对。一是，缺少足够数量的带有ground truth 3D">
+<meta name="description" content="2017年来自Berkeley一名博后金沢小姐姐的一篇论文">
 <meta name="keywords" content="CG">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[论文笔记]End-to-End Human Mesh Recovery">
 <meta property="og:url" content="http://yoursite.com/2018/08/05/论文笔记-End-to-End-Human-Mesh-Recovery/index.html">
 <meta property="og:site_name" content="Lin">
-<meta property="og:description" content="INTRODUCTION此paper提出了一个以端到端的方法实现从二维人体图像恢复出三维人体模型的框架。在此之前，绝大多数的方法或是只关心三维骨架的重建，或是采用两段式的方法，即先从二维图像推断出2D-joint location，再从2D-joint来预测三维模型或计算三维参数。以端到端的方法来实现这一目的，在数据集方面有几个挑战需要面对。一是，缺少足够数量的带有ground truth 3D">
+<meta property="og:description" content="2017年来自Berkeley一名博后金沢小姐姐的一篇论文">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-05T07:36:22.350Z">
+<meta property="og:updated_time" content="2018-08-05T09:43:41.719Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[论文笔记]End-to-End Human Mesh Recovery">
-<meta name="twitter:description" content="INTRODUCTION此paper提出了一个以端到端的方法实现从二维人体图像恢复出三维人体模型的框架。在此之前，绝大多数的方法或是只关心三维骨架的重建，或是采用两段式的方法，即先从二维图像推断出2D-joint location，再从2D-joint来预测三维模型或计算三维参数。以端到端的方法来实现这一目的，在数据集方面有几个挑战需要面对。一是，缺少足够数量的带有ground truth 3D">
+<meta name="twitter:description" content="2017年来自Berkeley一名博后金沢小姐姐的一篇论文">
 
 
 
@@ -370,7 +370,7 @@
       
 
       
-        <a id="more"></a>
+        <p>2017年来自Berkeley一名博后金沢小姐姐的一篇论文<br><a id="more"></a></p>
 <h1 id="INTRODUCTION"><a href="#INTRODUCTION" class="headerlink" title="INTRODUCTION"></a>INTRODUCTION</h1><p>此paper提出了一个以端到端的方法实现从二维人体图像恢复出三维人体模型的框架。在此之前，绝大多数的方法或是只关心三维骨架的重建，或是采用两段式的方法，即先从二维图像推断出2D-joint location，再从2D-joint来预测三维模型或计算三维参数。<br>以端到端的方法来实现这一目的，在数据集方面有几个挑战需要面对。一是，缺少足够数量的带有ground truth 3D annotation的自然获取的实况图像，目前已有的自带3D结构注解的图像都是在特定的实验环境下获得的，并不足以反映真实世界可能出现的所有情况。二是，从二维到三维存在着固有的模棱两可性，因为缺少了深度信息，许多不同的三维模型都可以映射为同一个二维图像，而由二维图像映射到三维时，也不一定能够符合人体结构学。该文章将着重解决这几个问题。<br>对于第一个难题，解决方案思路出发点是使用两个数据集来进行训练，一个是带有2D annotation的实况二维图像集，另一个是人体的3D mesh模型集，这两个数据集是没有配对关系的。当获得一副图像，先预测该图像对应的3D mesh参数，然后使推断出来的3D mesh的3D Joint映射到2D时能够与原图的2D-joint契合。通过这样一个从2D到3D再到2D的过程，我们就可以使用海量的不带三维信息的二维图像来作为数据集进行训练。在预测模型参数方面，以前的多数方法是把这个问题当做分类问题来处理，这样做得到的误差是离散化的，所以在精度上有不足。这篇paper在参数预测上则采用了iterative regression with feedback的方法。<br>对于第二个问题，为了使生成的模型符合真实的人体结构，使用GAN的网络结构，把生成模型的参数输入到一个Discriminator中，Discriminator在训练中学习每个joint之间的角度限制，由Discriminator来判断模型是否真实。</p>
 <p>所以，总结一下该文章提出的方案比其他方法屌在哪里：</p>
 <ol>
