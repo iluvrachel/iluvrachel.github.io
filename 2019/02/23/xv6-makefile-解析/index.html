@@ -1,0 +1,780 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="xv6,操作系统," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="xv6操作系统安装的makefile文件逐行分析">
+<meta name="keywords" content="xv6,操作系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="xv6 makefile 解析">
+<meta property="og:url" content="http://yoursite.com/2019/02/23/xv6-makefile-解析/index.html">
+<meta property="og:site_name" content="硅碳双键的文艺复兴">
+<meta property="og:description" content="xv6操作系统安装的makefile文件逐行分析">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-23T15:15:23.138Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="xv6 makefile 解析">
+<meta name="twitter:description" content="xv6操作系统安装的makefile文件逐行分析">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/23/xv6-makefile-解析/"/>
+
+
+
+
+
+  <title> xv6 makefile 解析 | 硅碳双键的文艺复兴 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">硅碳双键的文艺复兴</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">就算生活表里不一,鱼香茄子里没有鱼,也津津有味的过吧</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/23/xv6-makefile-解析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="L_in_z">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://i.dimg.cc/dc/51/d9/5a/1f/ea/cb/d1/18/74/b7/3d/50/9c/ee/bb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="硅碳双键的文艺复兴">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                xv6 makefile 解析
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-23T22:58:38+08:00">
+                2019-02-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程相关/" itemprop="url" rel="index">
+                    <span itemprop="name">编程相关</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>xv6操作系统安装的makefile文件逐行分析<br><a id="more"></a></p>
+<p>目标描述：xv6 Makefile分析<br>Xv6 的Makefile是用于组织源代码的编译流程的文件，Makefile文件描述了各个源文件之间的相互依赖关系，把原本繁琐的编译过程简化为makefile文件与make指令的配合使用。<br>Makefile大体结构是树形结构，即把一个目标分为多个子目标。make将makefile的第一个target作为作为最终的target，凡是这个规则依赖的规则都将被执行。<br>编译流程：<br>（一）首先OBJS指定需要编译的.c文件<br>（二）然后配置一些环境和工具信息<br>（三）xv6.img、bootblock、kernel相互依赖，生成系统内核与镜像<br>（四）生成文件系统以及系统内部可执行文件<br>（五）配置启动信息</p>
+<p>源代码注释及分析：<br>（1）编译目标定义<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">OBJS = \</span><br><span class="line">	bio.o\</span><br><span class="line">	console.o\</span><br><span class="line">	exec.o\</span><br><span class="line">	file.o\</span><br><span class="line">	fs.o\</span><br><span class="line">	ide.o\</span><br><span class="line">	ioapic.o\</span><br><span class="line">	kalloc.o\</span><br><span class="line">	kbd.o\</span><br><span class="line">	lapic.o\</span><br><span class="line">	log.o\</span><br><span class="line">	main.o\</span><br><span class="line">	mp.o\</span><br><span class="line">	picirq.o\</span><br><span class="line">	pipe.o\</span><br><span class="line">	proc.o\</span><br><span class="line">	sleeplock.o\</span><br><span class="line">	spinlock.o\</span><br><span class="line">	string.o\</span><br><span class="line">	swtch.o\</span><br><span class="line">	syscall.o\</span><br><span class="line">	sysfile.o\</span><br><span class="line">	sysproc.o\</span><br><span class="line">	trapasm.o\</span><br><span class="line">	trap.o\</span><br><span class="line">	uart.o\</span><br><span class="line">	vectors.o\</span><br><span class="line">	vm.o\</span><br></pre></td></tr></table></figure></p>
+<p>只要make查到某个 .o 文件，它就自动把相关的 .c 加到依赖关系中</p>
+<p>（2）配置编译工具gcc<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">ifndef TOOLPREFIX</span><br><span class="line">TOOLPREFIX := $(shell if i386-jos-elf-objdump -i 2&gt;&amp;1 | grep '^elf32-i386$$' &gt;/dev/null 2&gt;&amp;1; \</span><br><span class="line">	then echo 'i386-jos-elf-'; \</span><br><span class="line">	elif objdump -i 2&gt;&amp;1 | grep 'elf32-i386' &gt;/dev/null 2&gt;&amp;1; \</span><br><span class="line">	then echo ''; \</span><br><span class="line">	else echo "***" 1&gt;&amp;2; \</span><br><span class="line">	echo "*** Error: Couldn't find an i386-*-elf version of GCC/binutils." 1&gt;&amp;2; \</span><br><span class="line">	echo "*** Is the directory with i386-jos-elf-gcc in your PATH?" 1&gt;&amp;2; \</span><br><span class="line">	echo "*** If your i386-*-elf toolchain is installed with a command" 1&gt;&amp;2; \</span><br><span class="line">	echo "*** prefix other than 'i386-jos-elf-', set your TOOLPREFIX" 1&gt;&amp;2; \</span><br><span class="line">	echo "*** environment variable to that prefix and run 'make' again." 1&gt;&amp;2; \</span><br><span class="line">	echo "*** To turn off this error, run 'gmake TOOLPREFIX= ...'." 1&gt;&amp;2; \</span><br><span class="line">	echo "***" 1&gt;&amp;2; exit 1; fi)</span><br><span class="line">endif</span><br></pre></td></tr></table></figure></p>
+<p>若找不到合适的版本，输出错误信息</p>
+<p>（3）配置模拟器qemu<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">ifndef QEMU</span><br><span class="line">QEMU = $(shell if which qemu &gt; /dev/null; \</span><br><span class="line">	then echo qemu; exit; \</span><br><span class="line">	elif which qemu-system-i386 &gt; /dev/null; \</span><br><span class="line">	then echo qemu-system-i386; exit; \</span><br><span class="line">	elif which qemu-system-x86_64 &gt; /dev/null; \</span><br><span class="line">	then echo qemu-system-x86_64; exit; \</span><br><span class="line">	else \</span><br><span class="line">	qemu=/Applications/Q.app/Contents/MacOS/i386-softmmu.app/Contents/MacOS/i386-softmmu; \</span><br><span class="line">	if test -x $$qemu; then echo $$qemu; exit; fi; fi; \</span><br><span class="line">	echo "***" 1&gt;&amp;2; \</span><br><span class="line">	echo "*** Error: Couldn't find a working QEMU executable." 1&gt;&amp;2; \</span><br><span class="line">	echo "*** Is the directory containing the qemu binary in your PATH" 1&gt;&amp;2; \</span><br><span class="line">	echo "*** or have you tried setting the QEMU variable in Makefile?" 1&gt;&amp;2; \</span><br><span class="line">	echo "***" 1&gt;&amp;2; exit 1)</span><br><span class="line">endif</span><br></pre></td></tr></table></figure></p>
+<p>检索QEMU路径为变量QEMU赋值，若前面已定义则跳过这一步，若没有可用的QEMU，尝试使用i386-softmmu（针对MacOS），否则输出错误信息</p>
+<p>（3）配置编译器、汇编器、链接器、copy工具和dump工具（反编译）<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">CC = $(TOOLPREFIX)gcc</span><br><span class="line"><span class="meta">#</span> i386-jos-elf-gcc编译器</span><br><span class="line">AS = $(TOOLPREFIX)gas</span><br><span class="line"><span class="meta">#</span> i386-jos-elf-gas汇编器</span><br><span class="line">LD = $(TOOLPREFIX)ld</span><br><span class="line"><span class="meta">#</span> i386-jos-elf-ld链接器</span><br><span class="line"><span class="meta">#</span> 通过shell指令为CC、AS和LD添加附加参数，指定copy工具和dump工具</span><br><span class="line">OBJCOPY = $(TOOLPREFIX)objcopy</span><br><span class="line">OBJDUMP = $(TOOLPREFIX)objdump</span><br><span class="line">CFLAGS = -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -fno-omit-frame-pointer</span><br><span class="line"><span class="meta">#</span> -fno-pic不使用PIC（位置无关代码），-static将依赖的动态库编译为静态，</span><br><span class="line"><span class="meta">#</span> -fno-builtin不使用C语言自身的内建函数，因为是要写一个完整的操作系统，防止重名，</span><br><span class="line"><span class="meta">#</span> -fno-strict-aliasing编译器规则优化，使一些规则（-O1，-O2，-O3）可以混淆使用。</span><br><span class="line"><span class="meta">#</span> -Wall显示警告 -MD编译并保存代码依赖性 -ggdb产生GDB所需的调试信息 -m32生成32位汇编代码（默认64）-Werror遇到警告也停止编译</span><br><span class="line"><span class="meta">#</span> -fno-omit-frame-pointer保留函数调用产生的frame pointer，方便调试时的回溯</span><br><span class="line">CFLAGS += $(shell $(CC) -fno-stack-protector -E -x c /dev/null &gt;/dev/null 2&gt;&amp;1 &amp;&amp; echo -fno-stack-protector)</span><br><span class="line"><span class="meta">#</span> -fno-stack-protector 禁用栈保护，使编译器不会对局部变量的组织方式进行重新布局</span><br><span class="line"><span class="meta">#</span> -E -x c对后缀c的文件进行预处理而不编译</span><br><span class="line">ASFLAGS = -m32 -gdwarf-2 -Wa,-divide</span><br><span class="line"><span class="meta">#</span> FreeBSD ld wants ``elf_i386_fbsd''指定ELF文件系统格式和x86架构</span><br><span class="line">LDFLAGS += -m $(shell $(LD) -V | grep elf_i386 2&gt;/dev/null | head -n 1)</span><br><span class="line"><span class="meta">#</span> LDFLAGS即链接到相应版本的模拟器，grep管道查看匹配elf_i386架构的模拟器</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> Disable PIE when possible (for Ubuntu 16.10 toolchain) PIE用于将程序装载到随机的地址，这里选择禁用PIE机制</span><br><span class="line">ifneq ($(shell $(CC) -dumpspecs 2&gt;/dev/null | grep -e '[^f]no-pie'),)</span><br><span class="line">CFLAGS += -fno-pie -no-pie</span><br><span class="line">endif</span><br><span class="line">ifneq ($(shell $(CC) -dumpspecs 2&gt;/dev/null | grep -e '[^f]nopie'),)</span><br><span class="line">CFLAGS += -fno-pie -nopie</span><br><span class="line">endif</span><br></pre></td></tr></table></figure></p>
+<p>（3）生成xv6镜像（即最终装载到模拟器的）<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">xv6.img: bootblock kernel</span><br><span class="line">	dd if=/dev/zero of=xv6.img count=10000</span><br><span class="line">	dd if=bootblock of=xv6.img conv=notrunc</span><br><span class="line">	dd if=kernel of=xv6.img seek=1 conv=notrunc</span><br><span class="line">需要启动块引导程序bootblock和系统内核kernel</span><br><span class="line"><span class="meta">#</span> dd指令：把指定的输入文件拷贝到指定的输出文件中，并且在拷贝的过程中可以进行格式转换。</span><br><span class="line"><span class="meta">#</span> conv=notrunc防止文件被截断（用于虚拟软盘）</span><br></pre></td></tr></table></figure></p>
+<p>（4）生成xv6memfs镜像<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">xv6memfs.img: bootblock kernelmemfs</span><br><span class="line">	dd if=/dev/zero of=xv6memfs.img count=10000</span><br><span class="line">	dd if=bootblock of=xv6memfs.img conv=notrunc</span><br><span class="line">dd if=kernelmemfs of=xv6memfs.img seek=1 conv=notrunc</span><br></pre></td></tr></table></figure></p>
+<p>（5）生成启动引导块bootblock<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">bootblock: bootasm.S bootmain.c</span><br><span class="line"><span class="meta">	$</span>(CC) $(CFLAGS) -fno-pic -O -nostdinc -I. -c bootmain.c</span><br><span class="line"><span class="meta">	$</span>(CC) $(CFLAGS) -fno-pic -nostdinc -I. -c bootasm.S</span><br><span class="line"><span class="meta">	$</span>(LD) $(LDFLAGS) -N -e start -Ttext 0x7C00 -o bootblock.o bootasm.o bootmain.o</span><br><span class="line"><span class="meta">	$</span>(OBJDUMP) -S bootblock.o &gt; bootblock.asm</span><br><span class="line"><span class="meta">	$</span>(OBJCOPY) -S -O binary -j .text bootblock.o bootblock</span><br><span class="line">	./sign.pl bootblock</span><br><span class="line"><span class="meta">#</span> 主引导记录存入0x7C00地址</span><br><span class="line"><span class="meta">#</span> 链接bootasm.o bootmain.o生成bootblock.o文件，objdump反编译输出到bootblock.asm，使用工具objcopy把bootblock.o的.text段(该段包含程序的可执行指令)拷贝出来生成bootblock</span><br><span class="line"><span class="meta">#</span> 执行sign.pl，为bootblock设置大小512，得到BIOS之后执行的BootLoader</span><br></pre></td></tr></table></figure></p>
+<p>（6）生成entryother<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">entryother: entryother.S</span><br><span class="line"><span class="meta">	$</span>(CC) $(CFLAGS) -fno-pic -nostdinc -I. -c entryother.S</span><br><span class="line"><span class="meta">	$</span>(LD) $(LDFLAGS) -N -e start -Ttext 0x7000 -o bootblockother.o entryother.o</span><br><span class="line"><span class="meta">	$</span>(OBJCOPY) -S -O binary -j .text bootblockother.o entryother</span><br><span class="line"><span class="meta">	$</span>(OBJDUMP) -S bootblockother.o &gt; entryother.asm</span><br></pre></td></tr></table></figure></p>
+<p>用于多核启动</p>
+<p>（7）生成initcode<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">initcode: initcode.S</span><br><span class="line"><span class="meta">	$</span>(CC) $(CFLAGS) -nostdinc -I. -c initcode.S</span><br><span class="line"><span class="meta">	$</span>(LD) $(LDFLAGS) -N -e start -Ttext 0 -o initcode.out initcode.o</span><br><span class="line"><span class="meta">	$</span>(OBJCOPY) -S -O binary initcode.out initcode</span><br><span class="line"><span class="meta">	$</span>(OBJDUMP) -S initcode.o &gt; initcode.asm</span><br></pre></td></tr></table></figure></p>
+<p>用于启动系统第一个进程</p>
+<p>（8）生成内核<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">kernel: $(OBJS) entry.o entryother initcode kernel.ld</span><br><span class="line"><span class="meta">	$</span>(LD) $(LDFLAGS) -T kernel.ld -o kernel entry.o $(OBJS) -b binary initcode entryother</span><br><span class="line"><span class="meta">	$</span>(OBJDUMP) -S kernel &gt; kernel.asm</span><br><span class="line"><span class="meta">	$</span>(OBJDUMP) -t kernel | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$$/d' &gt; kernel.sym</span><br></pre></td></tr></table></figure></p>
+<p>输出到二进制文件initcode entryother，用于指定系统启动的第一个进程</p>
+<p>（9）tags工具，用于emac阅读代码<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tags: $(OBJS) entryother.S _init</span><br><span class="line">	etags *.S *.c</span><br></pre></td></tr></table></figure></p>
+<p>（10）生成可供系统调用的可执行文件<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">UPROGS=\</span><br><span class="line">	_cat\</span><br><span class="line">	_echo\</span><br><span class="line">	_forktest\</span><br><span class="line">	_grep\</span><br><span class="line">	_init\</span><br><span class="line">	_kill\</span><br><span class="line">	_ln\</span><br><span class="line">	_ls\</span><br><span class="line">	_mkdir\</span><br><span class="line">	_rm\</span><br><span class="line">	_sh\</span><br><span class="line">	_stressfs\</span><br><span class="line">	_usertests\</span><br><span class="line">	_wc\</span><br><span class="line">	_zombie\</span><br></pre></td></tr></table></figure></p>
+<p>（11）生成文件系统镜像<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fs.img: mkfs README $(UPROGS)</span><br><span class="line">	./mkfs fs.img README $(UPROGS)</span><br><span class="line"></span><br><span class="line">-include *.d</span><br></pre></td></tr></table></figure></p>
+<p>（12）若运行make clean指令则删除原始文件以外的生成文件<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">clean: </span><br><span class="line">	rm -f *.tex *.dvi *.idx *.aux *.log *.ind *.ilg \</span><br><span class="line">	*.o *.d *.asm *.sym vectors.S bootblock entryother \</span><br><span class="line">	initcode initcode.out kernel xv6.img fs.img kernelmemfs \</span><br><span class="line">	xv6memfs.img mkfs .gdbinit \</span><br><span class="line"><span class="meta">	$</span>(UPROGS)</span><br></pre></td></tr></table></figure></p>
+<p>（13）生成pdf<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">xv6.pdf: $(PRINT)</span><br><span class="line">	./runoff</span><br><span class="line">	ls -l xv6.pdf</span><br><span class="line"></span><br><span class="line">print: xv6.pdf</span><br></pre></td></tr></table></figure></p>
+<p>（14）一个虚拟机broch的配置<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bochs : fs.img xv6.img</span><br><span class="line">	if [ ! -e .bochsrc ]; then ln -s dot-bochsrc .bochsrc; fi</span><br><span class="line">	bochs -q</span><br></pre></td></tr></table></figure></p>
+<p>（15）配置GDB调试器<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> try to generate a unique GDB port</span><br><span class="line">GDBPORT = $(shell expr `id -u` % 5000 + 25000)</span><br><span class="line"><span class="meta">#</span> QEMU's gdb stub command line changed in 0.11</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> QEMUGDB为qemu模拟器中关于GDB的帮助信息</span><br><span class="line">QEMUGDB = $(shell if $(QEMU) -help | grep -q '^-gdb'; \</span><br><span class="line">	then echo "-gdb tcp::$(GDBPORT)"; \</span><br><span class="line">	else echo "-s -p $(GDBPORT)"; fi)</span><br></pre></td></tr></table></figure></p>
+<p>（16）qemu的一些设置<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">ifndef CPUS</span><br><span class="line">CPUS := 2</span><br><span class="line">endif</span><br><span class="line"><span class="meta">#</span> 配置硬件信息</span><br><span class="line"><span class="meta">#</span> -drive定义驱动器 file=指定镜像文件，磁盘类型raw -smp指定cpu -m指定内存</span><br><span class="line">QEMUOPTS = -drive file=fs.img,index=1,media=disk,format=raw -drive file=xv6.img,index=0,media=disk,format=raw -smp $(CPUS) -m 512 $(QEMUEXTRA)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> qemu加载fs xv6镜像，-serial指定串口号mon:stdio，以及配置驱动器</span><br><span class="line">qemu: fs.img xv6.img</span><br><span class="line"><span class="meta">	$</span>(QEMU) -serial mon:stdio $(QEMUOPTS)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> qemu-memfs加载xv6memfs镜像，配置驱动器</span><br><span class="line">qemu-memfs: xv6memfs.img</span><br><span class="line"><span class="meta">	$</span>(QEMU) -drive file=xv6memfs.img,index=0,media=disk,format=raw -smp $(CPUS) -m 256</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> -nographic非图形界面</span><br><span class="line">qemu-nox: fs.img xv6.img</span><br><span class="line"><span class="meta">	$</span>(QEMU) -nographic $(QEMUOPTS)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 初始化调试器</span><br><span class="line">.gdbinit: .gdbinit.tmpl</span><br><span class="line">	sed "s/localhost:1234/localhost:$(GDBPORT)/" &lt; $^ &gt; $@</span><br><span class="line"></span><br><span class="line">qemu-gdb: fs.img xv6.img .gdbinit</span><br><span class="line">	@echo "*** Now run 'gdb'." 1&gt;&amp;2</span><br><span class="line"><span class="meta">	$</span>(QEMU) -serial mon:stdio $(QEMUOPTS) -S $(QEMUGDB)</span><br><span class="line"></span><br><span class="line">qemu-nox-gdb: fs.img xv6.img .gdbinit</span><br><span class="line">	@echo "*** Now run 'gdb'." 1&gt;&amp;2</span><br><span class="line"><span class="meta">	$</span>(QEMU) -nographic $(QEMUOPTS) -S $(QEMUGDB)</span><br></pre></td></tr></table></figure></p>
+<p>（17）文件整理打包为tar<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tar:</span><br><span class="line">	rm -rf /tmp/xv6</span><br><span class="line">	mkdir -p /tmp/xv6</span><br><span class="line">	cp dist/* dist/.gdbinit.tmpl /tmp/xv6</span><br><span class="line">	(cd /tmp; tar cf - xv6) | gzip &gt;xv6-rev10.tar.gz  # the next one will be 10 (9/17)</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/xv6/" rel="tag"># xv6</a>
+          
+            <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/21/记一次调试神经网络/" rel="next" title="记一次调试神经网络">
+                <i class="fa fa-chevron-left"></i> 记一次调试神经网络
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://i.dimg.cc/dc/51/d9/5a/1f/ea/cb/d1/18/74/b7/3d/50/9c/ee/bb.jpg"
+               alt="L_in_z" />
+          <p class="site-author-name" itemprop="name">L_in_z</p>
+           
+              <p class="site-description motion-element" itemprop="description">希望你不认识我</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yizhi-jiao-41/activities" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-zhihu"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/iluvrachel" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">L_in_z</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> <script type="text/javascript" src="/js/src/fireworks.js"></script>  
+</body>
+</html>
