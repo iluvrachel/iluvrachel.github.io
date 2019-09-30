@@ -87,18 +87,18 @@
 
 
 
-<meta name="description" content="我真的是，想起一出是一出，终于也要对Unity下手了。前几天看到油管上有一个up主，挑战12小时做一款游戏，既然看到了就很想挑战一下，看看我和大佬的差距，也是保持每天编程的手感。">
+<meta name="description" content="我真的是，想起一出是一出，终于也要对Unity下手了。前几天看到油管上有一个up主，挑战12小时做一款游戏，既然看到了就很想挑战一下，看看我和大佬的差距，也是保持每天编程的手感。游戏下载传送门">
 <meta name="keywords" content="Unity,游戏开发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="复刻：挑战12小时做一款游戏">
 <meta property="og:url" content="http://yoursite.com/2019/09/20/复刻：挑战12小时做一款游戏/index.html">
 <meta property="og:site_name" content="硅碳双键的文艺复兴">
-<meta property="og:description" content="我真的是，想起一出是一出，终于也要对Unity下手了。前几天看到油管上有一个up主，挑战12小时做一款游戏，既然看到了就很想挑战一下，看看我和大佬的差距，也是保持每天编程的手感。">
+<meta property="og:description" content="我真的是，想起一出是一出，终于也要对Unity下手了。前几天看到油管上有一个up主，挑战12小时做一款游戏，既然看到了就很想挑战一下，看看我和大佬的差距，也是保持每天编程的手感。游戏下载传送门">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-30T17:12:17.625Z">
+<meta property="og:updated_time" content="2019-09-30T17:17:57.616Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="复刻：挑战12小时做一款游戏">
-<meta name="twitter:description" content="我真的是，想起一出是一出，终于也要对Unity下手了。前几天看到油管上有一个up主，挑战12小时做一款游戏，既然看到了就很想挑战一下，看看我和大佬的差距，也是保持每天编程的手感。">
+<meta name="twitter:description" content="我真的是，想起一出是一出，终于也要对Unity下手了。前几天看到油管上有一个up主，挑战12小时做一款游戏，既然看到了就很想挑战一下，看看我和大佬的差距，也是保持每天编程的手感。游戏下载传送门">
 
 
 
@@ -370,7 +370,7 @@
       
 
       
-        <p>我真的是，想起一出是一出，终于也要对Unity下手了。前几天看到油管上有一个up主，挑战12小时做一款游戏，既然看到了就很想挑战一下，看看我和大佬的差距，也是保持每天编程的手感。<br><a id="more"></a><br>大佬的12h即是从早到晚连续的12h，包括吃饭。我是绝对做不到了，毕竟我也不是大佬，而且每天也有其他的事情要做，于是采用离散计时法，随做随计。</p>
+        <p>我真的是，想起一出是一出，终于也要对Unity下手了。前几天看到油管上有一个up主，挑战12小时做一款游戏，既然看到了就很想挑战一下，看看我和大佬的差距，也是保持每天编程的手感。<br><a href="https://github.com/iluvrachel/BounceBall/releases" target="_blank" rel="noopener">游戏下载传送门</a><br><a id="more"></a><br>大佬的12h即是从早到晚连续的12h，包括吃饭。我是绝对做不到了，毕竟我也不是大佬，而且每天也有其他的事情要做，于是采用离散计时法，随做随计。</p>
 <h1 id="4h59m"><a href="#4h59m" class="headerlink" title="4h59m:"></a>4h59m:</h1><p>把player controller这一大块完成了，包括slow motion，ball squeeze和tail这些花里胡哨的东西也还原了。球的运动使用addForce()来做，Slow motion通过改变timeScale实现，球的变形通过改变gameObject的scale，tail一开始想得复杂，后来发现unity自带就有tail renderer。然后用slider去实现了aim line。其实也不算复杂，比较麻烦的就是各种数字的设置，力和速度的大小，重力和阻力什么的。<br>这里有一个bug尚未解决，就是addForce之后，球的运动有时候会产生偏移，即便是关掉阻力和重力也是如此，尚不清楚原因。<br>然后做相机追踪，包括移动缓冲和自动缩放。此时就遇到了第一个大问题。<br>相机跟随时物体抖动，速度越快抖动越剧烈，查了很多方法，也看了Update、FixedUpdate、LateUpdate各种关系依然无解，终究还是在国外某不知名论坛看到了解决方法。（百度不给力啊，还是谷歌靠谱）解决办法是把rigidbody里的interpolation打开，插值之后就能够纵享丝滑。不过关于Update这方面还有很多值得深挖的内容，以后得好好学一下。</p>
 <h1 id="5h48m"><a href="#5h48m" class="headerlink" title="5h48m:"></a>5h48m:</h1><p>制作敌人的碰撞检测，又遇到了个问题。碰撞之后丝毫无反应，debug发现连碰撞函数都没有进去，但是程序也没给我报错呀。<br>后来发现，我做的是2D游戏，设了Collider2D，在程序里就不能只写Collider，不然啥反应都没有还不会报错的。妈耶。</p>
 <h1 id="6h50m"><a href="#6h50m" class="headerlink" title="6h50m:"></a>6h50m:</h1><p>particle system做击中效果, 最烦人的一个部分，美工从来不是我的强项，没办法一个一个参数去试效果。<br>击中敌人爆炸，击中后先让sprite和collider消失，等particle system播完了再销毁对象。Like：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OnCollisionEnter2D</span>(<span class="params">Collision2D other</span>) </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(other.gameObject.tag==<span class="string">"Player"</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//print("hit");</span></span><br><span class="line">            explosionAudio.Play();</span><br><span class="line">            sr.enabled = <span class="literal">false</span>;</span><br><span class="line">            col.enabled = <span class="literal">false</span>;</span><br><span class="line">            ps.Play();</span><br><span class="line">            Destroy(gameObject,<span class="number">6</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
