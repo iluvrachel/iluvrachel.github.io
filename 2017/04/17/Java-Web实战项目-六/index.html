@@ -132,7 +132,13 @@
 
 
 
-  <title> Java Web实战项目-六 | 硅碳双键的文艺复兴 </title>
+  <title>
+  
+
+  
+    Java Web实战项目-六 | 硅碳双键的文艺复兴
+  
+</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -157,7 +163,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -262,115 +268,17 @@
             
 
   <div id="posts" class="posts-expand">
-    
+  <header class="post-header">
 
-  
+	<h1 class="post-title" itemprop="name headline">Java Web实战项目-六</h1>
 
-  
-  
-  
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/17/Java-Web实战项目-六/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="L_in_z">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://i.dimg.cc/dc/51/d9/5a/1f/ea/cb/d1/18/74/b7/3d/50/9c/ee/bb.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="硅碳双键的文艺复兴">
-    </span>
+</header>
 
     
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                Java Web实战项目-六
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-17T22:09:17+08:00">
-                2017-04-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程相关/" itemprop="url" rel="index">
-                    <span itemprop="name">编程相关</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i>
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
-            </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
     
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>上回已经搞定了登陆的问题，那么登陆之后页面就要转到首页，并将原来登陆字样改为已经登陆的用户名字样，这里主要用到的是session类。</p>
+      <p>上回已经搞定了登陆的问题，那么登陆之后页面就要转到首页，并将原来登陆字样改为已经登陆的用户名字样，这里主要用到的是session类。</p>
 <a id="more"></a>
 <ol>
 <li><p>改写LoginServlet<br>在登陆验证成功后将session里的用户名填入request，并执行转发：</p>
@@ -380,75 +288,7 @@
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=<span class="string">"java"</span> contentType=<span class="string">"text/html; charset=UTF-8"</span></span><br><span class="line">    pageEncoding=<span class="string">"UTF-8"</span>%&gt;</span><br><span class="line">    &lt;%<span class="meta">@taglib</span> uri=<span class="string">"http://java.sun.com/jsp/jstl/core"</span>  prefix=<span class="string">"c"</span>%&gt;</span><br><span class="line">        &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"col-md-12 column"</span> &gt;</span><br><span class="line">            &lt;ul <span class="class"><span class="keyword">class</span></span>=<span class="string">"nav nav-tabs"</span>&gt;</span><br><span class="line">                &lt;li style=<span class="string">"font-size:20px;"</span>&gt;</span><br><span class="line">                     &lt;a href="index.jsp"&gt;首页&lt;/a&gt;</span><br><span class="line">                &lt;/li&gt;</span><br><span class="line">                   &lt;c:choose&gt;</span><br><span class="line">                    &lt;c:when  test=<span class="string">"$&#123;empty sessionScope.n&#125;"</span>&gt;</span><br><span class="line">                &lt;li style=<span class="string">"font-size:20px;"</span>&gt;</span><br><span class="line">                     &lt;a href="login.jsp"&gt;登陆&lt;/a&gt;</span><br><span class="line">                &lt;/li&gt;</span><br><span class="line">                &lt;/c:when&gt;</span><br><span class="line">        &lt;c:otherwise&gt;</span><br><span class="line">        &lt;li style=<span class="string">"font-size:20px;"</span>&gt;</span><br><span class="line">        &lt;a href="javascript:void(0)"&gt;欢迎您，$&#123;sessionScope.n&#125;&lt;/a&gt;</span><br><span class="line">        &lt;/li&gt;&lt;/c:otherwise&gt;&lt;/c:choose&gt;</span><br><span class="line">                &lt;li style=<span class="string">"font-size:20px;"</span>&gt;</span><br><span class="line">                     &lt;a href="#"&gt;商店&lt;/a&gt;</span><br><span class="line">                &lt;/li&gt;</span><br><span class="line">                </span><br><span class="line">            &lt;/ul&gt;</span><br><span class="line">        &lt;/div&gt;</span><br></pre></td></tr></table></figure></li>
 </ol>
 
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Java-Web/" rel="tag"># Java Web</a>
-          
-        </div>
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/04/15/Java-Web项目实战-五/" rel="next" title="Java Web项目实战-五">
-                <i class="fa fa-chevron-left"></i> Java Web项目实战-五
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/04/27/Java获取百度搜索结果数demo/" rel="prev" title="Java获取百度搜索结果数demo">
-                Java获取百度搜索结果数demo <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
+    
   </div>
 
 
@@ -697,10 +537,6 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
-
-
 
   
 

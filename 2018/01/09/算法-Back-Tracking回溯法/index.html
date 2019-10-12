@@ -132,7 +132,13 @@
 
 
 
-  <title> 算法:Back Tracking回溯法 | 硅碳双键的文艺复兴 </title>
+  <title>
+  
+
+  
+    算法:Back Tracking回溯法 | 硅碳双键的文艺复兴
+  
+</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -157,7 +163,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -262,115 +268,17 @@
             
 
   <div id="posts" class="posts-expand">
-    
+  <header class="post-header">
 
-  
+	<h1 class="post-title" itemprop="name headline">算法:Back Tracking回溯法</h1>
 
-  
-  
-  
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/09/算法-Back-Tracking回溯法/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="L_in_z">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://i.dimg.cc/dc/51/d9/5a/1f/ea/cb/d1/18/74/b7/3d/50/9c/ee/bb.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="硅碳双键的文艺复兴">
-    </span>
+</header>
 
     
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                算法:Back Tracking回溯法
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-09T21:13:43+08:00">
-                2018-01-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程相关/" itemprop="url" rel="index">
-                    <span itemprop="name">编程相关</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i>
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
-            </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
     
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>说到回溯法就让人头大，理解起来倒是很容易，就是把问题看成一个树形的解空间，然后在对这个空间进行DFS深度优先遍历的基础上进行剪枝操作但是要与具体问题结合起来分析就没那么简单了。看了网上很多回溯法的算法框架都写得不明所以，这种东西果然还是要自己动手写一些才行。<br><a id="more"></a></p>
+      <p>说到回溯法就让人头大，理解起来倒是很容易，就是把问题看成一个树形的解空间，然后在对这个空间进行DFS深度优先遍历的基础上进行剪枝操作但是要与具体问题结合起来分析就没那么简单了。看了网上很多回溯法的算法框架都写得不明所以，这种东西果然还是要自己动手写一些才行。<br><a id="more"></a></p>
 <h1 id="n皇后问题"><a href="#n皇后问题" class="headerlink" title="n皇后问题"></a>n皇后问题</h1><p>这是回溯法可以解决的一个经典问题。回溯法大体上有递归和非递归两种解法，n皇后问题也不例外。</p>
 <h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> queen[N] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> gcount = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Queen_Recursion</span><span class="params">(<span class="keyword">int</span> queen[],<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    queen[i]++;<span class="comment">//第i行</span></span><br><span class="line">    <span class="keyword">while</span>(无法继续进行 &amp;&amp; 还有别的放置方式)</span><br><span class="line">    &#123;</span><br><span class="line">        queen[i] ++;<span class="comment">//对i行下一列判断</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(queen[i] &lt;= N)<span class="comment">//第i行的每一列还没判断完</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(i == N <span class="number">-1</span> )<span class="comment">//最后一行也放完了</span></span><br><span class="line">        &#123;</span><br><span class="line">            gcount ++;<span class="comment">//则确认为一种放法</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            i++;</span><br><span class="line">            queen[i] = <span class="number">0</span>;<span class="comment">//从下一行的第一列开始</span></span><br><span class="line">        &#125;</span><br><span class="line">        Queen_Recursion(queen,i);<span class="comment">//递归</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span><span class="comment">//i行每一列都判断了</span></span><br><span class="line">    &#123;</span><br><span class="line">        i--;<span class="comment">//回溯到上一行，对下一列判断</span></span><br><span class="line">        <span class="keyword">if</span>(i&lt;<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Queen_Recursion(queen,i);<span class="comment">//递归</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="非递归"><a href="#非递归" class="headerlink" title="非递归"></a>非递归</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Queen</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> queen[N] = &#123;<span class="number">0</span>&#125;;       <span class="comment">//初始化</span></span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(i&gt;=<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        queen[i]++;   <span class="comment">//列从1开始</span></span><br><span class="line">        <span class="keyword">while</span>(无法继续进行 &amp;&amp; 还有别的放置方式) <span class="comment">//判断此列是否符合条件。</span></span><br><span class="line">        &#123;</span><br><span class="line">            queen[i] ++;  <span class="comment">//下一列</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(eight_queen[i] &lt;= N)<span class="comment">//第i行的每一列还没判断完</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//找到一个位置</span></span><br><span class="line">            <span class="keyword">if</span>(i == N<span class="number">-1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//这是一个解</span></span><br><span class="line">                count ++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//没有到最后一行，则进行下一行</span></span><br><span class="line">                i++;</span><br><span class="line">                queen[i] = <span class="number">0</span>; <span class="comment">//下一行的第一列</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span><span class="comment">//如果这一行到最后也没有找到合适的列，则回溯上一行。</span></span><br><span class="line">        &#123;</span><br><span class="line">            i--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;count&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -405,75 +313,7 @@ i = <span class="number">1</span>;
 </code></pre>
 <p>未完maybe待续</p>
 
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/algorithm/" rel="tag"># algorithm</a>
-          
-        </div>
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/01/03/Opencv+VS2015/" rel="next" title="OpenCV3.40+Visual Studio2015环境搭建">
-                <i class="fa fa-chevron-left"></i> OpenCV3.40+Visual Studio2015环境搭建
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/18/OpenCV-人脸检测/" rel="prev" title="OpenCV--人脸检测">
-                OpenCV--人脸检测 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
+    
   </div>
 
 
@@ -505,17 +345,8 @@ i = <span class="number">1</span>;
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://i.dimg.cc/dc/51/d9/5a/1f/ea/cb/d1/18/74/b7/3d/50/9c/ee/bb.jpg"
@@ -597,22 +428,6 @@ i = <span class="number">1</span>;
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#n皇后问题"><span class="nav-number">1.</span> <span class="nav-text">n皇后问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#递归"><span class="nav-number">1.1.</span> <span class="nav-text">递归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非递归"><span class="nav-number">1.2.</span> <span class="nav-text">非递归</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#回溯法框架"><span class="nav-number">2.</span> <span class="nav-text">回溯法框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#递归-1"><span class="nav-number">2.1.</span> <span class="nav-text">递归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非递归-1"><span class="nav-number">2.2.</span> <span class="nav-text">非递归</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -747,10 +562,6 @@ i = <span class="number">1</span>;
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
-
-
 
   
 

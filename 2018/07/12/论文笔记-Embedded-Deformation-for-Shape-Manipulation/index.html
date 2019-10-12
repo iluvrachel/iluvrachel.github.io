@@ -132,7 +132,13 @@
 
 
 
-  <title> 论文笔记: Embedded Deformation for Shape Manipulation | 硅碳双键的文艺复兴 </title>
+  <title>
+  
+
+  
+    论文笔记: Embedded Deformation for Shape Manipulation | 硅碳双键的文艺复兴
+  
+</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -157,7 +163,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -262,115 +268,17 @@
             
 
   <div id="posts" class="posts-expand">
-    
+  <header class="post-header">
 
-  
+	<h1 class="post-title" itemprop="name headline">论文笔记: Embedded Deformation for Shape Manipulation</h1>
 
-  
-  
-  
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/12/论文笔记-Embedded-Deformation-for-Shape-Manipulation/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="L_in_z">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://i.dimg.cc/dc/51/d9/5a/1f/ea/cb/d1/18/74/b7/3d/50/9c/ee/bb.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="硅碳双键的文艺复兴">
-    </span>
+</header>
 
     
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                论文笔记: Embedded Deformation for Shape Manipulation
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-12T11:19:32+08:00">
-                2018-07-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/读论文/" itemprop="url" rel="index">
-                    <span itemprop="name">读论文</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i>
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
-            </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
     
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>siggraph上的一篇老文章，主要是通过建立一个Deformation Graph以及计算变形模型操作过程中仿射变换的最优值，来实现三维模型的直接操控变形，支持细节保留、粒子系统变形及模型局部变化。</p>
+      <p>siggraph上的一篇老文章，主要是通过建立一个Deformation Graph以及计算变形模型操作过程中仿射变换的最优值，来实现三维模型的直接操控变形，支持细节保留、粒子系统变形及模型局部变化。</p>
 <a id="more"></a>
 <h1 id="Deformation-Graph"><a href="#Deformation-Graph" class="headerlink" title="Deformation Graph"></a>Deformation Graph</h1><p>一种新型的可变形模型，可作用于所有欧式三维空间$\boldsymbol{R}^3$的点，空间中的变形由一系列仿射变换所定义，仿射变换包含了旋转项和位移项，定义为旋转矩阵$R_{j}$(3<em>3)和位移向量$\vec{t_{j}}$(3</em>1)，同时模型上每个点p的位置都受到全部其他顶点$g_{j}, j\in1…m$的影响，变形后的位置$\tilde{p}$由以下公式得到: $\tilde{p} = \R_{j}(p-g_{j})+g_{j}+\vec{t_{j}} \qquad(1)$<br>公式(1)为单个定点对模型上点的影响，在多个顶点的共同作用下，可以使用各顶点位置加权和来计算点vi变形之后的位置vi’<br>公式(2)<br>类似的，可以对顶点法向量做相应的变化。<br>公式(3)<br>位置加权和根据空间位置而改变，因此受到顶点位置的影响。由graph的结构可知，对于非常靠近的顶点来说，变形作用的结果是非常相似的，所以由此我们可以由最近的k个点中的最远距离dmax来计算权重。<br>公式(4)<br>获得deformation graph和模型上的顶点，就是对模型表面进行uniform sampling均匀采样，然后根据设定的采样密度反复地删除一定半径里的点，直到达到密度要求，并使这些顶点构成网格。顶点数在200到300个之间较为合适。<br>当nodes位置确定，便通过在影响同一vertex的两个nodes之间建立edge来确认连通性。</p>
 <h1 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h1><p>deformation graph确定后，即可通过选择顶点并移动它们来操纵形状改变。各个顶点的旋转矩阵和位移向量通过能量最小的方法来求解。<br>在旋转，正则化和约束三项上进行优化。</p>
@@ -395,75 +303,7 @@
 <h2 id="numerics"><a href="#numerics" class="headerlink" title="numerics"></a>numerics</h2><p>将以上三部分求一个加权和，求出使该值最小的R和t的值，即得到对应每个顶点所需要做的变换。<br>公式(9)</p>
 <h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>首先最基本的就是构造Deformation Graph，对于邻近k个点的选取，我们可以使用KNN算法（kd-tree）或者fast marching算法来实现。</p>
 
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/CG/" rel="tag"># CG</a>
-          
-        </div>
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/07/02/信仰充值成功：Surface-Book-2/" rel="next" title="信仰充值成功：Surface Book 2">
-                <i class="fa fa-chevron-left"></i> 信仰充值成功：Surface Book 2
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/05/论文笔记-End-to-End-Human-Mesh-Recovery/" rel="prev" title="[论文笔记]End-to-End Human Mesh Recovery">
-                [论文笔记]End-to-End Human Mesh Recovery <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
+    
   </div>
 
 
@@ -495,17 +335,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://i.dimg.cc/dc/51/d9/5a/1f/ea/cb/d1/18/74/b7/3d/50/9c/ee/bb.jpg"
@@ -587,22 +418,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Deformation-Graph"><span class="nav-number">1.</span> <span class="nav-text">Deformation Graph</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Optimization"><span class="nav-number">2.</span> <span class="nav-text">Optimization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#rotation"><span class="nav-number">2.1.</span> <span class="nav-text">rotation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#regularization"><span class="nav-number">2.2.</span> <span class="nav-text">regularization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#constraint"><span class="nav-number">2.3.</span> <span class="nav-text">constraint</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numerics"><span class="nav-number">2.4.</span> <span class="nav-text">numerics</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码实现"><span class="nav-number">3.</span> <span class="nav-text">代码实现</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -737,10 +552,6 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
-
-
 
   
 

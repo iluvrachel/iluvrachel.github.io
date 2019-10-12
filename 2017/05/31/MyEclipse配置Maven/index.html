@@ -132,7 +132,13 @@
 
 
 
-  <title> MyEclipse配置Maven | 硅碳双键的文艺复兴 </title>
+  <title>
+  
+
+  
+    MyEclipse配置Maven | 硅碳双键的文艺复兴
+  
+</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -157,7 +163,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -262,115 +268,17 @@
             
 
   <div id="posts" class="posts-expand">
-    
+  <header class="post-header">
 
-  
+	<h1 class="post-title" itemprop="name headline">MyEclipse配置Maven</h1>
 
-  
-  
-  
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/31/MyEclipse配置Maven/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="L_in_z">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://i.dimg.cc/dc/51/d9/5a/1f/ea/cb/d1/18/74/b7/3d/50/9c/ee/bb.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="硅碳双键的文艺复兴">
-    </span>
+</header>
 
     
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                MyEclipse配置Maven
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-31T21:37:03+08:00">
-                2017-05-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程相关/" itemprop="url" rel="index">
-                    <span itemprop="name">编程相关</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i>
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
-            </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
     
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>今天试了一下用MyEclipse来配置maven，可以说几经挫折，网上的教程五花八门，然而很多并不适用于我的电脑，总之折腾了蛮久，在这里记录一下。</p>
+      <p>今天试了一下用MyEclipse来配置maven，可以说几经挫折，网上的教程五花八门，然而很多并不适用于我的电脑，总之折腾了蛮久，在这里记录一下。</p>
 <a id="more"></a>
 <h1 id="下载maven"><a href="#下载maven" class="headerlink" title="下载maven"></a>下载maven</h1><h1 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h1><p>打开系统环境变量新建一个M2_HOME将解压后的Maven存放路径放在此，然后在path路径下加入%M2_HOME%\bin路径<br>检测是否配置成功，打开命令行输入echo %M2_HOME%查看M2_HOME指向的Maven存放安装目录是否正<br>确，输入mvn -v查看是否能找到正确的mvn执行脚本 </p>
 <h1 id="建立本地仓库"><a href="#建立本地仓库" class="headerlink" title="建立本地仓库"></a>建立本地仓库</h1><p>在本地新建文件夹MavenRepository，在MavenRepository下建立新文件夹repo<br>修改maven解压目录下conf文件夹里的setting.xml<br>将注释的localRepository标签解除注释并将地址修改为刚刚新建的地址如下<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">localRepository</span>&gt;</span>E:\myeclipse\MavenRepository\repo<span class="tag">&lt;/<span class="name">localRepository</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
@@ -380,77 +288,7 @@
 <h1 id="建立Maven项目"><a href="#建立Maven项目" class="headerlink" title="建立Maven项目"></a>建立Maven项目</h1><p>打开MyEclipse–&gt; new–&gt; web project–&gt; 勾上add maven support –&gt; java version 改为1.7 –&gt; finish<br>工程建立完毕<br>在pom.xml可以添加需要的包，然后maven会自动下载，这过程会比较卡比较慢（辣鸡电脑，好想要ssd），MyEclipse右下角会有个进度条显示当前正在忙什么，可以点开看<br>如果一直没反应就右键工程选择maven–&gt;update–&gt;勾上force update</p>
 <p>如果能在本地仓库看到下好的jar包，那基本没问题了</p>
 
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/MyEclipse/" rel="tag"># MyEclipse</a>
-          
-            <a href="/tags/maven/" rel="tag"># maven</a>
-          
-        </div>
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/05/29/spring和mybatis的整合/" rel="next" title="spring和mybatis的整合">
-                <i class="fa fa-chevron-left"></i> spring和mybatis的整合
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/06/03/阿里云上Tomcat无法访问的问题/" rel="prev" title="阿里云上Tomcat无法访问的问题">
-                阿里云上Tomcat无法访问的问题 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
+    
   </div>
 
 
@@ -482,17 +320,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://i.dimg.cc/dc/51/d9/5a/1f/ea/cb/d1/18/74/b7/3d/50/9c/ee/bb.jpg"
@@ -574,22 +403,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#下载maven"><span class="nav-number">1.</span> <span class="nav-text">下载maven</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置环境变量"><span class="nav-number">2.</span> <span class="nav-text">配置环境变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#建立本地仓库"><span class="nav-number">3.</span> <span class="nav-text">建立本地仓库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MyEclipse配置maven"><span class="nav-number">4.</span> <span class="nav-text">MyEclipse配置maven</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#建立Maven项目"><span class="nav-number">5.</span> <span class="nav-text">建立Maven项目</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -724,10 +537,6 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
-
-
 
   
 
