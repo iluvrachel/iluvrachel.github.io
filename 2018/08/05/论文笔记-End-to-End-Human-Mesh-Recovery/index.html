@@ -132,13 +132,7 @@
 
 
 
-  <title>
-  
-
-  
-    [论文笔记]End-to-End Human Mesh Recovery | 硅碳双键的文艺复兴
-  
-</title>
+  <title> [论文笔记]End-to-End Human Mesh Recovery | 硅碳双键的文艺复兴 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -163,7 +157,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -268,17 +262,115 @@
             
 
   <div id="posts" class="posts-expand">
-  <header class="post-header">
+    
 
-	<h1 class="post-title" itemprop="name headline">[论文笔记]End-to-End Human Mesh Recovery</h1>
+  
 
+  
+  
+  
 
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/05/论文笔记-End-to-End-Human-Mesh-Recovery/">
 
-</header>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="L_in_z">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://i.dimg.cc/dc/51/d9/5a/1f/ea/cb/d1/18/74/b7/3d/50/9c/ee/bb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="硅碳双键的文艺复兴">
+    </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                [论文笔记]End-to-End Human Mesh Recovery
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-05T15:32:47+08:00">
+                2018-08-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/读论文/" itemprop="url" rel="index">
+                    <span itemprop="name">读论文</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
     
-      <p>2017年来自Berkeley一名博后金沢小姐姐的一篇论文<br><a id="more"></a></p>
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>2017年来自Berkeley一名博后金沢小姐姐的一篇论文<br><a id="more"></a></p>
 <h1 id="INTRODUCTION"><a href="#INTRODUCTION" class="headerlink" title="INTRODUCTION"></a>INTRODUCTION</h1><p>此paper提出了一个以端到端的方法实现从二维人体图像恢复出三维人体模型的框架。在此之前，绝大多数的方法或是只关心三维骨架的重建，或是采用两段式的方法，即先从二维图像推断出2D-joint location，再从2D-joint来预测三维模型或计算三维参数。<br>以端到端的方法来实现这一目的，在数据集方面有几个挑战需要面对。一是，缺少足够数量的带有ground truth 3D annotation的自然获取的实况图像，目前已有的自带3D结构注解的图像都是在特定的实验环境下获得的，并不足以反映真实世界可能出现的所有情况。二是，从二维到三维存在着固有的模棱两可性，因为缺少了深度信息，许多不同的三维模型都可以映射为同一个二维图像，而由二维图像映射到三维时，也不一定能够符合人体结构学。该文章将着重解决这几个问题。<br>对于第一个难题，解决方案思路出发点是使用两个数据集来进行训练，一个是带有2D annotation的实况二维图像集，另一个是人体的3D mesh模型集，这两个数据集是没有配对关系的。当获得一副图像，先预测该图像对应的3D mesh参数，然后使推断出来的3D mesh的3D Joint映射到2D时能够与原图的2D-joint契合。通过这样一个从2D到3D再到2D的过程，我们就可以使用海量的不带三维信息的二维图像来作为数据集进行训练。在预测模型参数方面，以前的多数方法是把这个问题当做分类问题来处理，这样做得到的误差是离散化的，所以在精度上有不足。这篇paper在参数预测上则采用了iterative regression with feedback的方法。<br>对于第二个问题，为了使生成的模型符合真实的人体结构，使用GAN的网络结构，把生成模型的参数输入到一个Discriminator中，Discriminator在训练中学习每个joint之间的角度限制，由Discriminator来判断模型是否真实。</p>
 <p>所以，总结一下该文章提出的方案比其他方法屌在哪里：</p>
 <ol>
@@ -300,7 +392,75 @@
 <h2 id="Factorized-Adversarial-Prior"><a href="#Factorized-Adversarial-Prior" class="headerlink" title="Factorized Adversarial Prior"></a>Factorized Adversarial Prior</h2><p>先验对抗。如果不使用判别器来对生成的模型进行进行约束，就会产生一些奇奇怪怪的结果，搞得有点寄生兽既视感。所以采用了GAN。由于SMPL的可分离特性，我们可以对shape和pose分别单独训练Discriminator，以此来降低网络的复杂度，提高学习效率。对于shape参数，设计一个Discriminator，对于每一个joint各设计一个Discriminator，为了分析各个节点对骨架结构的贡献，对所有的joint再设计一个Discriminator，最终一共是K+2个判别器。然后作者表达了一下训练过程之漫长，1080ti 显卡也跑了五天之久。（我用我自己的戴尔图形工作站，懒得去配GPU环境，作死用CPU跑，两天还是三天跑了百分之一。。。）</p>
 <h2 id="Evaluation"><a href="#Evaluation" class="headerlink" title="Evaluation"></a>Evaluation</h2><p>之后作者用了将近三分之一的长篇大论来阐述该方法的结果多么多么好。然后还稍微提了一下人体图像语义分割，然而在代码中并没有找到相关实现。</p>
 
-    
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CG/" rel="tag"># CG</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/12/论文笔记-Embedded-Deformation-for-Shape-Manipulation/" rel="next" title="论文笔记: Embedded Deformation for Shape Manipulation">
+                <i class="fa fa-chevron-left"></i> 论文笔记: Embedded Deformation for Shape Manipulation
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/08/论文笔记-Semantic-Shape-Editing-Using-Deformation-Handles/" rel="prev" title="[论文笔记]Semantic Shape Editing Using Deformation Handles">
+                [论文笔记]Semantic Shape Editing Using Deformation Handles <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -332,8 +492,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://i.dimg.cc/dc/51/d9/5a/1f/ea/cb/d1/18/74/b7/3d/50/9c/ee/bb.jpg"
@@ -415,6 +584,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#INTRODUCTION"><span class="nav-number">1.</span> <span class="nav-text">INTRODUCTION</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Related-Work"><span class="nav-number">2.</span> <span class="nav-text">Related Work</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SMPL（A-Skinned-Multi-Person-Linear-Model）"><span class="nav-number">2.1.</span> <span class="nav-text">SMPL（A Skinned Multi-Person Linear Model）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Iterative-3D-Regression-with-Feedback"><span class="nav-number">2.2.</span> <span class="nav-text">Iterative 3D Regression with Feedback</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Factorized-Adversarial-Prior"><span class="nav-number">2.3.</span> <span class="nav-text">Factorized Adversarial Prior</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Evaluation"><span class="nav-number">2.4.</span> <span class="nav-text">Evaluation</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -549,6 +734,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 

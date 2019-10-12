@@ -132,13 +132,7 @@
 
 
 
-  <title>
-  
-
-  
-    xv6 makefile 解析 | 硅碳双键的文艺复兴
-  
-</title>
+  <title> xv6 makefile 解析 | 硅碳双键的文艺复兴 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -163,7 +157,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -268,17 +262,115 @@
             
 
   <div id="posts" class="posts-expand">
-  <header class="post-header">
+    
 
-	<h1 class="post-title" itemprop="name headline">xv6 makefile 解析</h1>
+  
 
+  
+  
+  
 
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/23/xv6-makefile-解析/">
 
-</header>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="L_in_z">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://i.dimg.cc/dc/51/d9/5a/1f/ea/cb/d1/18/74/b7/3d/50/9c/ee/bb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="硅碳双键的文艺复兴">
+    </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                xv6 makefile 解析
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-23T22:58:38+08:00">
+                2019-02-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程相关/" itemprop="url" rel="index">
+                    <span itemprop="name">编程相关</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
     
-      <p>xv6操作系统安装的makefile文件逐行分析<br><a id="more"></a></p>
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>xv6操作系统安装的makefile文件逐行分析<br><a id="more"></a></p>
 <p>目标描述：xv6 Makefile分析<br>Xv6 的Makefile是用于组织源代码的编译流程的文件，Makefile文件描述了各个源文件之间的相互依赖关系，把原本繁琐的编译过程简化为makefile文件与make指令的配合使用。<br>Makefile大体结构是树形结构，即把一个目标分为多个子目标。make将makefile的第一个target作为作为最终的target，凡是这个规则依赖的规则都将被执行。<br>编译流程：<br>（一）首先OBJS指定需要编译的.c文件<br>（二）然后配置一些环境和工具信息<br>（三）xv6.img、bootblock、kernel相互依赖，生成系统内核与镜像<br>（四）生成文件系统以及系统内部可执行文件<br>（五）配置启动信息</p>
 <p>源代码注释及分析：<br>（1）编译目标定义<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">OBJS = \</span><br><span class="line">	bio.o\</span><br><span class="line">	console.o\</span><br><span class="line">	exec.o\</span><br><span class="line">	file.o\</span><br><span class="line">	fs.o\</span><br><span class="line">	ide.o\</span><br><span class="line">	ioapic.o\</span><br><span class="line">	kalloc.o\</span><br><span class="line">	kbd.o\</span><br><span class="line">	lapic.o\</span><br><span class="line">	log.o\</span><br><span class="line">	main.o\</span><br><span class="line">	mp.o\</span><br><span class="line">	picirq.o\</span><br><span class="line">	pipe.o\</span><br><span class="line">	proc.o\</span><br><span class="line">	sleeplock.o\</span><br><span class="line">	spinlock.o\</span><br><span class="line">	string.o\</span><br><span class="line">	swtch.o\</span><br><span class="line">	syscall.o\</span><br><span class="line">	sysfile.o\</span><br><span class="line">	sysproc.o\</span><br><span class="line">	trapasm.o\</span><br><span class="line">	trap.o\</span><br><span class="line">	uart.o\</span><br><span class="line">	vectors.o\</span><br><span class="line">	vm.o\</span><br></pre></td></tr></table></figure></p>
 <p>只要make查到某个 .o 文件，它就自动把相关的 .c 加到依赖关系中</p>
@@ -306,7 +398,77 @@
 <p>（16）qemu的一些设置<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ifndef</span> CPUS</span><br><span class="line">CPUS := 2</span><br><span class="line"><span class="keyword">endif</span></span><br><span class="line"><span class="comment"># 配置硬件信息</span></span><br><span class="line"><span class="comment"># -drive定义驱动器 file=指定镜像文件，磁盘类型raw -smp指定cpu -m指定内存</span></span><br><span class="line">QEMUOPTS = -drive file=fs.img,index=1,media=disk,format=raw -drive file=xv6.img,index=0,media=disk,format=raw -smp <span class="variable">$(CPUS)</span> -m 512 <span class="variable">$(QEMUEXTRA)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># qemu加载fs xv6镜像，-serial指定串口号mon:stdio，以及配置驱动器</span></span><br><span class="line"><span class="section">qemu: fs.img xv6.img</span></span><br><span class="line">	<span class="variable">$(QEMU)</span> -serial mon:stdio <span class="variable">$(QEMUOPTS)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># qemu-memfs加载xv6memfs镜像，配置驱动器</span></span><br><span class="line"><span class="section">qemu-memfs: xv6memfs.img</span></span><br><span class="line">	<span class="variable">$(QEMU)</span> -drive file=xv6memfs.img,index=0,media=disk,format=raw -smp <span class="variable">$(CPUS)</span> -m 256</span><br><span class="line"></span><br><span class="line"><span class="comment"># -nographic非图形界面</span></span><br><span class="line"><span class="section">qemu-nox: fs.img xv6.img</span></span><br><span class="line">	<span class="variable">$(QEMU)</span> -nographic <span class="variable">$(QEMUOPTS)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化调试器</span></span><br><span class="line"><span class="section">.gdbinit: .gdbinit.tmpl</span></span><br><span class="line">	sed <span class="string">"s/localhost:1234/localhost:<span class="variable">$(GDBPORT)</span>/"</span> &lt; <span class="variable">$^</span> &gt; <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line"><span class="section">qemu-gdb: fs.img xv6.img .gdbinit</span></span><br><span class="line">	@echo <span class="string">"*** Now run 'gdb'."</span> 1&gt;&amp;2</span><br><span class="line">	<span class="variable">$(QEMU)</span> -serial mon:stdio <span class="variable">$(QEMUOPTS)</span> -S <span class="variable">$(QEMUGDB)</span></span><br><span class="line"></span><br><span class="line"><span class="section">qemu-nox-gdb: fs.img xv6.img .gdbinit</span></span><br><span class="line">	@echo <span class="string">"*** Now run 'gdb'."</span> 1&gt;&amp;2</span><br><span class="line">	<span class="variable">$(QEMU)</span> -nographic <span class="variable">$(QEMUOPTS)</span> -S <span class="variable">$(QEMUGDB)</span></span><br></pre></td></tr></table></figure></p>
 <p>（17）文件整理打包为tar<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">tar:</span></span><br><span class="line">	rm -rf /tmp/xv6</span><br><span class="line">	mkdir -p /tmp/xv6</span><br><span class="line">	cp dist/* dist/.gdbinit.tmpl /tmp/xv6</span><br><span class="line">	(cd /tmp; tar cf - xv6) | gzip &gt;xv6-rev10.tar.gz  <span class="comment"># the next one will be 10 (9/17)</span></span><br></pre></td></tr></table></figure></p>
 
-    
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/xv6/" rel="tag"># xv6</a>
+          
+            <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/21/记一次调试神经网络/" rel="next" title="记一次调试神经网络">
+                <i class="fa fa-chevron-left"></i> 记一次调试神经网络
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/23/xv6实现FIFO进程调度/" rel="prev" title="xv6实现FIFO进程调度">
+                xv6实现FIFO进程调度 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -555,6 +717,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 

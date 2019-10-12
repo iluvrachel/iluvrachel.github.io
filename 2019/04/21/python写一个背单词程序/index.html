@@ -132,13 +132,7 @@
 
 
 
-  <title>
-  
-
-  
-    python写一个背单词程序 | 硅碳双键的文艺复兴
-  
-</title>
+  <title> python写一个背单词程序 | 硅碳双键的文艺复兴 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -163,7 +157,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -268,22 +262,188 @@
             
 
   <div id="posts" class="posts-expand">
-  <header class="post-header">
+    
 
-	<h1 class="post-title" itemprop="name headline">python写一个背单词程序</h1>
+  
 
+  
+  
+  
 
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/21/python写一个背单词程序/">
 
-</header>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="L_in_z">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://i.dimg.cc/dc/51/d9/5a/1f/ea/cb/d1/18/74/b7/3d/50/9c/ee/bb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="硅碳双键的文艺复兴">
+    </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                python写一个背单词程序
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-21T23:41:57+08:00">
+                2019-04-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程相关/" itemprop="url" rel="index">
+                    <span itemprop="name">编程相关</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
     
-      <p>最近要考试阿，几千个单词叫我背，我怎么背嘛<br>碰巧周末不想干正事又闲的慌，花了两个小时（说实话两个小时里有一个多小时是在整理单词数据）写了一个python小程序用来背单词，顺便熟悉一下python tkinter的GUI操作<br>python的GUI简单用用还行，要和其他语言比还是个弟弟<br><a id="more"></a></p>
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近要考试阿，几千个单词叫我背，我怎么背嘛<br>碰巧周末不想干正事又闲的慌，花了两个小时（说实话两个小时里有一个多小时是在整理单词数据）写了一个python小程序用来背单词，顺便熟悉一下python tkinter的GUI操作<br>python的GUI简单用用还行，要和其他语言比还是个弟弟<br><a id="more"></a></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> tkinter <span class="keyword">as</span> tk <span class="comment"># GUI</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd </span><br><span class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> DataFrame</span><br><span class="line"><span class="keyword">import</span> random <span class="keyword">as</span> rd</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> ImageTk, Image</span><br><span class="line"></span><br><span class="line">df = pd.read_excel(<span class="string">'df.xlsx'</span>) <span class="comment"># 读取excel表中单词</span></span><br><span class="line">data = df.values</span><br><span class="line"><span class="comment">#data = DataFrame(data)</span></span><br><span class="line"><span class="comment">#data['A'] = data['A']+" "+data['B']</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#print("\n&#123;0&#125;".format(df))</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机抽单词函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">next_Random</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> cur_word</span><br><span class="line">    <span class="keyword">global</span> count</span><br><span class="line">    count += <span class="number">1</span></span><br><span class="line">    cur_word = rd.choice(data)</span><br><span class="line">    ch = extract_Chinese(str(cur_word))</span><br><span class="line">    text.configure(text = ch)</span><br><span class="line">    counter.configure(text = str(count))</span><br><span class="line">    root.update_idletasks() </span><br><span class="line"></span><br><span class="line"><span class="comment"># 把中文和英文分离</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">extract_Chinese</span><span class="params">(str)</span>:</span></span><br><span class="line">    str = re.sub(<span class="string">"[A-Za-z0-9\!\%\[\]\,\。]"</span>, <span class="string">""</span>, str)</span><br><span class="line">    <span class="keyword">return</span> str</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示答案</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_Answer</span><span class="params">()</span>:</span></span><br><span class="line">    text.configure(text = str(cur_word))</span><br><span class="line">    root.update_idletasks()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化GUI主体</span></span><br><span class="line">root = tk.Tk()    </span><br><span class="line">root.title(<span class="string">'给老子背单词'</span>)                 </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#背景画布，大小自己调</span></span><br><span class="line">canvas = tk.Canvas(root, width=<span class="number">612</span>,height=<span class="number">700</span>,bd=<span class="number">0</span>, highlightthickness=<span class="number">0</span>)</span><br><span class="line">imgpath = <span class="string">'timg.gif'</span></span><br><span class="line">img = Image.open(imgpath)</span><br><span class="line">photo = ImageTk.PhotoImage(img) </span><br><span class="line">canvas.create_image(<span class="number">306</span>, <span class="number">306</span>, image=photo)</span><br><span class="line">canvas.pack()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计数器，计已经背了多少个单词</span></span><br><span class="line">count = <span class="number">0</span></span><br><span class="line">counter = tk.Label(root,fg=<span class="string">'red'</span>,anchor=<span class="string">'se'</span>)</span><br><span class="line">counter.pack()</span><br><span class="line">counter[<span class="string">'text'</span>] = str(count)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 当前词汇</span></span><br><span class="line">cur_word = rd.choice(data)</span><br><span class="line">ch = extract_Chinese(str(cur_word))</span><br><span class="line">text  = tk.Label(root,text=ch,font=(<span class="string">'Arial'</span>, <span class="number">15</span>))          <span class="comment">#  创建组件</span></span><br><span class="line">text[<span class="string">'width'</span>] = <span class="number">25</span></span><br><span class="line">text[<span class="string">'height'</span>] = <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 两个按钮 下一个和显示答案</span></span><br><span class="line">B1 = tk.Button(root, text =<span class="string">"next"</span>, command = next_Random)</span><br><span class="line">B2 = tk.Button(root, text =<span class="string">"answer"</span>, command = show_Answer)</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="comment"># canvas.create_window(100, 50, width=100, height=20,</span></span><br><span class="line"><span class="comment">#                                        window=text)</span></span><br><span class="line"></span><br><span class="line">B1.pack()</span><br><span class="line">B2.pack()</span><br><span class="line">text.pack()                    <span class="comment"># 将小部件放置到主窗口中</span></span><br><span class="line">root.mainloop()                 <span class="comment"># 进入消息循环</span></span><br></pre></td></tr></table></figure>
 <p>然后只需要在Windows计划任务里面设置定时执行这个python文件，就可以做到每天督促自己背单词了<br>后续考虑再加入一些收藏功能和增删功能吧，界面暂时就不优化了，反正只是自己用，丑就丑点</p>
 <p>祝我高分</p>
 
-    
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/19/城市印象/" rel="next" title="城市印象">
+                <i class="fa fa-chevron-left"></i> 城市印象
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/25/爱，死亡，机器人/" rel="prev" title="爱，死亡，机器人">
+                爱，死亡，机器人 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -532,6 +692,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 

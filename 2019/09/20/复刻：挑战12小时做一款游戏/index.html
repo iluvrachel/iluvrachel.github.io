@@ -132,13 +132,7 @@
 
 
 
-  <title>
-  
-
-  
-    复刻：挑战12小时做一款游戏 | 硅碳双键的文艺复兴
-  
-</title>
+  <title> 复刻：挑战12小时做一款游戏 | 硅碳双键的文艺复兴 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -163,7 +157,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -268,17 +262,115 @@
             
 
   <div id="posts" class="posts-expand">
-  <header class="post-header">
+    
 
-	<h1 class="post-title" itemprop="name headline">复刻：挑战12小时做一款游戏</h1>
+  
 
+  
+  
+  
 
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/20/复刻：挑战12小时做一款游戏/">
 
-</header>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="L_in_z">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://i.dimg.cc/dc/51/d9/5a/1f/ea/cb/d1/18/74/b7/3d/50/9c/ee/bb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="硅碳双键的文艺复兴">
+    </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                复刻：挑战12小时做一款游戏
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-20T00:31:17+08:00">
+                2019-09-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程相关/" itemprop="url" rel="index">
+                    <span itemprop="name">编程相关</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
     
-      <p>我真的是，想起一出是一出，终于也要对Unity下手了。前几天看到油管上有一个up主，<a href="https://www.youtube.com/watch?v=mFNrOGPVls0&amp;t=547s" target="_blank" rel="noopener">挑战12小时做一款游戏</a>，既然看到了就很想挑战一下，看看我和大佬的差距，也是保持每天编程的手感。<br><a href="https://github.com/iluvrachel/BounceBall/releases" target="_blank" rel="noopener">游戏下载传送门</a><br><a id="more"></a><br>大佬的12h即是从早到晚连续的12h，包括吃饭。我是绝对做不到了，毕竟我也不是大佬，而且每天也有其他的事情要做，于是采用离散计时法，随做随计。</p>
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我真的是，想起一出是一出，终于也要对Unity下手了。前几天看到油管上有一个up主，<a href="https://www.youtube.com/watch?v=mFNrOGPVls0&amp;t=547s" target="_blank" rel="noopener">挑战12小时做一款游戏</a>，既然看到了就很想挑战一下，看看我和大佬的差距，也是保持每天编程的手感。<br><a href="https://github.com/iluvrachel/BounceBall/releases" target="_blank" rel="noopener">游戏下载传送门</a><br><a id="more"></a><br>大佬的12h即是从早到晚连续的12h，包括吃饭。我是绝对做不到了，毕竟我也不是大佬，而且每天也有其他的事情要做，于是采用离散计时法，随做随计。</p>
 <h1 id="4h59m"><a href="#4h59m" class="headerlink" title="4h59m:"></a>4h59m:</h1><p>把player controller这一大块完成了，包括slow motion，ball squeeze和tail这些花里胡哨的东西也还原了。球的运动使用addForce()来做，Slow motion通过改变timeScale实现，球的变形通过改变gameObject的scale，tail一开始想得复杂，后来发现unity自带就有tail renderer。然后用slider去实现了aim line。其实也不算复杂，比较麻烦的就是各种数字的设置，力和速度的大小，重力和阻力什么的。<br>这里有一个bug尚未解决，就是addForce之后，球的运动有时候会产生偏移，即便是关掉阻力和重力也是如此，尚不清楚原因。<br>然后做相机追踪，包括移动缓冲和自动缩放。此时就遇到了第一个大问题。<br>相机跟随时物体抖动，速度越快抖动越剧烈，查了很多方法，也看了Update、FixedUpdate、LateUpdate各种关系依然无解，终究还是在国外某不知名论坛看到了解决方法。（百度不给力啊，还是谷歌靠谱）解决办法是把rigidbody里的interpolation打开，插值之后就能够纵享丝滑。不过关于Update这方面还有很多值得深挖的内容，以后得好好学一下。</p>
 <h1 id="5h48m"><a href="#5h48m" class="headerlink" title="5h48m:"></a>5h48m:</h1><p>制作敌人的碰撞检测，又遇到了个问题。碰撞之后丝毫无反应，debug发现连碰撞函数都没有进去，但是程序也没给我报错呀。<br>后来发现，我做的是2D游戏，设了Collider2D，在程序里就不能只写Collider，不然啥反应都没有还不会报错的。妈耶。</p>
 <h1 id="6h50m"><a href="#6h50m" class="headerlink" title="6h50m:"></a>6h50m:</h1><p>particle system做击中效果, 最烦人的一个部分，美工从来不是我的强项，没办法一个一个参数去试效果。<br>击中敌人爆炸，击中后先让sprite和collider消失，等particle system播完了再销毁对象。Like：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OnCollisionEnter2D</span>(<span class="params">Collision2D other</span>) </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(other.gameObject.tag==<span class="string">"Player"</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//print("hit");</span></span><br><span class="line">            explosionAudio.Play();</span><br><span class="line">            sr.enabled = <span class="literal">false</span>;</span><br><span class="line">            col.enabled = <span class="literal">false</span>;</span><br><span class="line">            ps.Play();</span><br><span class="line">            Destroy(gameObject,<span class="number">6</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
@@ -299,7 +391,73 @@
 <p>虽然一开始确实是兴趣使然地去做这个游戏，但其实稍微想想的话，这个游戏的可扩展性很强，还能搞出更多新的花样，比如排名机制，比如闯关机制，再比如更多的敌人和联机模式。说起来，简单的图形更能让玩家和游戏开发者都专注于玩法上，很多优秀的游戏从来都不是单凭画面拿下市场的，甚至画面粗劣却拥有一大票拥趸者的游戏比比皆是，像elona，像和班尼特福迪一起攻克难关….</p>
 <p>不管怎么说，12小时的游戏开发挑战就先在这里画个休止符吧，毕竟也是一天一天的闲暇时间凑出来的12小时，也是蛮累的 XD</p>
 
-    
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Unity/" rel="tag"># Unity</a>
+          
+            <a href="/tags/游戏开发/" rel="tag"># 游戏开发</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/09/番外：快速搜索脚本之win32版/" rel="next" title="番外：快速搜索脚本之win32版">
+                <i class="fa fa-chevron-left"></i> 番外：快速搜索脚本之win32版
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -331,8 +489,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://i.dimg.cc/dc/51/d9/5a/1f/ea/cb/d1/18/74/b7/3d/50/9c/ee/bb.jpg"
@@ -414,6 +581,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#4h59m"><span class="nav-number">1.</span> <span class="nav-text">4h59m:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5h48m"><span class="nav-number">2.</span> <span class="nav-text">5h48m:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6h50m"><span class="nav-number">3.</span> <span class="nav-text">6h50m:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7h24m"><span class="nav-number">4.</span> <span class="nav-text">7h24m:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7h53m"><span class="nav-number">5.</span> <span class="nav-text">7h53m:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8h44m"><span class="nav-number">6.</span> <span class="nav-text">8h44m:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9h22m"><span class="nav-number">7.</span> <span class="nav-text">9h22m:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9h49m"><span class="nav-number">8.</span> <span class="nav-text">9h49m:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11h34m"><span class="nav-number">9.</span> <span class="nav-text">11h34m:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12h13m"><span class="nav-number">10.</span> <span class="nav-text">12h13m:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12h40m"><span class="nav-number">11.</span> <span class="nav-text">12h40m:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#13h20m"><span class="nav-number">12.</span> <span class="nav-text">13h20m:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#14h18m"><span class="nav-number">13.</span> <span class="nav-text">14h18m:</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -548,6 +731,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 
