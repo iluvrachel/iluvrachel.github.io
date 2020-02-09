@@ -55,17 +55,21 @@
   };
 </script>
 
-  <meta name="description" content="浅い眠りの中を　猫が歩いている">
-<meta property="og:type" content="website">
-<meta property="og:title" content="硅碳双键的文艺复兴">
-<meta property="og:url" content="http://yoursite.com/tags/Java-Web/index.html">
+  <meta name="description" content="在一个没有汤圆吃的元宵节，动手给自己搓几个丸子。参考了RayTracingInOneWeekend这本书，其实这是一个系列里面的第一本，很简单而且质量很高，还有两本我还没看。原书的代码是用c++写的，我过年只带了我的田牌笔记本回家，只有python的开发环境，所以就改成用python实现了一遍。比起c++运行效率确实慢了些，但是不是特别明显。不过想要尝试渲染1080x720大图的时候被预计时间3小">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python写一个光线追踪渲染器">
+<meta property="og:url" content="http://yoursite.com/2020/02/10/python写一个光线追踪渲染器/index.html">
 <meta property="og:site_name" content="硅碳双键的文艺复兴">
-<meta property="og:description" content="浅い眠りの中を　猫が歩いている">
+<meta property="og:description" content="在一个没有汤圆吃的元宵节，动手给自己搓几个丸子。参考了RayTracingInOneWeekend这本书，其实这是一个系列里面的第一本，很简单而且质量很高，还有两本我还没看。原书的代码是用c++写的，我过年只带了我的田牌笔记本回家，只有python的开发环境，所以就改成用python实现了一遍。比起c++运行效率确实慢了些，但是不是特别明显。不过想要尝试渲染1080x720大图的时候被预计时间3小">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2020/02/10/python写一个光线追踪渲染器/render.jpg">
+<meta property="og:updated_time" content="2020-02-09T16:42:24.418Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="硅碳双键的文艺复兴">
-<meta name="twitter:description" content="浅い眠りの中を　猫が歩いている">
-  <link rel="canonical" href="http://yoursite.com/tags/Java-Web/">
+<meta name="twitter:title" content="python写一个光线追踪渲染器">
+<meta name="twitter:description" content="在一个没有汤圆吃的元宵节，动手给自己搓几个丸子。参考了RayTracingInOneWeekend这本书，其实这是一个系列里面的第一本，很简单而且质量很高，还有两本我还没看。原书的代码是用c++写的，我过年只带了我的田牌笔记本回家，只有python的开发环境，所以就改成用python实现了一遍。比起c++运行效率确实慢了些，但是不是特别明显。不过想要尝试渲染1080x720大图的时候被预计时间3小">
+<meta name="twitter:image" content="http://yoursite.com/2020/02/10/python写一个光线追踪渲染器/render.jpg">
+  <link rel="canonical" href="http://yoursite.com/2020/02/10/python写一个光线追踪渲染器/">
 
 
 <script id="page-configurations">
@@ -73,13 +77,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>Tag: Java Web | 硅碳双键的文艺复兴</title>
+  <title>python写一个光线追踪渲染器 | 硅碳双键的文艺复兴</title>
   
 
 
@@ -206,24 +210,6 @@
 
     
 
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-  
-
 </nav>
 </div>
     </header>
@@ -241,267 +227,156 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
   
   
   
-  <div class="post-block tag">
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">Java Web<small>Tag</small>
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/10/python写一个光线追踪渲染器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="L_in_z">
+      <meta itemprop="description" content="浅い眠りの中を　猫が歩いている">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="硅碳双键的文艺复兴">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">python写一个光线追踪渲染器
+
+          
         </h2>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2020-02-10 00:23:27 / Modified: 00:42:24" itemprop="dateCreated datePublished" datetime="2020-02-10T00:23:27+08:00">2020-02-10</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/编程相关/" itemprop="url" rel="index"><span itemprop="name">编程相关</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/编程相关/CG/" itemprop="url" rel="index"><span itemprop="name">CG</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2020/02/10/python写一个光线追踪渲染器/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2020/02/10/python写一个光线追踪渲染器/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+        <p>在一个没有汤圆吃的元宵节，动手给自己搓几个丸子。<br><img src="/2020/02/10/python写一个光线追踪渲染器/render.jpg" alt="效果图"><br>参考了<a href="https://raytracing.github.io/" target="_blank" rel="noopener">RayTracingInOneWeekend</a>这本书，其实这是一个系列里面的第一本，很简单而且质量很高，还有两本我还没看。<br>原书的代码是用c++写的，我过年只带了我的田牌笔记本回家，只有python的开发环境，所以就改成用python实现了一遍。<br>比起c++运行效率确实慢了些，但是不是特别明显。不过想要尝试渲染1080x720大图的时候被预计时间3小时劝退了。<br>有时间可以想办法研究研究cuda加速。这是后话了。<br>代码很少，但是放在这里也得是洋洋洒洒的一篇了，不好看。<a href="https://github.com/iluvrachel/RayTracingInPython" target="_blank" rel="noopener">去github吧。</a></p>
 
-  
-  
+    </div>
 
-  
     
-    <div class="collection-year">
-      <h2 class="collection-header">2017</h2>
-    </div>
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2017-06-07T00:39:51+08:00"
-              content="2017-06-07">
-          06-07
-        </time>
-      </div>
-
-      <h3 class="post-title">
+    
+    
         
-          <a class="post-title-link" href="/2017/06/07/Spring和Mybatis的整合-续/" itemprop="url">
-            <span itemprop="name">Spring和Mybatis的整合-续</span>
-          </a>
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/python/" rel="tag"># python</a>
+            
+          </div>
         
-      </h3>
 
-    </header>
-  </article>
-
-
-
-  
-  
-
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2017-05-29T22:06:55+08:00"
-              content="2017-05-29">
-          05-29
-        </time>
-      </div>
-
-      <h3 class="post-title">
         
-          <a class="post-title-link" href="/2017/05/29/spring和mybatis的整合/" itemprop="url">
-            <span itemprop="name">spring和mybatis的整合</span>
-          </a>
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/02/02/记Global-Game-Jam-2020/" rel="next" title="记Global Game Jam 2020">
+                  <i class="fa fa-chevron-left"></i> 记Global Game Jam 2020
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
         
-      </h3>
-
-    </header>
-  </article>
-
-
-
-  
-  
-
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2017-04-17T22:09:17+08:00"
-              content="2017-04-17">
-          04-17
-        </time>
-      </div>
-
-      <h3 class="post-title">
-        
-          <a class="post-title-link" href="/2017/04/17/Java-Web实战项目-六/" itemprop="url">
-            <span itemprop="name">Java Web实战项目-六</span>
-          </a>
-        
-      </h3>
-
-    </header>
-  </article>
-
-
-
-  
-  
-
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2017-04-15T22:36:53+08:00"
-              content="2017-04-15">
-          04-15
-        </time>
-      </div>
-
-      <h3 class="post-title">
-        
-          <a class="post-title-link" href="/2017/04/15/Java-Web项目实战-五/" itemprop="url">
-            <span itemprop="name">Java Web项目实战-五</span>
-          </a>
-        
-      </h3>
-
-    </header>
-  </article>
-
-
-
-  
-  
-
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2017-03-30T23:36:50+08:00"
-              content="2017-03-30">
-          03-30
-        </time>
-      </div>
-
-      <h3 class="post-title">
-        
-          <a class="post-title-link" href="/2017/03/30/Java-Web项目实战-四/" itemprop="url">
-            <span itemprop="name">Java Web项目实战-四</span>
-          </a>
-        
-      </h3>
-
-    </header>
-  </article>
-
-
-
-  
-  
-
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2017-03-16T00:40:41+08:00"
-              content="2017-03-16">
-          03-16
-        </time>
-      </div>
-
-      <h3 class="post-title">
-        
-          <a class="post-title-link" href="/2017/03/16/Java-Web项目实战-三/" itemprop="url">
-            <span itemprop="name">Java Web项目实战-三</span>
-          </a>
-        
-      </h3>
-
-    </header>
-  </article>
-
-
-
-  
-  
-
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2017-03-12T15:48:16+08:00"
-              content="2017-03-12">
-          03-12
-        </time>
-      </div>
-
-      <h3 class="post-title">
-        
-          <a class="post-title-link" href="/2017/03/12/Java-Web项目实战-二/" itemprop="url">
-            <span itemprop="name">Java Web项目实战(二)</span>
-          </a>
-        
-      </h3>
-
-    </header>
-  </article>
-
-
-
-  
-  
-
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2017-03-12T00:44:57+08:00"
-              content="2017-03-12">
-          03-12
-        </time>
-      </div>
-
-      <h3 class="post-title">
-        
-          <a class="post-title-link" href="/2017/03/12/Java-Web项目实战-一/" itemprop="url">
-            <span itemprop="name">Java Web项目实战(一)</span>
-          </a>
-        
-      </h3>
-
-    </header>
-  </article>
-
-
-
-    </div>
+      </footer>
+    
   </div>
   
   
   
+  </article>
 
-  
-
+  </div>
 
 
           </div>
           
+    
+    <div class="comments" id="comments"></div>
+  
 
         </div>
           
@@ -516,6 +391,11 @@
 
   <aside class="sidebar">
     <div class="sidebar-inner">
+        
+        
+        
+        
+      
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
