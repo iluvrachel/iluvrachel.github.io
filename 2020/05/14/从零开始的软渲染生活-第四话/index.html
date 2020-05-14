@@ -55,23 +55,21 @@
   };
 </script>
 
-  <meta name="description" content="一个本来很简单的任务，把一个神经网络跑起来看看效果，愣是给我整了快一周，过程可谓是一步一坑，而且遇到的问题得到解决后看起来都好蠢。">
-<meta name="keywords" content="机器学习,pytorch,解决方案">
+  <meta name="description" content="（又过了一个多月。。） 前情提要：上一话总算是正确地把贴图之后的模型显示出来了，那么这一回要做的就是一些矩阵计算的东西了，具体的说就是使用view matrix调节相机视角，并实现perspective project，就像这样：">
+<meta name="keywords" content="CG,C++">
 <meta property="og:type" content="article">
-<meta property="og:title" content="记一次调试神经网络">
-<meta property="og:url" content="http://yoursite.com/2019/02/21/记一次调试神经网络/index.html">
+<meta property="og:title" content="从零开始的软渲染生活-第四话">
+<meta property="og:url" content="http://yoursite.com/2020/05/14/从零开始的软渲染生活-第四话/index.html">
 <meta property="og:site_name" content="硅碳双键的文艺复兴">
-<meta property="og:description" content="一个本来很简单的任务，把一个神经网络跑起来看看效果，愣是给我整了快一周，过程可谓是一步一坑，而且遇到的问题得到解决后看起来都好蠢。">
+<meta property="og:description" content="（又过了一个多月。。） 前情提要：上一话总算是正确地把贴图之后的模型显示出来了，那么这一回要做的就是一些矩阵计算的东西了，具体的说就是使用view matrix调节相机视角，并实现perspective project，就像这样：">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550742284060&di=718c647b45d1b3e9ab2fa33055329917&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201807%2F01%2F20180701205145_ehxeh.thumb.224_0.jpg">
-<meta property="og:image" content="http://b-ssl.duitang.com/uploads/item/201807/03/20180703155250_fuxkx.thumb.224_0.jpg">
-<meta property="og:image" content="http://b-ssl.duitang.com/uploads/item/201609/24/20160924230447_QUVCt.thumb.224_0.jpeg">
-<meta property="og:updated_time" content="2019-02-21T07:02:21.590Z">
+<meta property="og:image" content="http://yoursite.com/2020/05/14/从零开始的软渲染生活-第四话/1.png">
+<meta property="og:updated_time" content="2020-05-14T12:15:57.315Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="记一次调试神经网络">
-<meta name="twitter:description" content="一个本来很简单的任务，把一个神经网络跑起来看看效果，愣是给我整了快一周，过程可谓是一步一坑，而且遇到的问题得到解决后看起来都好蠢。">
-<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550742284060&di=718c647b45d1b3e9ab2fa33055329917&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201807%2F01%2F20180701205145_ehxeh.thumb.224_0.jpg">
-  <link rel="canonical" href="http://yoursite.com/2019/02/21/记一次调试神经网络/">
+<meta name="twitter:title" content="从零开始的软渲染生活-第四话">
+<meta name="twitter:description" content="（又过了一个多月。。） 前情提要：上一话总算是正确地把贴图之后的模型显示出来了，那么这一回要做的就是一些矩阵计算的东西了，具体的说就是使用view matrix调节相机视角，并实现perspective project，就像这样：">
+<meta name="twitter:image" content="http://yoursite.com/2020/05/14/从零开始的软渲染生活-第四话/1.png">
+  <link rel="canonical" href="http://yoursite.com/2020/05/14/从零开始的软渲染生活-第四话/">
 
 
 <script id="page-configurations">
@@ -85,7 +83,7 @@
   };
 </script>
 
-  <title>记一次调试神经网络 | 硅碳双键的文艺复兴</title>
+  <title>从零开始的软渲染生活-第四话 | 硅碳双键的文艺复兴</title>
   
 
 
@@ -235,7 +233,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/21/记一次调试神经网络/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/14/从零开始的软渲染生活-第四话/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="L_in_z">
@@ -247,7 +245,7 @@
       <meta itemprop="name" content="硅碳双键的文艺复兴">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">记一次调试神经网络
+        <h2 class="post-title" itemprop="name headline">从零开始的软渲染生活-第四话
 
           
         </h2>
@@ -263,7 +261,7 @@
                 
               
 
-              <time title="Created: 2019-02-21 14:37:18 / Modified: 15:02:21" itemprop="dateCreated datePublished" datetime="2019-02-21T14:37:18+08:00">2019-02-21</time>
+              <time title="Created: 2020-05-14 20:12:54 / Modified: 20:15:57" itemprop="dateCreated datePublished" datetime="2020-05-14T20:12:54+08:00">2020-05-14</time>
             </span>
           
             
@@ -303,7 +301,7 @@
       
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2019/02/21/记一次调试神经网络/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/02/21/记一次调试神经网络/" itemprop="commentCount"></span></a>
+    <a title="valine" href="/2020/05/14/从零开始的软渲染生活-第四话/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2020/05/14/从零开始的软渲染生活-第四话/" itemprop="commentCount"></span></a>
   </span>
   
   
@@ -317,10 +315,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>一个本来很简单的任务，把一个神经网络跑起来看看效果，愣是给我整了快一周，过程可谓是一步一坑，而且遇到的问题得到解决后看起来都好蠢。<br><a id="more"></a><br>首先拿到一个网络，当然第一步是安装环境，看了一下用的pytorch，电脑里没有，于是安装之<br><strong>pip install <a href="https://download.pytorch.org/whl/cu80/torch-1.0.1.post2-cp27-cp27mu-linux_x86_64.whl" target="_blank" rel="noopener">https://download.pytorch.org/whl/cu80/torch-1.0.1.post2-cp27-cp27mu-linux_x86_64.whl</a></strong><br>此时第一个问题出现了，它告诉我找不到pytorch的whl包，仔细确认了各种版本都没写错，那么问题就是我的pip版本用错了，因为同时装了python2和python3的缘故吧，pip改成pip2，成了<br>内心疯狂吐槽自己，你是沙雕吗，别人都是pip默认表示pip2，pip3才是pip3，哪有你这反过来的pip默认pip3<br>十几k的小水管啊缓缓地流，一天过去了。。。<br>然后把网络输入输出改好，看起来似乎没什么问题了，跑起，报错，嗯，意料之中，哪有一蹴而就的事<br>看一下，报pytorch的size不对，估摸着就是网络输入数据这一块没搞好了，print大法debug之，定位到出错的地方，原来是一个超参数忘了改，到这里看似轻描淡写，实际又过去了一天<br>改好之后，再跑起来，成了，开始训练了，epoch1，epoch2，epoch3，epoch4，epoch5，cuda out of memory…WHAT！？搞啥子哦，四张泰坦的服务器你给我讲out of memory？<br><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1550742284060&amp;di=718c647b45d1b3e9ab2fa33055329917&amp;imgtype=0&amp;src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201807%2F01%2F20180701205145_ehxeh.thumb.224_0.jpg" alt="funny马的屁.jpg" title="小孩子不要学粗话"><br>啊不对不对，一定是哪里搞错了，既然能跑5个epoch了说明代码ok的，再跑一遍试试，万一玄学嘛<br>保险起见，跑之前来一发<br><strong>torch.cuda.empty_cache()</strong><br>再跑，得，干脆一个epoch都跑不来了直接报错，还是out of memory，【讲粗话】<br>冷静，想一下，我用的数据是长序列，会不会是这个原因？于是把数据下采样，再来一遍。<br>还是报错，不过这次错误不太一样，查了一下，是因为网络源代码使用的是0.3.0版本的pytorch，而我用的是最新的1.0.1，于是有些接口比如data.loss[0]不支持了，怎么办呢，该不会要我卸载重装吧，有り得ない！<br>手动一处处把报错的地方改为最新的接口，又一天过去了<br>改完，再跑，out of memory…你搞我吗？<br><img src="http://b-ssl.duitang.com/uploads/item/201807/03/20180703155250_fuxkx.thumb.224_0.jpg" alt="挠头.jpg" title="卧槽"><br>大概又尝试了那么三四五六七八次，无果，最终决定，妥协，下载0.3.0版的pytorch，这一下，就是一天<br>终于，崭新的（并不）pytorch下好了，跑起，out of mem…两眼一黑<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">print(torch.__version__)</span><br></pre></td></tr></table></figure></p>
-<p>看一下pytorch，版本1.0.1，你在耍我吗？<br>终端往上翻一下安装信息，没错啊安装，成功了啊，torchvision也还ok啊，嗯？torchvision？嗯？你怎么还装了一大堆东西？怎么还有torch？卧槽torchvision还自带帮你升级pytorch版本的服务这么丧心病狂的吗？<br>Fine，再次卸载1.0.1，这次学乖了，先装torchvision，再装pytorch<br>Finally，模型顺顺利利地跑起来了，你以为悲惨的故事结束了吗？Naive！<br>当训练了一大半的时候，我想看一下显卡的状态怎么样，占用了多少，于是控制台<code>`nvidia-smi</code>，得，这一下，网络训练到一半直接宕了，报了不知道在讲啥的错误，还好一边训练一边有保存模型，不然哭都不知道去哪哭。</p>
-<p>总结一下，这一番折腾收获还是有的，让我明白了一个道理：</p>
-<p><strong>辣鸡机器学习</strong><br><img src="http://b-ssl.duitang.com/uploads/item/201609/24/20160924230447_QUVCt.thumb.224_0.jpeg" alt="人生重来算了.jpg" title="再见"></p>
+        <p>（又过了一个多月。。）</p>
+<p>前情提要：上一话总算是正确地把贴图之后的模型显示出来了，那么这一回要做的就是一些矩阵计算的东西了，具体的说就是使用view matrix调节相机视角，并实现perspective project，就像这样：<br><img src="/2020/05/14/从零开始的软渲染生活-第四话/1.png" alt="效果图"><br><a id="more"></a></p>
+<p>（加了透视投影之后，近大远小）<br>这一部分涉及到比较多的数学推导，原repo里解释得很细致，这里我就不再卖弄了。</p>
+<p><a href="https://github.com/ssloy/tinyrenderer/wiki/Lesson-4-Perspective-projection" target="_blank" rel="noopener">https://github.com/ssloy/tinyrenderer/wiki/Lesson-4-Perspective-projection</a><br>​<br>github.com<br>需要了解一些的前置知识是线性代数，至少要能看懂矩阵计算，至于四元数的概念则比较抽象，如果理解了四元数这一部分掌握起来会比较快。各种缩放、旋转、平移操作如何对应到变换矩阵中，可以参照一些入门的图形学书籍。</p>
+<p>把概念原理性的东西吃透之后，代码上的东西倒不是特别难了</p>
+<p>首先要引入的一个新东西是Matrix这种数据类型，也就是二维矩阵，并定义好其各种运算操作。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Matrix</span> &#123;</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">float</span>&gt; &gt; m;</span><br><span class="line">    <span class="keyword">int</span> rows, cols;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Matrix(<span class="keyword">int</span> r=DEFAULT_ALLOC, <span class="keyword">int</span> c=DEFAULT_ALLOC);</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">nrows</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">ncols</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> Matrix <span class="title">identity</span><span class="params">(<span class="keyword">int</span> dimensions)</span></span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">float</span>&gt;&amp; <span class="keyword">operator</span>[](<span class="keyword">const</span> <span class="keyword">int</span> i);</span><br><span class="line">    Matrix <span class="keyword">operator</span>*(<span class="keyword">const</span> Matrix&amp; a);</span><br><span class="line">    <span class="function">Matrix <span class="title">transpose</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function">Matrix <span class="title">inverse</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">friend</span> <span class="built_in">std</span>::ostream&amp; <span class="keyword">operator</span>&lt;&lt;(<span class="built_in">std</span>::ostream&amp; s, Matrix&amp; m);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>有了matrix，后面就照着公式算就行了。</p>
+<p>其实就是图形学中的MVP矩阵变换，只不过这里只涉及V和P（注意矩阵乘法的右优先）<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Matrix <span class="title">viewport</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> w, <span class="keyword">int</span> h)</span> </span>&#123;</span><br><span class="line">    Matrix m = Matrix::identity(<span class="number">4</span>);</span><br><span class="line">    m[<span class="number">0</span>][<span class="number">3</span>] = x+w/<span class="number">2.f</span>;</span><br><span class="line">    m[<span class="number">1</span>][<span class="number">3</span>] = y+h/<span class="number">2.f</span>;</span><br><span class="line">    m[<span class="number">2</span>][<span class="number">3</span>] = depth/<span class="number">2.f</span>;</span><br><span class="line"></span><br><span class="line">    m[<span class="number">0</span>][<span class="number">0</span>] = w/<span class="number">2.f</span>;</span><br><span class="line">    m[<span class="number">1</span>][<span class="number">1</span>] = h/<span class="number">2.f</span>;</span><br><span class="line">    m[<span class="number">2</span>][<span class="number">2</span>] = depth/<span class="number">2.f</span>;</span><br><span class="line">    <span class="keyword">return</span> m;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Matrix Projection = Matrix::identity(<span class="number">4</span>);</span><br><span class="line">Matrix ViewPort   = viewport(width/<span class="number">8</span>, height/<span class="number">8</span>, width*<span class="number">3</span>/<span class="number">4</span>, height*<span class="number">3</span>/<span class="number">4</span>);</span><br><span class="line"></span><br><span class="line">Projection[<span class="number">3</span>][<span class="number">2</span>] = <span class="number">-1.f</span>/camera.z;</span><br><span class="line"></span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"><span class="comment">//对于模型上的每个顶点，都执行相同的变换操作        </span></span><br><span class="line">Vec3f p0_proj =  m2v(ViewPort*Projection*v2m(p0));</span><br><span class="line">Vec3f p1_proj =  m2v(ViewPort*Projection*v2m(p1));</span><br><span class="line">Vec3f p2_proj =  m2v(ViewPort*Projection*v2m(p2));</span><br><span class="line"></span><br><span class="line"><span class="comment">//...</span></span><br></pre></td></tr></table></figure></p>
+<p>经过这一波变换之后，我们的模型已经投影到了画布上了，所以不需要再像之前一样对顶点做坐标映射。</p>
 
     </div>
 
@@ -336,11 +340,9 @@
           
           <div class="post-tags">
             
-              <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+              <a href="/tags/CG/" rel="tag"># CG</a>
             
-              <a href="/tags/pytorch/" rel="tag"># pytorch</a>
-            
-              <a href="/tags/解决方案/" rel="tag"># 解决方案</a>
+              <a href="/tags/C/" rel="tag"># C++</a>
             
           </div>
         
@@ -350,8 +352,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/02/10/神代再临的史诗-流浪地球/" rel="next" title="神代再临的史诗--流浪地球">
-                  <i class="fa fa-chevron-left"></i> 神代再临的史诗--流浪地球
+                <a href="/2020/05/06/关于《空洞骑士》中的优秀设计/" rel="next" title="关于《空洞骑士》中的优秀设计">
+                  <i class="fa fa-chevron-left"></i> 关于《空洞骑士》中的优秀设计
                 </a>
               
             </div>
@@ -359,10 +361,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2019/02/23/xv6-makefile-解析/" rel="prev" title="xv6 makefile 解析">
-                  xv6 makefile 解析 <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
