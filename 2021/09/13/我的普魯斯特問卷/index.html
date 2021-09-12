@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.7.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="之前相當長一段時間裏，人生陷入一種迷茫的狀態，並突然發現自己甚至沒有透徹瞭解過自己。喜歡什麽、討厭什麽、將來的夢想又是什麽？從前的那個將來已經變成了現在，而我依舊沒有找到自己的夢想。寫完畢業論文后剩餘的日子裏，閑過頭了所以一直在想這樣的問題————今後要以怎樣的目標怎樣的姿態活下去？思來想去無解，只好拿出一份普魯斯特問卷來做做，然後期待著三五年後再回來看看現在的答案，想必又會有什麽不同吧。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我的普魯斯特問卷">
+<meta property="og:url" content="http://yoursite.com/2021/09/13/我的普魯斯特問卷/index.html">
+<meta property="og:site_name" content="硅碳双键的文艺复兴">
+<meta property="og:description" content="之前相當長一段時間裏，人生陷入一種迷茫的狀態，並突然發現自己甚至沒有透徹瞭解過自己。喜歡什麽、討厭什麽、將來的夢想又是什麽？從前的那個將來已經變成了現在，而我依舊沒有找到自己的夢想。寫完畢業論文后剩餘的日子裏，閑過頭了所以一直在想這樣的問題————今後要以怎樣的目標怎樣的姿態活下去？思來想去無解，只好拿出一份普魯斯特問卷來做做，然後期待著三五年後再回來看看現在的答案，想必又會有什麽不同吧。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-09-12T16:54:08.473Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="我的普魯斯特問卷">
+<meta name="twitter:description" content="之前相當長一段時間裏，人生陷入一種迷茫的狀態，並突然發現自己甚至沒有透徹瞭解過自己。喜歡什麽、討厭什麽、將來的夢想又是什麽？從前的那個將來已經變成了現在，而我依舊沒有找到自己的夢想。寫完畢業論文后剩餘的日子裏，閑過頭了所以一直在想這樣的問題————今後要以怎樣的目標怎樣的姿態活下去？思來想去無解，只好拿出一份普魯斯特問卷來做做，然後期待著三五年後再回來看看現在的答案，想必又會有什麽不同吧。">
+  <link rel="canonical" href="http://yoursite.com/2021/09/13/我的普魯斯特問卷/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>我的普魯斯特問卷 | 硅碳双键的文艺复兴</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">硅碳双键的文艺复兴</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">浅い眠りの中を　猫が歩いている</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+    
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/09/13/我的普魯斯特問卷/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="L_in_z">
+      <meta itemprop="description" content="浅い眠りの中を　猫が歩いている">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="硅碳双键的文艺复兴">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">我的普魯斯特問卷
+
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2021-09-13 00:33:03 / Modified: 00:54:08" itemprop="dateCreated datePublished" datetime="2021-09-13T00:33:03+08:00">2021-09-13</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/碎碎念/" itemprop="url" rel="index"><span itemprop="name">碎碎念</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2021/09/13/我的普魯斯特問卷/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2021/09/13/我的普魯斯特問卷/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>之前相當長一段時間裏，人生陷入一種迷茫的狀態，並突然發現自己甚至沒有透徹瞭解過自己。<br>喜歡什麽、討厭什麽、將來的夢想又是什麽？<br>從前的那個將來已經變成了現在，而我依舊沒有找到自己的夢想。<br>寫完畢業論文后剩餘的日子裏，閑過頭了所以一直在想這樣的問題————今後要以怎樣的目標怎樣的姿態活下去？<br>思來想去無解，只好拿出一份普魯斯特問卷來做做，然後期待著三五年後再回來看看現在的答案，想必又會有什麽不同吧。</p>
+<a id="more"></a>
+<p>1.你认为最完美的快乐是怎样的？<br>没有负担和获得认同。<br>没有负担是，可以随心所欲，时时歌唱，时时起舞，不用为价格担心什么不该买，也不用为健康担心什么不该吃，想去的地方终究能到达，逃离电话、邮件和消息，不做时间的奴隶。<br>获得认同是，某一瞬间的感受，有人可以感同身受。</p>
+<p>2.你最希望拥有哪种才华？<br>语言和文字的表达能力。<br>时常想要说点什么、写点什么，却终究演变成语无伦次，所以一直扮演着倾听者。<br>以及幽默。<br>常常被很多梗图、弹幕、神评论逗笑，也想要成为带给人快乐的人啊。</p>
+<p>3.你最恐惧的是什么？<br>失去。<br>恐惧的事情数不胜数，曾经以为自己应该是无所畏惧的，说着“万事万物皆有因果始终，生老病死也不过是人间常态”的漂亮话。<br>到头来，发现面对令人害怕的事实时还是会感到战栗彷徨。<br>不害怕过错，却害怕过错被指责；不害怕接受挑战，却害怕达不到人们的期待；不害怕瞬时的死亡，却害怕漫长的告别。<br>到现在依然会为这些大大小小的令人悲伤的事情感到恐惧，但我想等到这一切都发生了，反而再没有什么好怕的了。<br>所以说到底是害怕失去，就像是《假如猫从世界上消失了》，死亡也不过是把生命中重要的事情、回忆一点点夺走。</p>
+<p>4.你目前的心境怎样？<br>些许不安。<br>未来有太多事情没有定论，而过去又有太多事情不如预期。</p>
+<p>5.还在世的人中你最钦佩的是谁？<br>多才多艺的人。目前认识的人里面最接近这一标准的是 志仓千代丸。</p>
+<p>6.你认为自己最伟大的成就是什么？<br>活着。<br>我不是什么伟大的人，生きるのは最高だ。</p>
+<p>7.你自己的哪个特点让你最觉得痛恨？<br>容易放弃。</p>
+<p>8.你最喜欢的旅行是哪一次？<br>不好说，每次旅行都有其独特的意义。<br>非要选一个，就是最近的那一次长沙之旅。</p>
+<p>9.你最痛恨别人的什么特点？<br>虚伪。</p>
+<p>10.你最珍惜的财产是什么？<br>我的日记，换句话说就是，我的记忆。<br>我是个健忘的人，</p>
+<p>11.你最奢侈的是什么？<br>时间。</p>
+<p>12.你认为程度最浅的痛苦是什么？<br>孤独。<br>或许和成长环境有关</p>
+<p>13.你认为哪种美德是被过高的评估的？<br>诚实。</p>
+<p>14.你最喜欢的职业是什么？<br>南极科考人员。<br>每个职业都有有趣的一面和苦逼的一面，任何可爱的事情一旦与ddl和金钱有了联系之后，都会变得不那么可爱。本来想写的是旅行家，但又觉得旅行家这一职业未免太过于理想化了，本来也想写游戏玩家或主播，但终究还是选择了南极科考人员，因为相对而言，会更加具体一点，也更加伟大一点。对南极科考的向往，深受《比宇宙更遥远的地方》和《在世界尽头相遇》这两部作品的影响，在世界最偏远的一隅做着与世人既无关却又息息相关的研究，不被尘嚣叨扰，不被时间催促，多好。</p>
+<p>15.你对自己的外表哪一点不满意？<br>鼻子、身材。<br>刚步入青春期的时候对自己外形各种不满意，现在倒是不太在意这些东西了，不过，能够完美些自然更好。</p>
+<p>16.你最后悔的事情是什么？<br>没有。<br>一路走来就是属于我的故事，没有什么后不后悔的。<br>非要说的话，后悔自己在该努力的时候没有做到100%的努力。</p>
+<p>17.还在世的人中你最鄙视的是谁？<br>没有，对事不对人。非要说的话，挺鄙视自己的。</p>
+<p>18.你最喜欢男性身上的什么品质？<br>人的品质无关性别。</p>
+<p>19.你使用过的最多的单词或者是词语是什么？<br>英文：fine<br>中文：可能<br>日语：まじか<br>你我他这类的就不算了，这里举的这些更像是口癖吧。</p>
+<p>20.你最喜欢女性身上的什么品质？<br>人的品质无关性别。</p>
+<p>21.你最伤痛的事是什么？<br>目前为止似乎没有。有过伤心事，但没有被伤的很深。</p>
+<p>22.你最看重朋友的什么特点？<br>仗义和坦诚。<br>但是反观自己，我似乎也不能在这两方面做得很好，如此竟也有人愿意与我为友，三生有幸。</p>
+<p>23.你这一生中最爱的人或东西是什么？<br>爱父母，爱自己。<br>无需多言。</p>
+<p>24.你希望以什么样的方式死去？<br>不需鲜花簇拥，不需轰轰烈烈，不想支离破碎地死去，也不想要漫长痛苦的告别，我希望在安静的夜里梦中，安静地死去，在另一个世界醒来。</p>
+<p>25.何时何地让你感觉到最快乐？<br>被通知考上重点高中的彼时彼刻。</p>
+<p>26.如果你可以改变你的家庭一件事，那会是什么？<br>让爸爸不要抽烟喝酒。</p>
+<p>27.如果你能选择的话，你希望让什么重现？<br>重现巨石阵的建造过程。</p>
+<p>28.你的座右铭是什么？<br>车到山前必有路，柳暗花明又一村。</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2021/08/14/記Ludum-Dare-48/" rel="next" title="記Ludum Dare 48">
+                  <i class="fa fa-chevron-left"></i> 記Ludum Dare 48
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.jpg"
+      alt="L_in_z">
+  <p class="site-author-name" itemprop="name">L_in_z</p>
+  <div class="site-description" itemprop="description">浅い眠りの中を　猫が歩いている</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/iluvrachel" title="GitHub &rarr; https://github.com/iluvrachel" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="/nullnevets@outlook.com" title="E-Mail &rarr; nullnevets@outlook.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">L_in_z</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.7.1</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/muse.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: '19I4erjL6VzPR0jceDLmyPMb-gzGzoHsz',
+    appKey: 'UzOpwcCnaUwYIUusw8akkXcD',
+    placeholder: 'Say something',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
