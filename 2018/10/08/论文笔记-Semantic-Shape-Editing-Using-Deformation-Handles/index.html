@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="浅い眠りの中を　猫が歩いている">
+    <meta name="author" content="Linzz">
+    
+    <title>
+        
+            [论文笔记]Semantic Shape Editing Using Deformation Handles |
+        
+        Linzz&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"en"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#70a1ff","title":"Linzz's blog","author":"Linzz","logo":null,"favicon":"/images/logo.svg","mode":"light"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"浅い眠りの中を 猫が歩いている","hitokoto":false},"social_contact":{"enable":false,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":false,"hide_header":true},"home":{"announcement":null,"category":false,"tag":false,"post_datetime":"created"},"post":{"author_badge":{"enable":false,"level_badge":false,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"toc":{"enable":false,"number":false,"expand_all":false,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":false,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+            <a class="site-name border-box" href="/">
+               Linzz&#39;s blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                HOME
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                ARCHIVES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
+                                
+                                TAGS
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
+                                
+                                CATEGORIES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
+                                
+                                ABOUT
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                            TAGS
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                            CATEGORIES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                            ABOUT
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        [论文笔记]Semantic Shape Editing Using Deformation Handles
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Linzz</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2018-10-08 21:47:56</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Fri Oct 04 2024 19:28:42 GMT+0800">2024-10-04 19:28:42</span>
+                </span>
+            
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E8%AF%BB%E8%AE%BA%E6%96%87/">读论文</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/CG/">CG</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <p>读了好久依然觉得不太透彻，因为好多东西的原理都来自于作者更早的一篇文章，所以有些地方一头雾水，前半部分写了些自己的理解，到后面就索性翻译了</p>
+<span id="more"></span>
+
+<h1 id="Abstarct"><a href="#Abstarct" class="headerlink" title="Abstarct"></a>Abstarct</h1><p>该文章提出了一种方法，使用语义属性与几何形状配对的数据集来学习一个由语义到几何模型的映射关系，通过这种关系以使用语义属性对形状进行编辑，这种编辑在形状上是连续变化的，而非离散地替换部件，使得非专业人士也可以定制满足自己需求的各种属性的模型。文章还提出了两种不同的用户交互方式。</p>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>编辑数字模型是许多工作的中心任务，如形状设计，产品个性化，但是往往对模型的操作任务要求（1）在产品的应用领域具有专业知识（2）对模型编辑较为熟悉（比如使用MAYA，AutoCAD等）。因此，将高级建模意图转化为几何指令通常是具有挑战性的。此外，也难以根据不同消费者的喜好去设计形状。<br>在此项工作中，我们提出了一种基于语义对输入模型进行变形操作的方法。是在原有模型上进行变形操作，保留了基本的拓扑结构，而非对部件进行增减或替换，因此使用的数据并非基于部件的框架。<br>为了识别相关的属性，我们调查了一组数字艺术专业人员、教育工作者和学生，以编写一组丰富的与形状集相关的属性。然后，由第二组非专家组的参与者将初始集简化为紧凑集。接下来，我们在形状集中的模型之间进行大量的成对语义比较，并使用这些数据来学习从属性得分到几何空间的连续映射。我们的几何表示建立在Yumer和KARA（2014）提出的<strong>抽象句柄空间（abstraction handle space）</strong>上。</p>
+<p>几何上本来差异较大的物体，直接映射时可能会具有相同的属性值，这样导致在遍历属性空间时造成高度不连续的形状转换。为了解决这一缺陷，我们将形状变形描述为几何空间中的<strong>约束路径遍历</strong>问题，使用形状集中的模型作为回归点。我们的公式允许将形状数据库编码为单个连续变形空间，其中我们计算不同的标量函数，每个标量函数用于感兴趣的不同语义属性。<br>最后经过映射，用户可以使用两种方法来操作变形，一是使用滑动条来控制各属性的值，二是把输入形状嵌入到2D的scalar map，通过控制在2D图上的位置来改变语义形状。</p>
+<p>论文的主要贡献：<br>（1）实现平滑的映射，不需要低层次上的mesh相关或拓扑上的相同；<br>（2）可以学习新的形状集；<br>（3）实现两种交互界面；<br>（4）在多种形状集上测试，高可用性；</p>
+<h1 id="Related-work"><a href="#Related-work" class="headerlink" title="Related work"></a>Related work</h1><h2 id="shape-deformation-and-editing"><a href="#shape-deformation-and-editing" class="headerlink" title="shape deformation and editing"></a>shape deformation and editing</h2><p>能量公式最小化的方法，可以实现平滑变形和细节保护，但是不适用于无连接或有重叠的模型、或不连续的特征、或不好的三角面片形状。<br>使用基函数对ROI进行变形，或者滑动窗口变形，上述方法通过从单个模型提取信息来促进形状变形，因此不能立即从集合分析得到约束。<br>Yumer和Kara[2012；2014]提出了一种学习元句柄形式的统计形状变形器的方法，该方法允许通过抽象几何代理来操纵输入模型。<br>上述方法是纯粹的变形，不涉及语义属性。</p>
+<h2 id="Semantic-Attributes"><a href="#Semantic-Attributes" class="headerlink" title="Semantic Attributes"></a>Semantic Attributes</h2><p>之前的工作，在mesh上需要有相关性，而此论文里，成员形状可以更加多样化。<br>之前的工作，把物体各部件分离处理变形，变形后再组合到一起，或是选择现有的不同属性的形状进行组合而非产生新的形状。此论文是为了更加迎合用户意图而非死板的替换。</p>
+<h1 id="End-User-Experience"><a href="#End-User-Experience" class="headerlink" title="End-User Experience"></a>End-User Experience</h1><p>提供两种交互模式：直接属性操作和映射图。在这两种情况下，用户通过导入属于语义处理的形状类别的多边形网格模型来开始。模型不需要在数据集中出现过。</p>
+<h2 id="Direct-Attribute-Editing"><a href="#Direct-Attribute-Editing" class="headerlink" title="Direct Attribute Editing"></a>Direct Attribute Editing</h2><p>几何变形经常引起许多属性的同时变化。用户可以使用三个按钮限制这些联动变化。使用约束路径遍历来实现。</p>
+<h2 id="Attribute-Map-Exploration"><a href="#Attribute-Map-Exploration" class="headerlink" title="Attribute Map Exploration"></a>Attribute Map Exploration</h2><p>探索性的界面，通过颜色来表示属性强度，与前者不同的是，当具有相似的属性强度时，也可能出现不同的形状风格。</p>
+<h1 id="Attribute-Collection"><a href="#Attribute-Collection" class="headerlink" title="Attribute Collection"></a>Attribute Collection</h1><p>分别对专家和普通用户进行用户研究。</p>
+<h2 id="Attribute-Discovery"><a href="#Attribute-Discovery" class="headerlink" title="Attribute Discovery"></a>Attribute Discovery</h2><p>我们要求五十位专家提供他们认为与目标产品类别最相关的十个属性。这项研究的总体目的也被解释，鼓励专家们考虑他们认为消费者会对产品评级有用的属性。我们合并了属性列表，筛选出同义词，并使用生成的列表来部署AMT研究。我们让1000名参与者在给每类产品打分时，选择他们认为与自己和其他消费者相关的五个属性。图4显示了汽车和鞋子的属性分布。我们遵循Schelling[1980]的众所周知的冲突策略，并要求用户评估其他人的观点：要求专家提供一般公众认为相关的属性，并要求一般公众选择其他人认为相关的属性。</p>
+<h2 id="Attribute-Rating"><a href="#Attribute-Rating" class="headerlink" title="Attribute Rating"></a>Attribute Rating</h2><p>对于每个属性，要求用户对比不同模型之间的差异。并设置了一致性问题对测试结果进行过滤，同时也剔除做太快的测试者，来得到最可靠的数据。</p>
+<h1 id="Attribute-Learning"><a href="#Attribute-Learning" class="headerlink" title="Attribute Learning"></a>Attribute Learning</h1><p>整个实现的过程其实就是geo to attribute to geo的过程。在收集属性评级后，将所有训练形状嵌入到一个公共变形空间中，利用训练数据计算属性预测函数，并建立从属性到目标形状几何变化的逆映射。</p>
+<h2 id="Shape-feature"><a href="#Shape-feature" class="headerlink" title="Shape feature"></a>Shape feature</h2><p>我们在一组表示每个形状的抽象表面上计算形状特征（图6），而不是使用低级多边形网格结构。这种方法使我们能够将输入形状嵌入到一个公共的特征空间中，从而促进连续的变形和形状合成。我们首先使用以前的方法[Yumer和Kara 2014]计算每个形状的<strong>共同约束抽象</strong>，该方法产生一组变形句柄（图6（b，c）），即把复杂的形状抽象为简单的几何表面的组合。变形句柄可以是下列表面类型的实例：球体、圆柱体、圆锥、开放二次曲面。当变形句柄不能由前图元可靠地表示时，使用开放二次曲面。<br>使用半径r，圆锥角β，一对正交的常曲率k1 k2，这些参数构成了内部参数。(pi，θi)表示表面相对于形状的轴对齐边界盒的绝对位置和方向，形成外部参数。<br>形状特征向量由每个表面的内在参数组成，然后是一组在所有表面对的外在特征之间计算的相对特征。<br>我们使用<strong>稀疏向量编码</strong>方案来表示每个特征向量。在这个表示中，向量的每个条目前面都有一个唯一地标定对应特征值的整数id。稀疏编码允许将具有不同数量的句柄和句柄类型的形状合并在同一公式中（图6（c））。每个变形句柄基于形状抽象过程中使用的兼容分割来获得唯一的整数ID。这样，两个或多个模型之间通用的句柄获得相同的id（例如，图6中的绿色引擎罩），而特定模型特有的句柄（例如，图6的第一列中的车后备箱）获得不共享的唯一id。通过计算每个变形句柄对的整数id，并记录与该对相关联的相应特征值，相似地对<strong>句柄对</strong>之间的<strong>相对特征</strong>进行编码。注意，如果两个或多个模型共享相似的句柄hA和hB，则计算来表示(hA；hB)对的id将在这些不同的模型中通用。</p>
+<h3 id="Previously-unseen-shape"><a href="#Previously-unseen-shape" class="headerlink" title="Previously unseen shape"></a>Previously unseen shape</h3><p>对于未见过的新的形状，使用先验公式（来自Yumer和Kara 2014年的论文）计算handles和handle types。然后训练一个<strong>多项式核的支持向量机</strong>作为分类器，根据分类结果为new shape的每一个surface指定handle type，基于获得的handle types计算内参和外参，得到new shape的特征向量。</p>
+<h3 id="Discussion-of-shape-feature"><a href="#Discussion-of-shape-feature" class="headerlink" title="Discussion of shape feature"></a>Discussion of shape feature</h3><p>以前的方法，依赖于从mesh representation计算特征。对于几何和拓扑上不同的形状（图7），这些特征要么限制这些方法进行排序或搜索，要么要求先验地建立顶点级别的对应关系。我们的方法消除了对低层次相关性的需求，从而允许使用几何和拓扑不同的形状进行语义上的学习（图7）。</p>
+<h2 id="Atrribute-Prediction"><a href="#Atrribute-Prediction" class="headerlink" title="Atrribute Prediction"></a>Atrribute Prediction</h2><p>训练一个函数，分两步将shape feature映射到预测的attribute scores（属性值）。 首先，将训练形状的相对比较值转换为具有相关可靠性估计的绝对属性值。 其次，将绝对分数扩展到整个特征空间的连续值函数。这种方法略微偏离了通常的做法，即通过非数字相对比较直接学习评分函数。该方法可以有效地对所收集的高度非线性数据建模，而无需进行大量的训练比较。</p>
+<h3 id="Absolute-Attribute-Scores-for-Training-Shapes"><a href="#Absolute-Attribute-Scores-for-Training-Shapes" class="headerlink" title="Absolute Attribute Scores for Training Shapes"></a>Absolute Attribute Scores for Training Shapes</h3><p>使用正态分布来描述attribute a和shape i的<strong>绝对属性分数</strong>。公式（1）<br>因为用户使用数字比例来比较形状，所以相对分数也可以表示为分布。如果（未知）绝对分数独立地正态分布，则它们的成对差异（相对差值）也可以被建模为正态分布,[Steel<br>et al. 1960]。则通过比较形状i和形状j得到已知的相对分数，可以计算得到绝对属性分数。公式（2）<br>我们的建模假设经得起健全性检查：基于分布矩的偏度测试表明成对比较符合正态分布（所有数据集通过常态检查的数据约为90％）。<br>为了计算所有绝对属性分数，在<strong>最小二乘</strong>意义下求解由所有均数μ和标准差σ对组成的超定方程组以最大化数据可能性。</p>
+<h3 id="Scoring-Function"><a href="#Scoring-Function" class="headerlink" title="Scoring Function"></a>Scoring Function</h3><p>在我们计算训练形状的绝对属性分数之后，我们将从形状变形handles中提取的<strong>特征集映射到这些分数</strong>。 映射可以扩展到整个特征空间（连续平滑），以产生预测以前未出现过的形状的属性强度的函数。我们修改了Shepard的方法(计算机图形学中散乱数据的插值与逼近)，将任意形状的稀疏特征向量xs映射到预测的属性强度：公式（3）<br>其中fa（xs）即是具有xs特征的shape的attribute值。τ是attribute strength和fa（xt）已知的shape训练数据集。数据点t的权重方程wt（xs）公式（4）<br>其中1i是shape i的稀疏特征向量的<strong>指示函数</strong>向量，如果shape具有该handle（由稀疏向量表示中的id确定），则其元素对于变形句柄的特征等于1，否则为0。<br>p是正实数，我们选择p大于1以得到一个全局连续的预测方程。最后，我们还增加了在已知数据点定义的可靠性常数r的权函数。因为我们使用正态分布（1）在已知的数据点（training shape）上对attribute score进行建模，我们选择分布均值作为相应的预测值f，并定义可靠性r与方差的倒数成比例。<br>对于<strong>任意shape xs</strong>的稀疏特征向量，以及<strong>训练集xt</strong>的特征向量，公式（4）中的指示函数只允许当xt中的handles也出现在xs时，对xs的attribute score才会有贡献，即若xs不具有xt上拥有的句柄，则对于该句柄的属性变化不会影响到xs，例子见第8节的隐形飞机例子。<br>虽然RankSVM提供了我们的属性评分函数的替代方案，但由于我们的问题具有强烈的多模态特性，我们还是赞成我们的方法。高斯混合模型GMM可以代替公式3，然而我们的方法训练时比他快100倍以上。</p>
+<h2 id="Deformation"><a href="#Deformation" class="headerlink" title="Deformation"></a>Deformation</h2><p>等式3中的属性预测函数表示形状空间上的<strong>连续标量场</strong>：属性是<strong>势</strong>，而形状特征是该空间中的坐标。 给定目标属性值，我们使用此空间对输入形状进行变形。 在本节中，我们描述了变形算法。<br>对于输入形状，我们首先使用[Yumer和Kara 2014]计算其<strong>抽象变形handle</strong>（图8（a））。 这些handle的内在和外在参数组合在一起形成形状的<strong>特征向量</strong>，如5.1节所述。<br>当用户与我们的系统交互时，他们使用语义属性作为控制参数来变形形状。当<strong>属性被修改</strong>时，我们的模型<strong>计算形状特征的相应变化</strong>。（该机制将在下一节中详细介绍。）回想一下，这些特性只是handle surfaces的参数（图8（b））。我们可以使用更新的参数来确定handle surfaces所有<strong>顶点的新位置</strong>，表示为多边形网格。然而，新的句柄配置也需要<strong>计算新的句柄边界</strong>，因为特征向量没有显式地编码边界信息。为了确保连通的、不透水的边界，我们联合优化所有handle surfaces的最终顶点位置如下：公式（5）其中H是shape 的一系列deformation handles。Vh和Eh是surface mesh上与handle h相关联的顶点和内部边。pi和fi是顶点i的当前位置和目标位置。βj是共享边j的多边形之间的二面角。λ是控制平滑项的常量。我们使用（Yumer和Kara 2014）中描述的表面处理顶点的新位置作为各向异性3D cage变形方法的边界条件。然后，使用为与cage相关联的四面体网格计算的体积变形来变形嵌入的原始网格几何形状，从而完成变形过程。<br>如果目标形状包含其他训练形状所不具有的变形柄，这些独特的柄保持在目标形状上，并且仅由方程式5产生的相容性（边界优化）约束而变形。第7节将展示这样的场景的例子。</p>
+<h1 id="Semantic-Editing-Interfaces"><a href="#Semantic-Editing-Interfaces" class="headerlink" title="Semantic Editing Interfaces"></a>Semantic Editing Interfaces</h1><p>我们的系统有两种交互模式：（1）直接属性编辑（2）属性图探索。这两种模式利用等式3中给出的属性预测函数来将形状变形为期望的属性值。然而，底层导航机制对于这两种方法是不同的。</p>
+<h2 id="Direct-Attribute-Editing-1"><a href="#Direct-Attribute-Editing-1" class="headerlink" title="Direct Attribute Editing"></a>Direct Attribute Editing</h2><p>在等式3中给出的连续属性预测函数不是凸的。然而，通过设计，局部最大值和最小值只能出现在函数的构造中使用的数据点（用户研究中的模型）。对于每个属性，该函数在相同的几何空间XS上定义；因此，在该空间中的输入形状的位置是容易知道的。对于直接属性编辑，我们为每个属性实时计算该空间中形状的路径，并将这些路径映射到相应的滑块。</p>
+<h3 id="Unconstrained-attribute-editing"><a href="#Unconstrained-attribute-editing" class="headerlink" title="Unconstrained attribute editing"></a>Unconstrained attribute editing</h3><p>我们要求在形状变化与最小和最大属性值之间具有连续路径。我们采用松弛解作为变形光滑性和属性单调性之间的折衷。设（xs，fa（xs））是shape当前在变形空间中的位置以及相关的属性a的属性值。设τ是用于构建公式3的shape集（特征及相关属性），设τlow是包含了attribute scores小于fa（xs）的shape的τ的子集，τhigh&#x3D;τ-τlow（补集）。建立两个KNN图，Glow是τlow和当前位置（xs，fa（xs））的并集，Ghigh是τhigh和当前位置（xs，fa（xs））的并集，然后，我们使用Dijkstra的算法来在Glow中找到连接具有最小属性值的形状的到xs的最短路径，然后在Ghigh中，xs到具有最大属性值的形状的路径。如图9a-b。由此产生的路径仅通过τ中的模型的子集。Glow和Ghigh可以由不连通的岛组成。图9a<br>在这种情况下，所产生的路径仅包含包含当前形状XS的岛屿。该路径的两端映射到用户界面中相应属性的最大和最小滑块位置。图9(b)中原始最短路径直接按照字面遍历通常会导致突然的、视觉上不连续的几何变化。为了减轻这种影响，我们用一个在组成点上回归的G1连续的分段三次样条代替这个路径（图9（c））。因为沿着这条新路径的遍历仍然在几何空间中，我们在所有其他属性预测函数中遍历相同的路径，读出相应的属性得分，并将结果映射到用户界面中的滑块集。（注：即改变一个属性会影响其他的属性值）。这种方法有助于用户探索各种变形，实时更新所有属性。请参阅我们的补充视频互动实例。注意，遍历路径是正在编辑的当前属性以及特征空间中目标形状的当前坐标的函数。因此，最终变形取决于属性被调整的顺序。例如，给定原始目标形状，如果AttributeB在AttributeA之前已经最大化，则将AttributeA滑动到其最大值，然后将AttributeB滑动到其最大值，可能不会产生相同的最终形状。</p>
+<h3 id="Constrained-attribute-editing"><a href="#Constrained-attribute-editing" class="headerlink" title="Constrained attribute editing"></a>Constrained attribute editing</h3><p>对于受限的编辑，我们消除了违反τlow和τhigh设置的约束的形状。然后，我们遵循上面所解释的相同的过程，使用减少的形状集进行无约束属性编辑。例如，如果用户在通过其他属性编辑形状的同时约束属性b保持大致相同，则从τlow和τhigh中消除b值比当前形状的b值低或高于10％(根据经验确定)的形状。如果用户激活属性b的+按钮，那么我们只包括具有较高b值的形状，然后是编辑后的形状的当前配置。图9（D- F）说明了这个想法。多个约束也可以由用户激活。</p>
+<h2 id="Attribute-Map-Exploration-1"><a href="#Attribute-Map-Exploration-1" class="headerlink" title="Attribute Map Exploration"></a>Attribute Map Exploration</h2><p>我们的第二种编辑模式包括抓取和滑动方法，其中用户在针对每个属性构造的2D高度图中探索输入形状的变化。地图中的颜色决定属性的级别（红色：高，蓝色：低，见图3（b））。<br>构建公式3时，设集合X是shapes的特征，我们首先使用局部线性嵌入来计算X的2D嵌入，得到yi的集合Y，yi是具有特征向量Xi的形状i的二维坐标，图10a。我们使用方程3计算嵌入空间Y（图10（b））中的标量场，同时将方程4中的yi替换为特征向量xi。<br>对于用户导入的用于编辑的新形状，我们首先计算特征空间中它的k-最近邻的重建权重如下：公式（6）<br>其中K是K个近邻，Wi为权重。shape s嵌入为ys：公式（7）<br>当用户在map上滑动shape s，得到一个新的location ys’，计算目标特征向量xs’，公式（8）<br>其中p是正实数，cs和C是与map中shape可到达的最大距离相关的归一化常量。<br>由用户可视化的地图表示更高维度空间的2D投影。因此，视觉上不同的模型可能会出现近似。虽然这有时可能让用户感到困惑，但是用户通常发现在探索时直接浏览这个空间（类似于Design Galleries[Marks等人]。1997）。我们的用户研究（第7节）表明，用户发现地图交互是有用的和鼓舞人心的。</p>
+<h1 id="Result-and-Discussion"><a href="#Result-and-Discussion" class="headerlink" title="Result and Discussion"></a>Result and Discussion</h1><p>我们使用AMT比较用户研究，以汽车（131款车型）、鞋子（127款车型）、椅子（61款车型）和飞机（53款车型）的形式展示我们的系统的结果。对于每一个集合，使用图4所示的前五个属性。在鞋子组中，靴子和凉鞋都包含在同一个训练池中（即，它们不是不同形状类别的部分）。我们的补充文件包含了这些形状集的进一步细节。<br>值得注意的是，专家和AMT对象的属性评分之间存在显著差异。<br>给定形状集，我们首先使用[YUMER和KARA 2014 ]计算共约束的抽象。此步骤在I7、8核机上每形状花费不到一分钟，并且仅对数据集执行一次。从变形空间到属性集的映射对于每个数据集需要两分钟。对于一个未见过的输入形状，我们首先计算它的变形handle（每形状1min）。一旦变形handle被计算，我们的系统中的形状编辑发生在交互中。</p>
+<h2 id="Unconstrained-and-constrained-editing"><a href="#Unconstrained-and-constrained-editing" class="headerlink" title="Unconstrained and constrained editing"></a>Unconstrained and constrained editing</h2><p>图12显示了来自Cars and Shoes形状集的无约束编辑示例，而图18显示了来自椅子和飞机的无约束编辑示例。在这些示例中，用户正在调整针对每个变体所注意的属性。图13演示了如何约束时尚改变用户在改变舒适属性时获得的结果。图14显示了类似于汽车模型的比较。图19示出了约束形状变形的进一步示例，其中还使用了多个约束。</p>
+<h2 id="Pairwise-ranking-quality"><a href="#Pairwise-ranking-quality" class="headerlink" title="Pairwise ranking quality"></a>Pairwise ranking quality</h2><p>我们两两比较我们的系统和AMT数据。对于一个形状对（p，q），由我们的系统计算的属性分数为FA（p）＞FA（q），如果系统的平均AMT属性分数也是FAMT A（P）＞FAMT A（Q），则我们的系统的评分是成功的，否则不成功。我们使用leave one out方法：从训练中留下一个形状，并测试包含它的所有形状对。对所有语义属性重复该测试，并对结果进行平均化。我们的方法的排名误差是11.2%的汽车，9.5%的鞋，9.7%的椅子和10.4%的飞机。对于同一数据集，约束GMM方法的学习时间超过100倍，排序误差分别为10.7%、8.9%、8.3%和9.1%。</p>
+<h2 id="Comparison-of-the-Learning-Approach"><a href="#Comparison-of-the-Learning-Approach" class="headerlink" title="Comparison of the Learning Approach"></a>Comparison of the Learning Approach</h2><p>我们学习作为连续标量场的属性预测函数的方法（第5.2.2节）与从相对比较（第5.2.1节）对训练形状的绝对属性分数的初始估计解耦。我们赞成这种方法基于线性投影排序方法（例如，RANKSVM）[PARIKH和GRAUMAN 2011；Chorduri等人]。2013）由于我们问题的强多模态性质。特别地，显著不同的几何配置可能具有与我们的补充文档和视频中所展示的相似的属性强度。这种现象至少部分归因于我们对形状特征的选择，这些特征特别适合于变形，但不与属性线性相关。乔杜里等。[2013]对于它们的应用没有这样的约束，因此，它们使用具有附加非线性特征的扩展特征空间来获得满意的RankSVM结果。在图11和补充视频中，我们演示了由RankSVM生成的评分函数比我们的方法产生更少有意义的变形。<br>有的人说，可以使用多模态、非线性方法（例如，高斯混合模型（GMM）、RankBoost[Freund等人.2003]）来学习方程3的替代预测函数。我们首先用约束GMM模型进行实验，其中从用户收集的相对属性评级被用作遵循Yumer等人的方法的约束。〔2014〕。我们获得了类似于我们使用约束GMM的方法的结果，但是由于大量的约束和逼近形状数目的高斯数，训练时间明显更长（&gt;100x）。此外，因为我们收集了数值相对比较，我们不需要求助于RANKBOOST与基于非数值比较的损失函数。我们的方法类似于混合专家方法[YukSet等]。2012）具有固定数目的高斯过程的专家学习者。这种通用性解释了结果与GMM的相似之处，高斯数接近用户研究中所涉及的形状的数量。</p>
+<h2 id="Evaluation-User-Study-I"><a href="#Evaluation-User-Study-I" class="headerlink" title="Evaluation User Study I"></a>Evaluation User Study I</h2><p>我们进行了AMT的用户研究，以评估我们的系统的形状评分与参与者给出的分数匹配。如图15所示，向参与者呈现了形状的三个版本，并要求他们根据指定的属性（最多和最少）对形状进行排序。三个版本以随机顺序呈现给参与者，并且对应于属性的最大、最小和中间滑块位置。每个参与者都提出了十个这样的问题。八的问题是独特的，而剩下的两个是重复的，三个不同的顺序呈现。如果参与者没有通过第4.2节中描述的勤勉标准，或者如果参与者对两个重复问题的回答不匹配，我们就拒绝了参与者。在根据拒绝标准排除27%的参与者之后，我们针对所有四个数据集的五个属性中的每个属性编译了来自1200多个问题的结果。<br>我们的系统和参与者之间的匹配只有当参与者对形状的排序准确地符合我们的要求时才是成功的。成功匹配率如表1所示，其中基线（机会）成功率为1&#x2F;6＝16.7%。</p>
+<h2 id="Evaluation-User-Study-II"><a href="#Evaluation-User-Study-II" class="headerlink" title="Evaluation User Study II"></a>Evaluation User Study II</h2><p>我们进行了第二次亲自研究，以评估参与者使用两个较大的数据集（汽车和鞋子）的数据创建的系统，对系统的接受程度。每个参与者都给出了系统的简要描述。然后，我们要求参与者探索五种不同形状的变化，以达到最终的形状，以满足他们的需求。我们将参与者的互动限制为每分钟一分钟。通过这样做，我们的主要目标是测量参与者对他们在有时间限制的会话中生成的模型的满意度。最后，参与者被要求完成一项涉及李克特量表评估的调查。图16总结了从41个非专家参与者（即，没有与形状建模或设计相关的先前专业经验或培训）收集的结果。大多数参与者对他们的模型感到满意，并且没有发现系统很麻烦，尽管他们与我们的系统交互时间很短。</p>
+<h2 id="Limitations-and-Future-Work"><a href="#Limitations-and-Future-Work" class="headerlink" title="Limitations and Future Work"></a>Limitations and Future Work</h2><p>我们的方法产生了现有形状的变化，而不是在设计空间中发现新的解决方案。在变形期间，使用指定属性可以变形形状的最大程度取决于承载该属性的极值的训练形状。当新的形状被引入训练集或现有的形状被移除时，输入形状所经历的变形的数量和性质可能改变。此外，在受约束的编辑期间，用户可以过度约束变形，使得没有适当的训练形状可以保留用于构造变形路径(第6.1节)。虽然我们没有遇到这样的场景，但是训练形状的数量不足或者可控属性的丰富可能导致这种故障模式。进一步的工作是必要的，以量化过度约束的概率作为这两个参数的函数。<br>我们的方法利用由Yumer和Kara提出的变形handle。因此，它只能捕获和变形形状的几何形状中体积显著的细节。图17表明，古董椅子主要是区分他们展示在腿和靠背组件的细节。我们的方法无法捕获如图18所示的这些细节（使原始椅子更古董不会显著地改变几何形状）。此外，变形处理表面的聚类也在我们的系统中起着关键的作用。例如，隐形飞机（图17）由数据库中其他飞机不共享的抽象抽象表面组成。我们的系统无法将这些飞机的抽象表面与其他飞机的对应变形handle进行聚类。当原始飞机更隐身时，这会导致不明显的变形（图18）。<br>我们当前的属性评级、学习和变形方法要求输入形状整体变形，而无需选择修改形状的部分。例如，尽管我们的方法在将民用飞机变形为战斗机方面做得相当好（图19），但是在战斗机上还有许多额外的部件（图17）。此外，我们的方法只考虑几何形状，而忽略了其他语义相关的信息，如外观（例如，颜色和纹理）。包含这样的公式<br>信息渠道可以帮助建立更丰富和更稳健的产品特征和语义评级之间的映射。</p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>我们介绍了一种语义形状编辑方法，使用属性评分从成对的形状比较。我们的方法使用户能够使用一组属性滑块或通过导航一组属性映射来操纵3D形状。从属性到几何的映射是由来自大众的评级来决定的。因此，我们的方法可以适应新的形状和新的用户评级，从而允许它适应不断发展的形状偏好、不同的用户基础和新的语义属性的可用性。</p>
+
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/CG/">CG</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2018/11/21/xv6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/"
+                                   title="xv6操作系统安装"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">xv6操作系统安装</span>
+                                        <span class="post-nav-item">Prev posts</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2018/08/05/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0-End-to-End-Human-Mesh-Recovery/"
+                                   title="[论文笔记]End-to-End Human Mesh Recovery"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">[论文笔记]End-to-End Human Mesh Recovery</span>
+                                        <span class="post-nav-item">Next posts</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2024
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Linzz</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+
+    
+        <div class="count-info info-item">
+            
+
+            
+                <span class="count-item border-box uv">
+                    <span class="item-type border-box">Unique Visitor</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-item border-box pv">
+                    <span class="item-type border-box">Page View</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

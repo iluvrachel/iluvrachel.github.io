@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="浅い眠りの中を　猫が歩いている">
+    <meta name="author" content="Linzz">
+    
+    <title>
+        
+            复刻：挑战12小时做一款游戏 |
+        
+        Linzz&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"en"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#70a1ff","title":"Linzz's blog","author":"Linzz","logo":null,"favicon":"/images/logo.svg","mode":"light"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"浅い眠りの中を 猫が歩いている","hitokoto":false},"social_contact":{"enable":false,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":false,"hide_header":true},"home":{"announcement":null,"category":false,"tag":false,"post_datetime":"created"},"post":{"author_badge":{"enable":false,"level_badge":false,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"toc":{"enable":false,"number":false,"expand_all":false,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":false,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+            <a class="site-name border-box" href="/">
+               Linzz&#39;s blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                HOME
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                ARCHIVES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
+                                
+                                TAGS
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
+                                
+                                CATEGORIES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
+                                
+                                ABOUT
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                            TAGS
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                            CATEGORIES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                            ABOUT
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        复刻：挑战12小时做一款游戏
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Linzz</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2019-09-20 00:31:17</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Fri Oct 04 2024 19:28:00 GMT+0800">2024-10-04 19:28:00</span>
+                </span>
+            
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Unity/">Unity</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <p>我真的是，想起一出是一出，终于也要对Unity下手了。前几天看到油管上有一个up主，<a class="link" href="https://www.youtube.com/watch?v=mFNrOGPVls0&t=547s">挑战12小时做一款游戏<i class="fas fa-external-link-alt"></i></a>，既然看到了就很想挑战一下，看看我和大佬的差距，也是保持每天编程的手感。<br><a class="link" href="https://github.com/iluvrachel/BounceBall/releases">游戏下载传送门<i class="fas fa-external-link-alt"></i></a></p>
+<span id="more"></span>
+<p>大佬的12h即是从早到晚连续的12h，包括吃饭。我是绝对做不到了，毕竟我也不是大佬，而且每天也有其他的事情要做，于是采用离散计时法，随做随计。</p>
+<h1 id="4h59m"><a href="#4h59m" class="headerlink" title="4h59m:"></a>4h59m:</h1><p>把player controller这一大块完成了，包括slow motion，ball squeeze和tail这些花里胡哨的东西也还原了。球的运动使用addForce()来做，Slow motion通过改变timeScale实现，球的变形通过改变gameObject的scale，tail一开始想得复杂，后来发现unity自带就有tail renderer。然后用slider去实现了aim line。其实也不算复杂，比较麻烦的就是各种数字的设置，力和速度的大小，重力和阻力什么的。<br>这里有一个bug尚未解决，就是addForce之后，球的运动有时候会产生偏移，即便是关掉阻力和重力也是如此，尚不清楚原因。<br>然后做相机追踪，包括移动缓冲和自动缩放。此时就遇到了第一个大问题。<br>相机跟随时物体抖动，速度越快抖动越剧烈，查了很多方法，也看了Update、FixedUpdate、LateUpdate各种关系依然无解，终究还是在国外某不知名论坛看到了解决方法。（百度不给力啊，还是谷歌靠谱）解决办法是把rigidbody里的interpolation打开，插值之后就能够纵享丝滑。不过关于Update这方面还有很多值得深挖的内容，以后得好好学一下。</p>
+<h1 id="5h48m"><a href="#5h48m" class="headerlink" title="5h48m:"></a>5h48m:</h1><p>制作敌人的碰撞检测，又遇到了个问题。碰撞之后丝毫无反应，debug发现连碰撞函数都没有进去，但是程序也没给我报错呀。<br>后来发现，我做的是2D游戏，设了Collider2D，在程序里就不能只写Collider，不然啥反应都没有还不会报错的。妈耶。</p>
+<h1 id="6h50m"><a href="#6h50m" class="headerlink" title="6h50m:"></a>6h50m:</h1><p>particle system做击中效果, 最烦人的一个部分，美工从来不是我的强项，没办法一个一个参数去试效果。<br>击中敌人爆炸，击中后先让sprite和collider消失，等particle system播完了再销毁对象。Like：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OnCollisionEnter2D</span>(<span class="params">Collision2D other</span>)</span> </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(other.gameObject.tag==<span class="string">&quot;Player&quot;</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//print(&quot;hit&quot;);</span></span><br><span class="line">            explosionAudio.Play();</span><br><span class="line">            sr.enabled = <span class="literal">false</span>;</span><br><span class="line">            col.enabled = <span class="literal">false</span>;</span><br><span class="line">            ps.Play();</span><br><span class="line">            Destroy(gameObject,<span class="number">6</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="7h24m"><a href="#7h24m" class="headerlink" title="7h24m:"></a>7h24m:</h1><p>post processing stack，看起来很厉害的东西，实际也很厉害，但是用起来没有想象中那么难。简单地说就是类似于相机滤镜一样的东西，不管你原来的场景做得多粗糙简陋，把它加进去之后简直化腐朽为神奇。这一块倒是没花很多时间，因为只是随便加了个效果，实在要达到大佬那样的视效还得仔细地去调参数，先放一放吧。</p>
+<h1 id="7h53m"><a href="#7h53m" class="headerlink" title="7h53m:"></a>7h53m:</h1><p>health bar &amp; player health，做UI也很是繁琐，索性直接用个slider就完事了，美中不足是血条为0时会有一点残余，是由于这一点位置是原来slider的handle占着的，删掉handle就露出来了，留着后面想办法吧。</p>
+<h1 id="8h44m"><a href="#8h44m" class="headerlink" title="8h44m:"></a>8h44m:</h1><p>enemies spawn，既然大佬说是直接google的，那我也就直接借鉴大佬的了，只是参数还得再慢慢调。<br>这条公式具体如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">float yPos = Mathf.Floor(Mathf.Abs(UnityEngine.Random.Range(0f,1f) - UnityEngine.Random.Range(0f,1f)) * (1 + 100 - (-2)) + (-2));</span><br></pre></td></tr></table></figure>
+<p>当然参数是我自己调得，公式的作用就是让敌人生成的位置尽量靠近底部。<br>公式确实很神奇而且有效，学到了。</p>
+<h1 id="9h22m"><a href="#9h22m" class="headerlink" title="9h22m:"></a>9h22m:</h1><p>玩家死亡游戏结束，说实话这里没想到什么好方法，试过各种方法都有一点不完美，姑且是先清空速度停止位移禁用script，后面看看能不能写成boardcast的形式。</p>
+<h1 id="9h49m"><a href="#9h49m" class="headerlink" title="9h49m:"></a>9h49m:</h1><p>完成计算分数UI，用public static int 来构造类变量使别的类可以调用。</p>
+<h1 id="11h34m"><a href="#11h34m" class="headerlink" title="11h34m:"></a>11h34m:</h1><p>做了game over界面，你问我为什么这里用了将近两个小时，说来可笑，做完game over菜单其实也就十几分钟，然后打算加上游戏重新开始功能，其实用LoadScene()一行代码就可以搞定了，但是做完运行的时候发现restart按钮点第一下游戏重新开始了但是Game over界面还在，点第二下才消失，于是花式改代码花式查资料查api，心态崩了.jpg。就在大脑停止工作的前一秒，想到在start()的时候给判断游戏结束的参数重新赋值而不是在LoadScene()的时候重新赋值，就可以了窝。那一瞬间的心情，想必是悲喜交加的。<br>但是，anyway，游戏总算是能做出个完整的样子，此时距离12h的期限只有不到半小时。</p>
+<h1 id="12h13m"><a href="#12h13m" class="headerlink" title="12h13m:"></a>12h13m:</h1><p>虽然一直以来都是音乐苦手，但是碰撞爆炸音效什么的也大概是搞定了。顺便学会了用数组去获得object下的同类资源这么一个操作。Like this：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> AudioSource[] AudioClips = <span class="literal">null</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">   &#123;</span><br><span class="line">       <span class="comment">//...</span></span><br><span class="line">       shootingAudio = AudioClips[<span class="number">0</span>];</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>即便本科的时候玩过一阵子FL studio， BGM也是真的搞不来，由衷佩服全能的大佬。</p>
+<p>至此，大佬花了6小时包括吃饭上厕所以及构思。而我只能勉勉强强踩着12h的期限做出个仅仅是称之为“能玩”而不能称之为“游戏”的半成品。而且做的时间也是断断续续的。要说达到了大佬一半的功力怕是在侮辱大佬。<br>再往下做，就是一些细枝末节的东西了，优化游戏体验，更需要细心的去做，虽然内容不多，但是难度可不小哦。</p>
+<h1 id="12h40m"><a href="#12h40m" class="headerlink" title="12h40m:"></a>12h40m:</h1><p>撞击时相机抖动，这个地方搞了大佬一个小时多，我却意外的顺利【摊手】。撞击时给相机位置加个随机数，撞击过后再回到原来的位置就成了。于是可以得到完整的相机代码包括跟随与缩放功能如下：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LateUpdate</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// camera follow</span></span><br><span class="line">        targetPos = player.transform.position + offset; </span><br><span class="line">            </span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (isHit)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//camera shake</span></span><br><span class="line">            <span class="keyword">if</span> (shakeTime &gt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                transform.position = originalPos + Random.insideUnitSphere * shakeAmount;</span><br><span class="line"></span><br><span class="line">                shakeTime -= Time.deltaTime * decreaseFactor;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                shakeTime = <span class="number">0f</span>;</span><br><span class="line">                transform.position = originalPos;</span><br><span class="line">                isHit = <span class="literal">false</span>;</span><br><span class="line">                shakeTime = <span class="number">0.1f</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            transform.position  = Vector3.SmoothDamp (transform.position, targetPos, <span class="keyword">ref</span> moveSpeed, dampTime); <span class="comment">//player.transform.position + offset;</span></span><br><span class="line">            originalPos = transform.position;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// camera zoom</span></span><br><span class="line">        <span class="built_in">float</span> desiredZoom = defaultZoom + Vector3.Distance(transform.position,player.transform.position);</span><br><span class="line">        <span class="keyword">if</span>(desiredZoom&gt;<span class="number">18</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            desiredZoom = <span class="number">18</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Camera.main.orthographicSize = Mathf.SmoothDamp(Camera.main.orthographicSize, desiredZoom, <span class="keyword">ref</span> velZoom, zoomSpeed);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(transform.position.y &lt; yMin)</span><br><span class="line">        &#123;</span><br><span class="line">            transform.position = <span class="keyword">new</span> Vector3(transform.position.x,yMin,transform.position.z);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="13h20m"><a href="#13h20m" class="headerlink" title="13h20m:"></a>13h20m:</h1><p>加了两种新的enemy类型，绿色的碰到就必死，紫色的碰到就给player来一个AddForce带你乱飞。</p>
+<h1 id="14h18m"><a href="#14h18m" class="headerlink" title="14h18m:"></a>14h18m:</h1><p>让镜头之外的物体在一段时间后自动销毁，避免占用太多资源，用这两个函数来判断：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnBecameVisible</span>()</span> </span><br><span class="line">&#123;</span><br><span class="line">    isVis = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnBecameInvisible</span>()</span> </span><br><span class="line">&#123;</span><br><span class="line">    isVis = <span class="literal">false</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<p>然后加入combo机制，说实话，combo这个一开始想错方向，绕了好久的弯路。<br>最后加上一个esc键退出功能，就这么完结了吧。实在是累了肝不动了，而且也是超时了很多，在功能上面只能说尽力去模仿原作吧，然而bgm实在是搞不来，用别人的音乐又怕什么版权纠纷，虽然我这也不算用于商业用途。至于后来他还实现了黑洞，这个有考虑过也有了一点思路，但是做起来要花点心思，最近开始要渐渐忙起来了，所以就先搁置一下吧。</p>
+<p>虽然一开始确实是兴趣使然地去做这个游戏，但其实稍微想想的话，这个游戏的可扩展性很强，还能搞出更多新的花样，比如排名机制，比如闯关机制，再比如更多的敌人和联机模式。说起来，简单的图形更能让玩家和游戏开发者都专注于玩法上，很多优秀的游戏从来都不是单凭画面拿下市场的，甚至画面粗劣却拥有一大票拥趸者的游戏比比皆是，像elona，像和班尼特福迪一起攻克难关….</p>
+<p>不管怎么说，12小时的游戏开发挑战就先在这里画个休止符吧，毕竟也是一天一天的闲暇时间凑出来的12小时，也是蛮累的 XD</p>
+
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Unity/">Unity</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2019/10/25/OpenGL%E7%BB%98%E5%88%B6%E5%A4%AA%E9%98%B3%E7%B3%BB/"
+                                   title="OpenGL绘制太阳系"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">OpenGL绘制太阳系</span>
+                                        <span class="post-nav-item">Prev posts</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2019/09/09/%E7%95%AA%E5%A4%96%EF%BC%9A%E5%BF%AB%E9%80%9F%E6%90%9C%E7%B4%A2%E8%84%9A%E6%9C%AC%E4%B9%8Bwin32%E7%89%88/"
+                                   title="番外：快速搜索脚本之win32版"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">番外：快速搜索脚本之win32版</span>
+                                        <span class="post-nav-item">Next posts</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2024
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Linzz</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+
+    
+        <div class="count-info info-item">
+            
+
+            
+                <span class="count-item border-box uv">
+                    <span class="item-type border-box">Unique Visitor</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-item border-box pv">
+                    <span class="item-type border-box">Page View</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

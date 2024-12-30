@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="浅い眠りの中を　猫が歩いている">
+    <meta name="author" content="Linzz">
+    
+    <title>
+        
+            OpenGL绘制太阳系 |
+        
+        Linzz&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"en"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#70a1ff","title":"Linzz's blog","author":"Linzz","logo":null,"favicon":"/images/logo.svg","mode":"light"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"浅い眠りの中を 猫が歩いている","hitokoto":false},"social_contact":{"enable":false,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":false,"hide_header":true},"home":{"announcement":null,"category":false,"tag":false,"post_datetime":"created"},"post":{"author_badge":{"enable":false,"level_badge":false,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"toc":{"enable":false,"number":false,"expand_all":false,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":false,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+            <a class="site-name border-box" href="/">
+               Linzz&#39;s blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                HOME
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                ARCHIVES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
+                                
+                                TAGS
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
+                                
+                                CATEGORIES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
+                                
+                                ABOUT
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                            TAGS
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                            CATEGORIES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                            ABOUT
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        OpenGL绘制太阳系
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Linzz</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2019-10-25 00:35:18</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Fri Oct 04 2024 19:27:53 GMT+0800">2024-10-04 19:27:53</span>
+                </span>
+            
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/CG/">CG</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/OpenGL/">OpenGL</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/C/">C++</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <p>给别人讲了大半学期的OpenGL和图形学了，忍不住手痒自己也用OpenGL来写点什么。绘制一个太阳系作为用来练手的OpenGL项目，再合适不过了，可以做到形状绘制，相机投影，光照贴图五脏俱全。<br>起手写的时候尝试着从底层的那些东西来入手，手撕各种shader、图元和矩阵变换，然而创业未半而中道偷懒，shader还是太硬核了一时半会玩不来，还是觉得用现成的函数来的舒服，反复造轮子是对生产力的极大浪费不是嘛XD<br>好了不废话，开始主题</p>
+<span id="more"></span>
+
+<h2 id="Requirement-Environment"><a href="#Requirement-Environment" class="headerlink" title="Requirement &amp; Environment"></a>Requirement &amp; Environment</h2><ul>
+<li>OpenGL</li>
+<li>freeglut</li>
+<li>GLEW</li>
+<li>SOIL（用于读取图片信息的一个库）</li>
+<li>Visual Studio 2015</li>
+<li>Win10 C++</li>
+</ul>
+<h2 id="Camera-Perspective"><a href="#Camera-Perspective" class="headerlink" title="Camera &amp; Perspective"></a>Camera &amp; Perspective</h2><p>相机和投影视角是图形学的重要内容，我们这里先简单的使用透视投影以及可以由鼠标操控的相机，主要的两个函数就是gluPerspective()和gluLookAt()，对应到图形学里的投影矩阵和模视变换矩阵。对于相机的视点参数，也就是相机的位置，我们使用三角函数来构建球形环绕轨迹，使得通过拖动鼠标可以围绕着某一点转动相机视角。于是有：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">RenderScene</span><span class="params">(<span class="type">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">float</span> ex = radius * <span class="built_in">cos</span>(upAngle * M_PI / <span class="number">180.0</span>) * <span class="built_in">sin</span>(rotateAngle * M_PI / <span class="number">180.0</span>);</span><br><span class="line">	<span class="type">float</span> ey = radius * <span class="built_in">sin</span>(upAngle * M_PI / <span class="number">180.0</span>);</span><br><span class="line">	<span class="type">float</span> ez = radius * <span class="built_in">cos</span>(upAngle * M_PI / <span class="number">180.0</span>) * <span class="built_in">cos</span>(rotateAngle * M_PI / <span class="number">180.0</span>);</span><br><span class="line">	<span class="built_in">glLoadIdentity</span>();</span><br><span class="line">	<span class="built_in">gluLookAt</span>(ex, ey, ez, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="built_in">glClear</span>(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//光源设置在太阳中心</span></span><br><span class="line">	GLfloat sun_light_position[] = &#123; <span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">1.0f</span> &#125;;</span><br><span class="line">	<span class="built_in">glLightfv</span>(GL_LIGHT0, GL_POSITION, sun_light_position);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//这里是我们后面画各种物体的地方</span></span><br><span class="line">	<span class="comment">//draw_milky_way(-500+ex, -500 + ey, -500 + ez, 1000.0f, 1000.0f, 1000.0f);</span></span><br><span class="line">	<span class="comment">//sun();</span></span><br><span class="line">	<span class="comment">//earth();</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="built_in">glutPostWindowRedisplay</span>(mainWindow);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">glutSwapBuffers</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中glLoadIdentity();是对当前矩阵恢复初始化。</p>
+<p>关于鼠标操作，用OpenGL回调函数glutMouseFunc(Mouse)和glutMotionFunc(onMouseMove)来调用如下函数：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Mouse</span><span class="params">(<span class="type">int</span> button, <span class="type">int</span> state, <span class="type">int</span> x, <span class="type">int</span> y)</span> <span class="comment">//处理鼠标点击</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (button == <span class="number">3</span> || button == <span class="number">4</span>) &#123;</span><br><span class="line">		<span class="comment">//currentTransform = TRANSFORM_SCALE;</span></span><br><span class="line">		<span class="keyword">if</span> (button == <span class="number">3</span>)</span><br><span class="line">			radius -= <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (button == <span class="number">4</span>)</span><br><span class="line">			radius += <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//std::cout &lt;&lt; radius &lt;&lt; std::endl;</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> (state == GLUT_DOWN) &#123;</span><br><span class="line">		<span class="comment">//currentTransform = TRANSFORM_ROTATE;</span></span><br><span class="line">		oldmx = x, oldmy = y;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">GLfloat deltax = <span class="number">0.0f</span>;</span><br><span class="line">GLfloat deltay = <span class="number">0.0f</span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">onMouseMove</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> <span class="comment">//处理鼠标拖动</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">	deltax = x - oldmx; <span class="comment">//鼠标在窗口x轴方向上的增量加到视点绕y轴的角度上，这样就左右转了</span></span><br><span class="line">	</span><br><span class="line">	deltay = y - oldmy; <span class="comment">//鼠标在窗口y轴方向上的改变加到视点的y坐标上，就上下转了</span></span><br><span class="line"></span><br><span class="line">	rotateAngle += deltax;</span><br><span class="line">	upAngle += deltay;</span><br><span class="line"></span><br><span class="line">	oldmx = x, oldmy = y; <span class="comment">//把此时的鼠标坐标作为旧值，为下一次计算增量做准备</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Sun-Earth-Moon"><a href="#Sun-Earth-Moon" class="headerlink" title="Sun &amp; Earth &amp; Moon"></a>Sun &amp; Earth &amp; Moon</h2><p>对于各种天体的绘制使用gluSphere()函数来实现非常简单，利用glTranslatef()来调整位置，利用glRotatef()来改变不同的公转自转以及倾斜角，由于这些矩阵操作都是对当前的矩阵进行操作的，为了不使每个星球的位移与旋转操作相互影响，我们使用glPushMatrix()来将矩阵入栈之后再修改，当前星球的操作结束后，将先前保存的矩阵glPopMatrix()出栈，来恢复位置状态。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">sun</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">glPushMatrix</span>();</span><br><span class="line">	<span class="built_in">material_sun</span>();</span><br><span class="line">	<span class="built_in">gluQuadricTexture</span>(e_tex, GLU_TRUE);</span><br><span class="line">	<span class="built_in">glPushAttrib</span>(GL_ENABLE_BIT | GL_TEXTURE_BIT);</span><br><span class="line">	<span class="built_in">glEnable</span>(GL_TEXTURE_2D);</span><br><span class="line">	<span class="built_in">glBindTexture</span>(GL_TEXTURE_2D, <span class="built_in">load_texture</span>(<span class="string">&quot;sun.jpg&quot;</span>));</span><br><span class="line">	<span class="built_in">gluSphere</span>(e_tex, <span class="number">30.0f</span>, <span class="number">30.0f</span>, <span class="number">30.0f</span>);</span><br><span class="line">	<span class="built_in">glBindTexture</span>(GL_TEXTURE_2D, <span class="number">0</span>);</span><br><span class="line">	<span class="built_in">glPopAttrib</span>();</span><br><span class="line">	<span class="built_in">gluQuadricTexture</span>(e_tex, GLU_FALSE);	</span><br><span class="line">	<span class="built_in">glPopMatrix</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">earth</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">glPushMatrix</span>();</span><br><span class="line">	<span class="built_in">material_planet</span>();</span><br><span class="line">	<span class="built_in">glEnable</span>(GL_LIGHTING);</span><br><span class="line"></span><br><span class="line">	<span class="type">static</span> <span class="type">float</span> aMoonRot = <span class="number">0.0f</span>;</span><br><span class="line">	<span class="type">static</span> <span class="type">float</span> aEarthRot = <span class="number">0.0f</span>;</span><br><span class="line">	<span class="type">static</span> <span class="type">float</span> sMoonRot = <span class="number">0.0f</span>;</span><br><span class="line">	<span class="type">static</span> <span class="type">float</span> sEarthRot = <span class="number">0.0f</span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">glRotatef</span>(aEarthRot, <span class="number">0.0f</span>, <span class="number">1.0f</span>, <span class="number">0.0f</span>);</span><br><span class="line">	<span class="built_in">glTranslatef</span>(<span class="number">105.0f</span>, <span class="number">0.0f</span>, <span class="number">0.0f</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">glRotatef</span>(<span class="number">90</span>, <span class="number">1.0f</span>, <span class="number">0.0f</span>, <span class="number">0.0f</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">glRotatef</span>(sEarthRot, <span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">1.0f</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">gluQuadricTexture</span>(e_tex, GLU_TRUE);</span><br><span class="line">	<span class="built_in">glPushAttrib</span>(GL_ENABLE_BIT | GL_TEXTURE_BIT);</span><br><span class="line">	<span class="built_in">glEnable</span>(GL_TEXTURE_2D);</span><br><span class="line">	<span class="built_in">glBindTexture</span>(GL_TEXTURE_2D, <span class="built_in">load_texture</span>(<span class="string">&quot;earth.jpg&quot;</span>));</span><br><span class="line"></span><br><span class="line">	<span class="built_in">gluSphere</span>(e_tex, <span class="number">15.0f</span>, <span class="number">15.0f</span>, <span class="number">15.0f</span>);</span><br><span class="line">	<span class="built_in">glBindTexture</span>(GL_TEXTURE_2D, <span class="number">0</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">glPopAttrib</span>();</span><br><span class="line">	<span class="built_in">gluQuadricTexture</span>(e_tex, GLU_FALSE);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">glColor3ub</span>(<span class="number">200</span>, <span class="number">200</span>, <span class="number">200</span>);</span><br><span class="line">	<span class="built_in">glRotatef</span>(aMoonRot, <span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">1.0f</span>);</span><br><span class="line">	<span class="built_in">glTranslatef</span>(<span class="number">30.0f</span>, <span class="number">0.0f</span>, <span class="number">0.0f</span>);</span><br><span class="line">	aMoonRot += <span class="number">3.0f</span>;</span><br><span class="line">	<span class="keyword">if</span> (aMoonRot &gt;= <span class="number">360.0f</span>)</span><br><span class="line">		aMoonRot = <span class="number">0.0f</span>;</span><br><span class="line">	<span class="built_in">gluQuadricTexture</span>(e_tex, GLU_TRUE);</span><br><span class="line">	<span class="built_in">glPushAttrib</span>(GL_ENABLE_BIT | GL_TEXTURE_BIT);</span><br><span class="line">	<span class="built_in">glEnable</span>(GL_TEXTURE_2D);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">glBindTexture</span>(GL_TEXTURE_2D, <span class="built_in">load_texture</span>(<span class="string">&quot;moon.jpg&quot;</span>));</span><br><span class="line">	<span class="built_in">gluSphere</span>(e_tex, <span class="number">4.0f</span>, <span class="number">15.0f</span>, <span class="number">15.0f</span>);</span><br><span class="line">	<span class="built_in">glBindTexture</span>(GL_TEXTURE_2D, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	aEarthRot += <span class="number">1.0f</span>;</span><br><span class="line">	<span class="keyword">if</span> (aEarthRot &gt;= <span class="number">360.0f</span>)</span><br><span class="line">		aEarthRot = <span class="number">0.0f</span>;</span><br><span class="line">	sEarthRot += <span class="number">5.0f</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (sEarthRot &gt;= <span class="number">360.0f</span>)</span><br><span class="line">		sEarthRot = <span class="number">0.0f</span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">glPopMatrix</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Texture-Material"><a href="#Texture-Material" class="headerlink" title="Texture &amp; Material"></a>Texture &amp; Material</h2><p>贴图和材质直接决定了绘制图形的美观程度。上一步中构建太阳地球月亮的时候已经调用了材质和贴图函数，现在来具体看看内部实现。</p>
+<h3 id="材质"><a href="#材质" class="headerlink" title="材质"></a>材质</h3><p>材质上，由于太阳在我们的系统里是充当着光源的角色，所以材质与其他天体是有区别的。太阳应该是一个发光体，所以关键要加上一句glMaterialfv(GL_FRONT, GL_EMISSION, sun_mat_emission);使其自发光</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">material_sun</span><span class="params">()</span>                               </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	GLfloat sun_mat_ambient[] = &#123; <span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span> &#125;;  <span class="comment">//定义材质的环境光颜色</span></span><br><span class="line">	GLfloat sun_mat_diffuse[] = &#123; <span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span> &#125;;  <span class="comment">//定义材质的漫反射光颜色</span></span><br><span class="line">	GLfloat sun_mat_specular[] = &#123; <span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span> &#125;;   <span class="comment">//定义材质的镜面反射光颜色</span></span><br><span class="line">	GLfloat sun_mat_emission[] = &#123; <span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">0.0f</span> &#125;;   <span class="comment">//定义材质的辐射广颜色</span></span><br><span class="line">	GLfloat sun_mat_shininess = <span class="number">0.0f</span>;</span><br><span class="line">	<span class="built_in">glMaterialfv</span>(GL_FRONT, GL_AMBIENT, sun_mat_ambient);</span><br><span class="line">	<span class="built_in">glMaterialfv</span>(GL_FRONT, GL_DIFFUSE, sun_mat_diffuse);</span><br><span class="line">	<span class="built_in">glMaterialfv</span>(GL_FRONT, GL_SPECULAR, sun_mat_specular);</span><br><span class="line">	<span class="built_in">glMaterialfv</span>(GL_FRONT, GL_EMISSION, sun_mat_emission);</span><br><span class="line">	<span class="built_in">glMaterialf</span>(GL_FRONT, GL_SHININESS, sun_mat_shininess);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于其他星球，我们则可以用统一的材料，辐射光设为0使其不自发光，其他的根据个人喜好调节参数。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">material_planet</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	GLfloat earth_mat_ambient[] = &#123; <span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span> &#125;;  <span class="comment">//定义材质的环境光颜色</span></span><br><span class="line">	GLfloat earth_mat_diffuse[] = &#123; <span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span> &#125;;  <span class="comment">//定义材质的漫反射光颜色</span></span><br><span class="line">	GLfloat earth_mat_specular[] = &#123; <span class="number">0.8f</span>, <span class="number">0.8f</span>, <span class="number">0.8f</span>, <span class="number">0.2f</span> &#125;;   <span class="comment">//定义材质的镜面反射光颜色</span></span><br><span class="line">	GLfloat earth_mat_emission[] = &#123; <span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">1.0f</span> &#125;;   <span class="comment">//定义材质的辐射光颜色</span></span><br><span class="line">	GLfloat earth_mat_shininess = <span class="number">5.0f</span>;</span><br><span class="line">	<span class="built_in">glMaterialfv</span>(GL_FRONT, GL_AMBIENT, earth_mat_ambient);</span><br><span class="line">	<span class="built_in">glMaterialfv</span>(GL_FRONT, GL_DIFFUSE, earth_mat_diffuse);</span><br><span class="line">	<span class="built_in">glMaterialfv</span>(GL_FRONT, GL_SPECULAR, earth_mat_specular);</span><br><span class="line">	<span class="built_in">glMaterialfv</span>(GL_FRONT, GL_EMISSION, earth_mat_emission);</span><br><span class="line">	<span class="built_in">glMaterialf</span>(GL_FRONT, GL_SHININESS, earth_mat_shininess);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不过在这个环节我曾经被一个很蠢的问题卡了很久，就是一开始不知道为什么怎么调地球明暗面都非常不明显，总以为是哪个参数设错了，折腾了好久发现，原来是选的贴图本身就很暗，导致看不出阴影效果，换了张贴图就可以了，我无语。</p>
+<h3 id="贴图"><a href="#贴图" class="headerlink" title="贴图"></a>贴图</h3><p>加载贴图数据有很多种方法，那么这里我选择使用SOIL.h这个库来读取一张图片，然后用glGenTextures(1, &amp;name)和glBindTexture(GL_TEXTURE_2D, name)来为这张贴图绑定一个名字，glTexImage2D()生成贴图数据。通过我们绑定的名字就可以为图形进行贴图。当然这里的名字是自动生成的，可以保证唯一对应。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">GLuint <span class="title">load_texture</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *path)</span> </span>&#123;</span><br><span class="line">	<span class="type">unsigned</span> <span class="type">char</span>* image;</span><br><span class="line">	<span class="type">int</span> width, height;</span><br><span class="line">	GLuint name;</span><br><span class="line">	<span class="built_in">glGenTextures</span>(<span class="number">1</span>, &amp;name);</span><br><span class="line">	<span class="built_in">glBindTexture</span>(GL_TEXTURE_2D, name);</span><br><span class="line">	<span class="built_in">glTexParameteri</span>(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);</span><br><span class="line">	<span class="built_in">glTexParameteri</span>(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);</span><br><span class="line">	<span class="built_in">glTexParameteri</span>(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);</span><br><span class="line">	<span class="built_in">glTexParameteri</span>(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);</span><br><span class="line">	image = <span class="built_in">SOIL_load_image</span>(path, &amp;width, &amp;height, <span class="number">0</span>, SOIL_LOAD_RGB);</span><br><span class="line">	<span class="built_in">glTexImage2D</span>(GL_TEXTURE_2D, <span class="number">0</span>, GL_RGB, width, height, <span class="number">0</span>, GL_RGB, GL_UNSIGNED_BYTE, image);</span><br><span class="line">	<span class="built_in">SOIL_free_image_data</span>(image);</span><br><span class="line">	<span class="built_in">glBindTexture</span>(GL_TEXTURE_2D, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">return</span> name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Skybox"><a href="#Skybox" class="headerlink" title="Skybox"></a>Skybox</h2><p>多数游戏和3D场景都有一个天空盒来作为背景，简单来讲天空盒就是一个把你绘制的所有物体包裹起来的一个带贴图的立方体，在这个例子里就是星空背景。这个立方体要一个一个面画，因为实际上每个面的贴图应该是连续且不重复的全景，但是这里我就偷懒全部用一张图片了，反正背景都是星星也看不出特别违和。天空盒的中心应该是我们的相机的位置，这样无论相机怎么移动，背景都不会有相对的大小变化，来形成一种背景无限远的感觉。画天空盒时先使用glDepthMask(GL_FALSE)来取消深度，可以使我们绘制的物体永远处于前景。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">draw_milky_way</span><span class="params">(<span class="type">float</span> x, <span class="type">float</span> y, <span class="type">float</span> z, <span class="type">float</span> width, <span class="type">float</span> height, <span class="type">float</span> len)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">glPushAttrib</span>(GL_ENABLE_BIT | GL_TEXTURE_BIT);</span><br><span class="line">	<span class="built_in">glDepthMask</span>(GL_FALSE);</span><br><span class="line">	<span class="built_in">glEnable</span>(GL_TEXTURE_2D);</span><br><span class="line">	<span class="built_in">glBindTexture</span>(GL_TEXTURE_2D, <span class="built_in">load_texture</span>(<span class="string">&quot;sky.png&quot;</span>));</span><br><span class="line"></span><br><span class="line">	<span class="comment">//back face</span></span><br><span class="line">	<span class="built_in">glBegin</span>(GL_QUADS);</span><br><span class="line">	<span class="built_in">glNormal3f</span>(<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">1.0</span>);</span><br><span class="line">	<span class="built_in">glTexCoord2f</span>(<span class="number">1.0f</span>, <span class="number">0.0f</span>);</span><br><span class="line">	<span class="built_in">glVertex3f</span>(x + width, y, z);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">glTexCoord2f</span>(<span class="number">1.0f</span>, <span class="number">1.0f</span>);</span><br><span class="line">	<span class="built_in">glVertex3f</span>(x + width, y + height, z);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">glTexCoord2f</span>(<span class="number">0.0f</span>, <span class="number">1.0f</span>);</span><br><span class="line">	<span class="built_in">glVertex3f</span>(x, y + height, z);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">glTexCoord2f</span>(<span class="number">0.0f</span>, <span class="number">0.0f</span>);</span><br><span class="line">	<span class="built_in">glVertex3f</span>(x, y, z);</span><br><span class="line">	<span class="built_in">glEnd</span>();</span><br><span class="line">	<span class="comment">//front face</span></span><br><span class="line">	<span class="built_in">glBegin</span>(GL_QUADS);</span><br><span class="line">	<span class="built_in">glNormal3f</span>(<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">-1.0</span>);</span><br><span class="line">	<span class="built_in">glTexCoord2f</span>(<span class="number">1.0f</span>, <span class="number">0.0f</span>);</span><br><span class="line">	<span class="built_in">glVertex3f</span>(x, y, z + len);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">glTexCoord2f</span>(<span class="number">1.0f</span>, <span class="number">1.0f</span>);</span><br><span class="line">	<span class="built_in">glVertex3f</span>(x, y + height, z + len);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">glTexCoord2f</span>(<span class="number">0.0f</span>, <span class="number">1.0f</span>);</span><br><span class="line">	<span class="built_in">glVertex3f</span>(x + width, y + height, z + len);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">glTexCoord2f</span>(<span class="number">0.0f</span>, <span class="number">0.0f</span>);</span><br><span class="line">	<span class="built_in">glVertex3f</span>(x + width, y, z + len);</span><br><span class="line">	<span class="built_in">glEnd</span>();</span><br><span class="line">	<span class="comment">//bottom face</span></span><br><span class="line">	<span class="built_in">glBegin</span>(GL_QUADS);</span><br><span class="line">	<span class="built_in">glNormal3f</span>(<span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span>);</span><br><span class="line">	<span class="built_in">glTexCoord2f</span>(<span class="number">1.0f</span>, <span class="number">0.0f</span>);</span><br><span class="line">	<span class="built_in">glVertex3f</span>(x, y, z);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">glTexCoord2f</span>(<span class="number">1.0f</span>, <span class="number">1.0f</span>);</span><br><span class="line">	<span class="built_in">glVertex3f</span>(x, y, z + len);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">glTexCoord2f</span>(<span class="number">0.0f</span>, <span class="number">1.0f</span>);</span><br><span class="line">	<span class="built_in">glVertex3f</span>(x + width, y, z + len);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">glTexCoord2f</span>(<span class="number">0.0f</span>, <span class="number">0.0f</span>);</span><br><span class="line">	<span class="built_in">glVertex3f</span>(x + width, y, z);</span><br><span class="line">	<span class="built_in">glEnd</span>();</span><br><span class="line">	<span class="comment">//top face</span></span><br><span class="line">	<span class="built_in">glBegin</span>(GL_QUADS);</span><br><span class="line">	<span class="built_in">glNormal3f</span>(<span class="number">0.0</span>, <span class="number">-1.0</span>, <span class="number">0.0</span>);</span><br><span class="line">	<span class="built_in">glTexCoord2f</span>(<span class="number">1.0f</span>, <span class="number">0.0f</span>);</span><br><span class="line">	<span class="built_in">glVertex3f</span>(x + width, y + height, z);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="built_in">glTexCoord2f</span>(<span class="number">1.0f</span>, <span class="number">1.0f</span>);</span><br><span class="line">	<span class="built_in">glVertex3f</span>(x + width, y + height, z + len);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="built_in">glTexCoord2f</span>(<span class="number">0.0f</span>, <span class="number">1.0f</span>);</span><br><span class="line">	<span class="built_in">glVertex3f</span>(x, y + height, z + len);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="built_in">glTexCoord2f</span>(<span class="number">0.0f</span>, <span class="number">0.0f</span>);</span><br><span class="line">	<span class="built_in">glVertex3f</span>(x, y + height, z);</span><br><span class="line">	<span class="built_in">glEnd</span>();</span><br><span class="line">	<span class="comment">//left face</span></span><br><span class="line">	<span class="built_in">glBegin</span>(GL_QUADS);</span><br><span class="line">	<span class="built_in">glNormal3f</span>(<span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>);</span><br><span class="line">	<span class="built_in">glTexCoord2f</span>(<span class="number">1.0f</span>, <span class="number">0.0f</span>);</span><br><span class="line">	<span class="built_in">glVertex3f</span>(x, y + height, z);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">glTexCoord2f</span>(<span class="number">1.0f</span>, <span class="number">1.0f</span>);</span><br><span class="line">	<span class="built_in">glVertex3f</span>(x, y + height, z + len);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">glTexCoord2f</span>(<span class="number">0.0f</span>, <span class="number">1.0f</span>);</span><br><span class="line">	<span class="built_in">glVertex3f</span>(x, y, z + len);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">glTexCoord2f</span>(<span class="number">0.0f</span>, <span class="number">0.0f</span>);</span><br><span class="line">	<span class="built_in">glVertex3f</span>(x, y, z);</span><br><span class="line">	<span class="built_in">glEnd</span>();</span><br><span class="line"></span><br><span class="line">	<span class="comment">//right face</span></span><br><span class="line">	<span class="built_in">glBegin</span>(GL_QUADS);</span><br><span class="line">	<span class="built_in">glNormal3f</span>(<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">-1.0</span>);</span><br><span class="line">	<span class="built_in">glTexCoord2f</span>(<span class="number">1.0f</span>, <span class="number">0.0f</span>);</span><br><span class="line">	<span class="built_in">glVertex3f</span>(x + width, y, z);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">glTexCoord2f</span>(<span class="number">1.0f</span>, <span class="number">1.0f</span>);</span><br><span class="line">	<span class="built_in">glVertex3f</span>(x + width, y, z + len);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">glTexCoord2f</span>(<span class="number">0.0f</span>, <span class="number">1.0f</span>);</span><br><span class="line">	<span class="built_in">glVertex3f</span>(x + width, y + height, z + len);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">glTexCoord2f</span>(<span class="number">0.0f</span>, <span class="number">0.0f</span>);</span><br><span class="line">	<span class="built_in">glVertex3f</span>(x + width, y + height, z);</span><br><span class="line">	<span class="built_in">glEnd</span>();</span><br><span class="line"></span><br><span class="line">	<span class="built_in">glBindTexture</span>(GL_TEXTURE_2D, <span class="number">0</span>);</span><br><span class="line">	<span class="built_in">glDepthMask</span>(GL_TRUE);</span><br><span class="line">	<span class="built_in">glPopAttrib</span>();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="To-Be-Continue"><a href="#To-Be-Continue" class="headerlink" title="To Be Continue"></a>To Be Continue</h2><p>搞定上述这些模块，我们就已经可以画出像模像样的场景了，<a class="link" href="https://github.com/iluvrachel/SolarSystem">完整代码在这里<i class="fas fa-external-link-alt"></i></a>，但是毕竟代码写得非常简陋（甚至丑陋），还存在着一些比较难以忽视的问题，比如如果使用的贴图分辨率过高会使运行卡顿等等，还有多其他几个行星还没画，这些留着下次解决。<br>话说图形学的代码也真是冗长啊，实现这一点点小场景就已经四百行代码了，下次把代码结构也一并优化一下。<br><img src="https://github.com/iluvrachel/SolarSystem/raw/master/img/result.PNG" alt="solar system" title="Solar System"></p>
+
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/CG/">CG</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/OpenGL/">OpenGL</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/C/">C++</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2019/11/04/OpenGL%E7%BB%98%E5%88%B6%E5%A4%AA%E9%98%B3%E7%B3%BB-%E5%85%B6%E4%BA%8C/"
+                                   title="OpenGL绘制太阳系-其二"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">OpenGL绘制太阳系-其二</span>
+                                        <span class="post-nav-item">Prev posts</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2019/09/20/%E5%A4%8D%E5%88%BB%EF%BC%9A%E6%8C%91%E6%88%9812%E5%B0%8F%E6%97%B6%E5%81%9A%E4%B8%80%E6%AC%BE%E6%B8%B8%E6%88%8F/"
+                                   title="复刻：挑战12小时做一款游戏"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">复刻：挑战12小时做一款游戏</span>
+                                        <span class="post-nav-item">Next posts</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2024
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Linzz</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+
+    
+        <div class="count-info info-item">
+            
+
+            
+                <span class="count-item border-box uv">
+                    <span class="item-type border-box">Unique Visitor</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-item border-box pv">
+                    <span class="item-type border-box">Page View</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

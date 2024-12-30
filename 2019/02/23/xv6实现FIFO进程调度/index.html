@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="浅い眠りの中を　猫が歩いている">
+    <meta name="author" content="Linzz">
+    
+    <title>
+        
+            xv6实现FIFO进程调度 |
+        
+        Linzz&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"en"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#70a1ff","title":"Linzz's blog","author":"Linzz","logo":null,"favicon":"/images/logo.svg","mode":"light"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"浅い眠りの中を 猫が歩いている","hitokoto":false},"social_contact":{"enable":false,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":false,"hide_header":true},"home":{"announcement":null,"category":false,"tag":false,"post_datetime":"created"},"post":{"author_badge":{"enable":false,"level_badge":false,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"toc":{"enable":false,"number":false,"expand_all":false,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":false,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+            <a class="site-name border-box" href="/">
+               Linzz&#39;s blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                HOME
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                ARCHIVES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
+                                
+                                TAGS
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
+                                
+                                CATEGORIES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
+                                
+                                ABOUT
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                            TAGS
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                            CATEGORIES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                            ABOUT
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        xv6实现FIFO进程调度
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Linzz</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2019-02-23 23:30:26</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Fri Oct 04 2024 19:27:55 GMT+0800">2024-10-04 19:27:55</span>
+                </span>
+            
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/xv6/">xv6</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <h1 id="整体方案"><a href="#整体方案" class="headerlink" title="整体方案"></a>整体方案</h1><p>目标描述：xv6 增加先来先服务进程调度算法，与原有时间片轮转算法并存，并优先于时间片轮转，此外添加ps功能</p>
+<span id="more"></span>
+<p>进程调度原理及过程：<br>Xv6原有的进程调度算法非常简单<br>每个CPU初始化完毕后就载入proc.c中的scheduler函数开始进程调度，scheduler函数是个死循环，不停的通过内循环遍历所有进程状态，由于遍历的过程中可能会改变进程状态，所以，一次遍历的内循环外需要加锁保护，一旦scheduler函数发现有状态为RUNABLE的进程就调用swithuvm来载入这个进程段数据，并且把这个进程设置为RUNNING，调用swtch()来切换进程的内核态上下文，swtch()返回后就到了forkret()(创建新进程)或者sched()(运行中的切换，由yield,sleep,exit这种会导致进程切换的函数中调用的sched引起)，具体哪个函数要看swtch切换的进程上下文状态而定。<br>进程从swtch()返回后，要把scheduler()加的锁释放掉，然后返回到系统调用处，进入用户态运行。<br>如果是运行中发生切换，首先旧进程要让出CPU。<br>在trap.c文件里可以看到，一个进程从RUNNING变回RUNABLE是通过调用yeild()函数来强行让出CPU。<br>然后进程则会从用户态进入内核态的对应函数。获得进程列表锁，然后根据当前函数来设置运行状态，再调用sched()函数检查进程状态，检查完毕后，sched会调用swtch()把当前内核态切换到scheduler()中，继续上面的操作。<br>因此当多个进程共同存在时，每个进程执行一小片时间后就将CPU让给另一个进程。</p>
+<p>我们添加了先来先服务FCFS调度算法，修改scheduler调度器，增加对进程创建时间的判断逻辑，即记录下创建时间最小的那个进程，当它没执行完，使它一直为当前进程，即状态一直为running，这便实现了FCFS。<br>同时我们为进程的数据结构添加了一个新属性flag，用于指定它是由FCFS调度还是由RR调度，以实现FCFS优先于RR执行，类似于Linux的普通进程与实时进程。</p>
+<h1 id="涉及的文件和关键数据结构"><a href="#涉及的文件和关键数据结构" class="headerlink" title="涉及的文件和关键数据结构"></a>涉及的文件和关键数据结构</h1><ol>
+<li>为系统添加ps：<br>1)在syscall.c里添加全局声明：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="type">int</span> <span class="title function_">sys_cps</span><span class="params">(<span class="type">void</span>)</span>; <span class="comment">// PS</span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="title function_">int</span> <span class="params">(*syscalls[])</span><span class="params">(<span class="type">void</span>)</span> = &#123;</span><br><span class="line">…</span><br><span class="line"> [SYS_cps]     sys_cps, <span class="comment">// PS</span></span><br><span class="line">…</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>2)在syscall.h里添加系统调用号：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> SYS_cps    22</span></span><br></pre></td></tr></table></figure>
+
+<p>3)在defs.h文件里添加函数调用接口:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>     <span class="title function_">cps</span><span class="params">(<span class="type">void</span>)</span>;</span><br></pre></td></tr></table></figure>
+<p>4)同样在user.h里也加入，为用户调用：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>     <span class="title function_">cps</span><span class="params">(<span class="type">void</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>5)usys.S文件里加入：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SYSCALL(cps)</span><br></pre></td></tr></table></figure>
+
+<p>6)在sysproc.c文件里加入：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">sys_cps</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">return</span> cps(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>7)再proc.c文件里加入cps函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">cps</span><span class="params">()</span>&#123;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">proc</span> *<span class="title">p</span>;</span></span><br><span class="line">  sti();</span><br><span class="line">  acquire(&amp;ptable.lock);</span><br><span class="line">  cprintf(<span class="string">&quot;name \t pid \t state \t \n&quot;</span>);</span><br><span class="line">  <span class="keyword">for</span> ( p = ptable.proc; p &lt; &amp;ptable.proc[NPROC]; p++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> (p-&gt;state == SLEEPING)</span><br><span class="line">    &#123;</span><br><span class="line">      cprintf(<span class="string">&quot;%s \t %d \t SLEEPING \t \n&quot;</span>, p-&gt;name, p-&gt;pid);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (p-&gt;state == RUNNING)</span><br><span class="line">    &#123;</span><br><span class="line">      cprintf(<span class="string">&quot;%s \t %d \t RUNNING \t \n&quot;</span>, p-&gt;name, p-&gt;pid);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (p-&gt;state == RUNNABLE)</span><br><span class="line">    &#123;</span><br><span class="line">      cprintf(<span class="string">&quot;%s \t %d \t RUNNABLE \t \n&quot;</span>, p-&gt;name, p-&gt;pid);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  release(&amp;ptable.lock);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">22</span>;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>8)创建 ps.c 文件，此函数的作用是当用户在xv6中敲命令ps可以去调用cps()函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> “types.h”</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> “stat.h”</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> “user.h”</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> “fcntl.h”</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>*argv[])</span>&#123;</span><br><span class="line">cps();</span><br><span class="line"><span class="built_in">exit</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="9">
+<li>   要想在xv6的命令行实现ps功能，必须在makefile设置去编译ps.c文件 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">UPROGS=\</span><br><span class="line">	_cat\</span><br><span class="line">	_echo\</span><br><span class="line">	_forktest\</span><br><span class="line">	_grep\</span><br><span class="line">	_init\</span><br><span class="line">	_kill\</span><br><span class="line">	_ln\</span><br><span class="line">	_ls\</span><br><span class="line">	_mkdir\</span><br><span class="line">	_rm\</span><br><span class="line">	_sh\</span><br><span class="line">	_stressfs\</span><br><span class="line">	_usertests\</span><br><span class="line">	_wc\</span><br><span class="line">	_ps\ </span><br><span class="line">	_zombie\</span><br><span class="line">        _test\</span><br><span class="line">        _testFF\</span><br><span class="line">        _testRR\</span><br><span class="line">        _testPR\</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>在makefile文件的此处也要修改</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">EXTRA=\</span><br><span class="line">	mkfs.c ulib.c user.h cat.c echo.c forktest.c grep.c kill.c\</span><br><span class="line">	ln.c ls.c mkdir.c rm.c stressfs.c usertests.c wc.c ps.c zombie.c\</span><br><span class="line">	printf.c umalloc.c\</span><br><span class="line">	README dot-bochsrc *.pl toc.* runoff runoff1 runoff.list\</span><br><span class="line">	.gdbinit.tmpl gdbutil\</span><br></pre></td></tr></table></figure>
+
+<ol start="10">
+<li>   编译make后运行xv6就可以在命令行执行ps命令了</li>
+</ol>
+<ol start="2">
+<li>实现调度算法<br>首先，类似于上面添加ps的过程，我们添加一个setflag的功能，用来指定进程采用的调度算法<br>在syscall.c里添加全局声明：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="type">int</span> <span class="title function_">sys_setflag</span><span class="params">(<span class="type">void</span>)</span>; <span class="comment">// PS</span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="title function_">int</span> <span class="params">(*syscalls[])</span><span class="params">(<span class="type">void</span>)</span> = &#123;</span><br><span class="line">…</span><br><span class="line"> [SYS_setflag]     sys_setflag, <span class="comment">// PS</span></span><br><span class="line">…</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>在syscall.h里添加系统调用号：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> SYS_setflag    23</span></span><br></pre></td></tr></table></figure>
+
+<p>在user.h里加入用户调用：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span>     <span class="title function_">cps</span><span class="params">(<span class="type">void</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>usys.S文件里加入：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SYSCALL(setflag)</span><br></pre></td></tr></table></figure>
+
+<p>在sysproc.c文件里加入：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">sys_setflag</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  myproc()-&gt;flag = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后，打开proc.h文件，这里就是进程调度涉及到的非常关键的数据结构：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">proc</span> &#123;</span></span><br><span class="line">  uint sz;                     <span class="comment">// Size of process memory (bytes)</span></span><br><span class="line">  <span class="type">pde_t</span>* pgdir;                <span class="comment">// Page table</span></span><br><span class="line">  <span class="type">char</span> *kstack;                <span class="comment">// Bottom of kernel stack for this process</span></span><br><span class="line">  <span class="class"><span class="keyword">enum</span> <span class="title">procstate</span> <span class="title">state</span>;</span>        <span class="comment">// Process state</span></span><br><span class="line">  <span class="type">int</span> pid;                     <span class="comment">// Process ID</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">proc</span> *<span class="title">parent</span>;</span>         <span class="comment">// Parent process</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">trapframe</span> *<span class="title">tf</span>;</span>        <span class="comment">// Trap frame for current syscall</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">context</span> *<span class="title">context</span>;</span>     <span class="comment">// swtch() here to run process</span></span><br><span class="line">  <span class="type">void</span> *chan;                  <span class="comment">// If non-zero, sleeping on chan</span></span><br><span class="line">  <span class="type">int</span> killed;                  <span class="comment">// If non-zero, have been killed</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">file</span> *<span class="title">ofile</span>[<span class="title">NOFILE</span>];</span>  <span class="comment">// Open files</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">inode</span> *<span class="title">cwd</span>;</span>           <span class="comment">// Current directory</span></span><br><span class="line">  <span class="type">char</span> name[<span class="number">16</span>];               <span class="comment">// Process name (debugging)</span></span><br><span class="line">  uint ctime;                  <span class="comment">// Process creation time  FCFS</span></span><br><span class="line">  <span class="type">int</span> flag;                   <span class="comment">// to judge if FCFS</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这便是进程的数据结构，我们添加</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">uint ctime;                  <span class="comment">// Process creation time  FCFS</span></span><br><span class="line"><span class="type">int</span> flag;                   <span class="comment">// to judge if FCFS</span></span><br></pre></td></tr></table></figure>
+
+<p>这两个成员，ctime用来记录进程创建时间，flag用来标记调度算法</p>
+<p>接下来，在proc.c这个文件的这个函数里：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">allocproc(<span class="type">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">proc</span> *<span class="title">p</span>;</span></span><br><span class="line">  <span class="type">char</span> *sp;</span><br><span class="line"></span><br><span class="line">  acquire(&amp;ptable.lock);</span><br><span class="line">  <span class="keyword">for</span>(p = ptable.proc; p &lt; &amp;ptable.proc[NPROC]; p++)</span><br><span class="line">    <span class="keyword">if</span>(p-&gt;state == UNUSED)</span><br><span class="line">      <span class="keyword">goto</span> found;</span><br><span class="line">  release(&amp;ptable.lock);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">found:</span><br><span class="line">  p-&gt;state = EMBRYO;</span><br><span class="line">  p-&gt;pid = nextpid++;</span><br><span class="line">  p-&gt;flag = <span class="number">0</span>;</span><br><span class="line">  p-&gt;ctime = ticks; <span class="comment">// FCFS</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  release(&amp;ptable.lock);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Allocate kernel stack.</span></span><br><span class="line">  <span class="keyword">if</span>((p-&gt;kstack = kalloc()) == <span class="number">0</span>)&#123;</span><br><span class="line">    p-&gt;state = UNUSED;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  sp = p-&gt;kstack + KSTACKSIZE;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Leave room for trap frame.</span></span><br><span class="line">  sp -= <span class="keyword">sizeof</span> *p-&gt;tf;</span><br><span class="line">  p-&gt;tf = (<span class="keyword">struct</span> trapframe*)sp;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Set up new context to start executing at forkret,</span></span><br><span class="line">  <span class="comment">// which returns to trapret.</span></span><br><span class="line">  sp -= <span class="number">4</span>;</span><br><span class="line">  *(uint*)sp = (uint)trapret;</span><br><span class="line"></span><br><span class="line">  sp -= <span class="keyword">sizeof</span> *p-&gt;context;</span><br><span class="line">  p-&gt;context = (<span class="keyword">struct</span> context*)sp;</span><br><span class="line">  <span class="built_in">memset</span>(p-&gt;context, <span class="number">0</span>, <span class="keyword">sizeof</span> *p-&gt;context);</span><br><span class="line">  p-&gt;context-&gt;eip = (uint)forkret;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在found：下面我们给每个进程的flag和ctime设定初始值。</p>
+<p>最后，修改调度器算法如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span></span><br><span class="line"><span class="title function_">scheduler</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">proc</span> *<span class="title">p</span>;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">cpu</span> *<span class="title">c</span> =</span> mycpu();</span><br><span class="line">  c-&gt;proc = <span class="number">0</span>;</span><br><span class="line">  <span class="comment">//cprintf(&quot;%d\n&quot;, 111);</span></span><br><span class="line">  <span class="keyword">for</span>(;;)&#123;</span><br><span class="line">    <span class="comment">// Enable interrupts on this processor.</span></span><br><span class="line">    sti();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Loop over process table looking for process to run.</span></span><br><span class="line">    acquire(&amp;ptable.lock);</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">proc</span> *<span class="title">minP</span> =</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(p = ptable.proc; p &lt; &amp;ptable.proc[NPROC]; p++)&#123;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span>(p-&gt;state != RUNNABLE)&#123;<span class="keyword">continue</span>;&#125;</span><br><span class="line"></span><br><span class="line"> 	    <span class="comment">// ignore init and sh processes from FCFS</span></span><br><span class="line">      <span class="keyword">if</span>(p-&gt;flag)&#123;</span><br><span class="line">        <span class="comment">//scheduling</span></span><br><span class="line">        <span class="keyword">if</span>(p-&gt;pid &gt; <span class="number">1</span>)&#123;</span><br><span class="line">         <span class="keyword">if</span> (minP != <span class="number">0</span>)&#123;</span><br><span class="line">          <span class="keyword">if</span>(p-&gt;ctime &lt; minP-&gt;ctime)&#123;minP = p;&#125;</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">else</span> &#123;minP = p;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(minP != <span class="number">0</span> &amp;&amp; minP-&gt;state == RUNNABLE) &#123;</span><br><span class="line">         p = minP; </span><br><span class="line">         <span class="comment">//cprintf(&quot;%d\n&quot;, minP-&gt;pid);</span></span><br><span class="line">        &#125;</span><br><span class="line">      <span class="comment">//find the minP as the target process</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span>&#123;</span><br><span class="line">      	<span class="keyword">if</span>(minP != <span class="number">0</span> &amp;&amp; minP-&gt;state == RUNNABLE)&#123;</span><br><span class="line">          p = minP;</span><br><span class="line">        &#125; </span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//run new target process</span></span><br><span class="line">      <span class="keyword">if</span> (p!=<span class="number">0</span>)&#123;</span><br><span class="line">       <span class="comment">//p = minP;//the process with the smallest creation time</span></span><br><span class="line">       c-&gt;proc = p;</span><br><span class="line">       switchuvm(p);</span><br><span class="line">       p-&gt;state = RUNNING;</span><br><span class="line">       <span class="comment">//cprintf(&quot;%d\n&quot;, p-&gt;pid);</span></span><br><span class="line">       swtch(&amp;c-&gt;scheduler, p-&gt;context);</span><br><span class="line">       switchkvm();</span><br><span class="line">        <span class="comment">// Process is done running for now.</span></span><br><span class="line">        <span class="comment">// It should have changed its p-&gt;state before coming back.</span></span><br><span class="line">       c-&gt;proc = <span class="number">0</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  release(&amp;ptable.lock);</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后，写一个测试函数testPR.c，并将其添加到makefile里编译为可执行文件，就大功告成了。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">include <span class="string">&quot;types.h&quot;</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stat.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;user.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> count, count2, processID, startTime = uptime();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (count = <span class="number">0</span>; count &lt; <span class="number">20</span>; count++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (count&lt;<span class="number">10</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            processID = fork();</span><br><span class="line">            <span class="keyword">if</span> (!processID)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            processID = fork();</span><br><span class="line">            setflag();</span><br><span class="line">            <span class="keyword">if</span> (!processID)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> primeCount = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (count = <span class="number">1</span>; count &lt;= <span class="number">30000</span>; count++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (count2 = <span class="number">2</span>; count2 &lt; count; count2++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (!(count % count2))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (count2 == count)</span><br><span class="line">        &#123;</span><br><span class="line">            primeCount++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="number">1</span>,<span class="string">&quot;%d:%d\n&quot;</span>,getpid(), primeCount);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (processID)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (count = <span class="number">0</span>; count &lt; <span class="number">20</span>; count++)</span><br><span class="line">        &#123;</span><br><span class="line">            wait();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="number">1</span>, <span class="string">&quot;Total Elapsed Time: %d ms\n&quot;</span>, uptime() - startTime);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">exit</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/xv6/">xv6</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2019/03/04/%E5%A5%8B%E8%BA%AB%E7%8B%AC%E6%AD%A5%EF%BC%8C%E5%BC%BA%E9%A3%8E%E5%90%B9%E6%8B%82/"
+                                   title="奋身独步，强风吹拂"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">奋身独步，强风吹拂</span>
+                                        <span class="post-nav-item">Prev posts</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2019/02/23/xv6-makefile-%E8%A7%A3%E6%9E%90/"
+                                   title="xv6 makefile 解析"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">xv6 makefile 解析</span>
+                                        <span class="post-nav-item">Next posts</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2024
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Linzz</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+
+    
+        <div class="count-info info-item">
+            
+
+            
+                <span class="count-item border-box uv">
+                    <span class="item-type border-box">Unique Visitor</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-item border-box pv">
+                    <span class="item-type border-box">Page View</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

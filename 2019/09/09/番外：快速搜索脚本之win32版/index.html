@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="浅い眠りの中を　猫が歩いている">
+    <meta name="author" content="Linzz">
+    
+    <title>
+        
+            番外：快速搜索脚本之win32版 |
+        
+        Linzz&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"en"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#70a1ff","title":"Linzz's blog","author":"Linzz","logo":null,"favicon":"/images/logo.svg","mode":"light"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"浅い眠りの中を 猫が歩いている","hitokoto":false},"social_contact":{"enable":false,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":false,"hide_header":true},"home":{"announcement":null,"category":false,"tag":false,"post_datetime":"created"},"post":{"author_badge":{"enable":false,"level_badge":false,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"toc":{"enable":false,"number":false,"expand_all":false,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":false,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+            <a class="site-name border-box" href="/">
+               Linzz&#39;s blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                HOME
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                ARCHIVES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
+                                
+                                TAGS
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
+                                
+                                CATEGORIES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
+                                
+                                ABOUT
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                            TAGS
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                            CATEGORIES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                            ABOUT
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        番外：快速搜索脚本之win32版
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Linzz</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2019-09-09 21:24:40</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Fri Oct 04 2024 19:28:16 GMT+0800">2024-10-04 19:28:16</span>
+                </span>
+            
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/windows/">windows</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <p>几天前用python写了个快捷键打开搜索引擎的工具，但是后来又想搞得更像模像样一点，于是就着手用win32重新写了一遍，也加了一些新东西进去。win32开发是刚刚上手，一遍对着MSDN的例程一边一点点把功能堆上去的，但其实实际感受起来会发现api很多，用起来也很友好，比较烦人的也就是几种数据类型的转换。</p>
+<span id="more"></span>
+<p>思路还是和之前的差不多，从最最核心的获取剪切板和打开浏览器开始，有</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BOOL <span class="title">GetTextFromClipboard</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (::<span class="built_in">OpenClipboard</span>(<span class="literal">NULL</span>))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//获得剪贴板数据</span></span><br><span class="line">		HGLOBAL hMem = <span class="built_in">GetClipboardData</span>(CF_TEXT);</span><br><span class="line">		<span class="keyword">if</span> (<span class="literal">NULL</span> != hMem)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="type">char</span>* lpStr = (<span class="type">char</span>*)::<span class="built_in">GlobalLock</span>(hMem);</span><br><span class="line">			<span class="keyword">if</span> (<span class="literal">NULL</span> != lpStr)</span><br><span class="line">			&#123;</span><br><span class="line">				string engine_link;</span><br><span class="line">				<span class="comment">//XXX</span></span><br><span class="line">				<span class="keyword">if</span> (engine) &#123;</span><br><span class="line">					engine_link = <span class="string">&quot;http://www.baidu.com/s?wd=&quot;</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span> &#123;</span><br><span class="line">					engine_link = <span class="string">&quot;https://www.google.com/search?q=&quot;</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				</span><br><span class="line">				<span class="function">string <span class="title">keyword</span><span class="params">(lpStr)</span></span>;</span><br><span class="line">				string search_link = engine_link + keyword;</span><br><span class="line">				TCHAR lk[MAX_PATH];</span><br><span class="line">				<span class="comment">//把string 转成 tchar</span></span><br><span class="line">                <span class="meta">#<span class="keyword">ifdef</span> UNICODE</span></span><br><span class="line">				_stprintf_s(lk, MAX_PATH, _T(<span class="string">&quot;%S&quot;</span>), search_link.<span class="built_in">c_str</span>());<span class="comment">//%S宽字符</span></span><br><span class="line">                <span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">				_stprintf_s(lk, MAX_PATH, _T(<span class="string">&quot;%s&quot;</span>), search_link.<span class="built_in">c_str</span>());<span class="comment">//%s单字符</span></span><br><span class="line">                <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">				<span class="built_in">ShellExecute</span>(<span class="literal">NULL</span>, _T(<span class="string">&quot;open&quot;</span>), _T(lk), <span class="literal">NULL</span>, <span class="literal">NULL</span>, SW_SHOW); <span class="comment">//不要指定“explore.exe”，否则会打开的是文件资源管理器 </span></span><br><span class="line">				::<span class="built_in">GlobalUnlock</span>(hMem);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		::<span class="built_in">CloseClipboard</span>();</span><br><span class="line">		<span class="keyword">return</span> TRUE;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> FALSE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后我希望这个程序运行时只在托盘显示图标，首先初始化托盘并设置菜单,使用函数<strong>Shell_NotifyIcon</strong>来实现：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">InitTray</span><span class="params">(HINSTANCE hInstance, HWND hWnd)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	nid.cbSize = <span class="built_in">sizeof</span>(NOTIFYICONDATA);<span class="comment">//结构体长度</span></span><br><span class="line">	nid.hWnd = hWnd;<span class="comment">//窗口句柄</span></span><br><span class="line">	nid.uID = IDI_ICON1;<span class="comment">//图标</span></span><br><span class="line">	nid.hIcon = <span class="built_in">LoadIcon</span>(hInst, <span class="built_in">MAKEINTRESOURCE</span>(IDI_ICON1));<span class="comment">//加载图标</span></span><br><span class="line">	nid.uCallbackMessage = WM_NOTIFYICON;<span class="comment">//消息处理，这里很重要，处理鼠标点击</span></span><br><span class="line">	nid.uFlags = NIF_ICON | NIF_MESSAGE | NIF_TIP;</span><br><span class="line">	<span class="built_in">strcpy_s</span>(nid.szTip, _T(<span class="string">&quot;托盘响应&quot;</span>));</span><br><span class="line"></span><br><span class="line">	hMenu = <span class="built_in">CreatePopupMenu</span>();<span class="comment">//生成托盘菜单</span></span><br><span class="line">	<span class="comment">//为托盘菜单添加两个选项</span></span><br><span class="line">	<span class="built_in">AppendMenu</span>(hMenu, MF_STRING, ID_BAIDU, <span class="built_in">TEXT</span>(<span class="string">&quot;百度&quot;</span>));</span><br><span class="line">	<span class="built_in">AppendMenu</span>(hMenu, MF_STRING, ID_GOOGLE, <span class="built_in">TEXT</span>(<span class="string">&quot;谷歌&quot;</span>));</span><br><span class="line">	<span class="built_in">AppendMenu</span>(hMenu, MF_STRING, ID_SHOW, <span class="built_in">TEXT</span>(<span class="string">&quot;提示&quot;</span>));</span><br><span class="line">	<span class="built_in">AppendMenu</span>(hMenu, MF_STRING, ID_EXIT, <span class="built_in">TEXT</span>(<span class="string">&quot;退出&quot;</span>));</span><br><span class="line"></span><br><span class="line">	<span class="built_in">CheckMenuItem</span>(hMenu, ID_BAIDU, MF_CHECKED);</span><br><span class="line">	<span class="built_in">CheckMenuItem</span>(hMenu, ID_GOOGLE, MF_UNCHECKED);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">Shell_NotifyIcon</span>(NIM_ADD, &amp;nid);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接着创建主窗体，<strong>WS_EX_TOOLWINDOW</strong>这一项可以使任务栏上不会出现图标：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HWND hWnd = <span class="built_in">CreateWindowEx</span>(WS_EX_TOOLWINDOW, szWindowClass, szTitle, WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, <span class="number">500</span>, <span class="number">100</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>, hInstance, <span class="literal">NULL</span>);</span><br><span class="line">	<span class="keyword">if</span> (!hWnd) &#123;</span><br><span class="line">		<span class="built_in">MessageBox</span>(<span class="literal">NULL</span>, _T(<span class="string">&quot;Call to CreateWindow failed!&quot;</span>), _T(<span class="string">&quot;Win32 Guided Tour&quot;</span>), <span class="literal">NULL</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>创建主窗口时，使用**ShowWindow(hWnd, SW_HIDE);**这一条语句来令窗口不显示<br>于是UI部分大致就完成了<br>最后再编写系统消息处理部分，不知道为什么，自定义的热键组合在dispatch后没办法被WinProc捕获，于是只能在dispatch之前对按键消息进行处理。like：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">MSG msg;</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">GetMessage</span>(&amp;msg, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="number">0</span>)) &#123;</span><br><span class="line">		<span class="comment">//在dispatch之前先截获消息</span></span><br><span class="line">		<span class="keyword">if</span> (msg.message == WM_HOTKEY)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">GetTextFromClipboard</span>();</span><br><span class="line">			<span class="comment">//MessageBox(NULL, _T(&quot;Debug!&quot;), _T(&quot;Win32 Guided Tour&quot;), NULL);</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="built_in">TranslateMessage</span>(&amp;msg); <span class="comment">//翻译消息</span></span><br><span class="line">		<span class="built_in">DispatchMessage</span>(&amp;msg);  <span class="comment">//派遣消息 调用WndProc函数</span></span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> (<span class="type">int</span>)msg.wParam;</span><br></pre></td></tr></table></figure>
+<p>最后WinProc里我们来做UI上的交互，也就是菜单功能的实现，包括切换搜索引擎以及程序的退出：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">LRESULT CALLBACK <span class="title">WndProc</span><span class="params">(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)</span> </span>&#123;</span><br><span class="line">	PAINTSTRUCT ps;</span><br><span class="line">	HDC hdc;</span><br><span class="line">	TCHAR greeting[] = _T(<span class="string">&quot;Hello, World!&quot;</span>);</span><br><span class="line">	<span class="keyword">switch</span> (message) &#123;</span><br><span class="line">	<span class="keyword">case</span> WM_PAINT:</span><br><span class="line">		<span class="comment">//要处理 WM_PAINT 消息，首先应调用 BeginPaint</span></span><br><span class="line">		<span class="comment">//然后处理所有的逻辑以及在窗口中布局文本、按钮和其他控件等</span></span><br><span class="line">		<span class="comment">//然后调用 EndPaint。 </span></span><br><span class="line">		hdc = <span class="built_in">BeginPaint</span>(hWnd, &amp;ps);</span><br><span class="line"></span><br><span class="line">		<span class="comment">// -----------------在这段代码对应用程序进行布局------------------------ </span></span><br><span class="line">		<span class="comment">// 对于此应用程序，开始调用和结束调用之间的逻辑是在窗口中显示字符串 “Hello，World!”。</span></span><br><span class="line">		<span class="comment">// 请注意 TextOut 函数用于显示字符串。</span></span><br><span class="line">		<span class="built_in">TextOut</span>(hdc, <span class="number">50</span>, <span class="number">5</span>, greeting, _tcslen(greeting));</span><br><span class="line">		<span class="comment">// -----------------------布局模块结束----------------------------------</span></span><br><span class="line"></span><br><span class="line">		<span class="built_in">EndPaint</span>(hWnd, &amp;ps);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> WM_NOTIFYICON:<span class="comment">//这是我们的宏定义</span></span><br><span class="line">		<span class="keyword">if</span> ((wParam == IDI_ICON1) &amp;&amp; (lParam == WM_LBUTTONDOWN)) <span class="comment">// 鼠标左键按下时响应</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">//ShowWindow(hWnd, 10);//当点击鼠标的时候显示窗口</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> ((wParam == IDI_ICON1) &amp;&amp; (lParam == WM_RBUTTONDOWN)) <span class="comment">// 鼠标左键按下时响应</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">//获取鼠标坐标</span></span><br><span class="line">			POINT pt; <span class="built_in">GetCursorPos</span>(&amp;pt);</span><br><span class="line"></span><br><span class="line">			<span class="comment">//解决在菜单外单击左键菜单不消失的问题</span></span><br><span class="line">			<span class="built_in">SetForegroundWindow</span>(hWnd);</span><br><span class="line"></span><br><span class="line">			<span class="comment">//使菜单某项变灰</span></span><br><span class="line">			<span class="comment">//EnableMenuItem(hMenu, ID_SHOW, MF_GRAYED);	</span></span><br><span class="line"></span><br><span class="line">			<span class="comment">//显示并获取选中的菜单</span></span><br><span class="line">			<span class="type">int</span> cmd = <span class="built_in">TrackPopupMenu</span>(hMenu, TPM_RETURNCMD, pt.x, pt.y, <span class="literal">NULL</span>, hWnd,</span><br><span class="line">				<span class="literal">NULL</span>);</span><br><span class="line">            <span class="comment">//利用菜单选项切换搜索引擎</span></span><br><span class="line">			<span class="keyword">if</span> (cmd == ID_BAIDU) &#123;</span><br><span class="line">				engine = TRUE;</span><br><span class="line">				<span class="built_in">CheckMenuItem</span>(hMenu,ID_BAIDU,MF_CHECKED);</span><br><span class="line">				<span class="built_in">CheckMenuItem</span>(hMenu, ID_GOOGLE, MF_UNCHECKED);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (cmd == ID_GOOGLE) &#123;</span><br><span class="line">				engine = FALSE;</span><br><span class="line">				<span class="built_in">CheckMenuItem</span>(hMenu, ID_GOOGLE, MF_CHECKED);</span><br><span class="line">				<span class="built_in">CheckMenuItem</span>(hMenu, ID_BAIDU, MF_UNCHECKED);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (cmd == ID_SHOW)</span><br><span class="line">				<span class="built_in">MessageBox</span>(hWnd,  <span class="string">&quot;快捷键 ctrl+上方向键 搜索&quot;</span>, <span class="string">&quot;提示&quot;</span>, MB_OK);</span><br><span class="line">			<span class="keyword">if</span> (cmd == ID_EXIT)</span><br><span class="line">				<span class="built_in">PostMessage</span>(hWnd, WM_DESTROY, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> WM_DESTROY:</span><br><span class="line">		<span class="built_in">UnregisterHotKey</span>(<span class="literal">NULL</span>, hkid1);</span><br><span class="line">		<span class="built_in">Shell_NotifyIcon</span>(NIM_DELETE, &amp;nid);</span><br><span class="line">		<span class="built_in">PostQuitMessage</span>(<span class="number">0</span>);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> WM_SYSCOMMAND:</span><br><span class="line">		<span class="keyword">if</span> (wParam == SC_MINIMIZE) &#123;</span><br><span class="line">			<span class="built_in">ShowWindow</span>(hWnd, SW_HIDE);</span><br><span class="line">			<span class="comment">//MessageBox(NULL, _T(&quot;Debug!&quot;), _T(&quot;Win32 Guided Tour&quot;), NULL);</span></span><br><span class="line">			<span class="comment">//Shell_NotifyIcon(NIM_ADD, &amp;nid); //最小化时隐藏窗口并设置系统托盘  </span></span><br><span class="line">		&#125;</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		<span class="comment">//DefWindowProc缺省窗口处理函数</span></span><br><span class="line">		<span class="comment">//这个函数是默认的窗口处理函数，我们可以把不关心的消息都丢给它来处理</span></span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">DefWindowProc</span>(hWnd, message, wParam, lParam);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其实思路清晰之后一遍做下来并没有想象中的那么痛苦，特别是这种一个个功能迭代的过程是乐在其中的。win32编程无非是搞清楚系统消息和窗体的关系，要不是到后面顶不住身体突发不适可能会把更多功能怼进去，但是目前至少以及达到了我最初设想的样子了，也就不想再做下去了，UI这方面不用QT或者MFC做还是比较难搞的。<br>嘛，告一段落吧。</p>
+
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/windows/">windows</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2019/09/20/%E5%A4%8D%E5%88%BB%EF%BC%9A%E6%8C%91%E6%88%9812%E5%B0%8F%E6%97%B6%E5%81%9A%E4%B8%80%E6%AC%BE%E6%B8%B8%E6%88%8F/"
+                                   title="复刻：挑战12小时做一款游戏"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">复刻：挑战12小时做一款游戏</span>
+                                        <span class="post-nav-item">Prev posts</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2019/09/02/python%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E6%90%9C%E7%B4%A2%E8%84%9A%E6%9C%AC-md/"
+                                   title="python写一个快速搜索脚本"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">python写一个快速搜索脚本</span>
+                                        <span class="post-nav-item">Next posts</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2024
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Linzz</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+
+    
+        <div class="count-info info-item">
+            
+
+            
+                <span class="count-item border-box uv">
+                    <span class="item-type border-box">Unique Visitor</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-item border-box pv">
+                    <span class="item-type border-box">Page View</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

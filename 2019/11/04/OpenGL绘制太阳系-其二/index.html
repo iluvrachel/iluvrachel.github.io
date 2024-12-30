@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="浅い眠りの中を　猫が歩いている">
+    <meta name="author" content="Linzz">
+    
+    <title>
+        
+            OpenGL绘制太阳系-其二 |
+        
+        Linzz&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"en"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#70a1ff","title":"Linzz's blog","author":"Linzz","logo":null,"favicon":"/images/logo.svg","mode":"light"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"浅い眠りの中を 猫が歩いている","hitokoto":false},"social_contact":{"enable":false,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":false,"hide_header":true},"home":{"announcement":null,"category":false,"tag":false,"post_datetime":"created"},"post":{"author_badge":{"enable":false,"level_badge":false,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"toc":{"enable":false,"number":false,"expand_all":false,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":false,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+            <a class="site-name border-box" href="/">
+               Linzz&#39;s blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                HOME
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                ARCHIVES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
+                                
+                                TAGS
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
+                                
+                                CATEGORIES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
+                                
+                                ABOUT
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                            TAGS
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                            CATEGORIES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                            ABOUT
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        OpenGL绘制太阳系-其二
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Linzz</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2019-11-04 23:41:23</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Fri Oct 04 2024 19:27:53 GMT+0800">2024-10-04 19:27:53</span>
+                </span>
+            
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/CG/">CG</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/OpenGL/">OpenGL</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/C/">C++</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <p>上次已经基本把太阳系模型的雏形搞出来了，但是还是太简陋。拖沓了一个多星期以后，总算是把一些必要的东西给补全了。相较于之前的版本，此次把太阳系八大行星都画上了，而且为行星们创建了一个行星类方便使用。其次，解决了之前加载贴图资源导致运行卡顿的问题。然后为场景添加了两种不同的相机模式。以下细述。</p>
+<span id="more"></span>
+
+<h2 id="Planet类"><a href="#Planet类" class="headerlink" title="Planet类"></a>Planet类</h2><p>我们把所有行星的通用属性都定义到一个planet类中写在头文件里就可以随处调用并实例化了：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> PLANET_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PLANET_H</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Planet</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="type">float</span> srot;</span><br><span class="line">	<span class="type">float</span> arot;</span><br><span class="line">	<span class="type">float</span> radius;</span><br><span class="line">	GLuint texture_name;</span><br><span class="line">	<span class="type">float</span> distance;</span><br><span class="line"></span><br><span class="line">	<span class="type">float</span> counter_a = <span class="number">0.0f</span>;</span><br><span class="line">	<span class="type">float</span> counter_s = <span class="number">0.0f</span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Planet</span>(<span class="type">float</span> sr, <span class="type">float</span> ar, <span class="type">float</span> r, GLuint tex, <span class="type">float</span> dis)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;srot = sr;</span><br><span class="line">		<span class="keyword">this</span>-&gt;arot = ar;</span><br><span class="line">		<span class="keyword">this</span>-&gt;radius = r;</span><br><span class="line">		<span class="keyword">this</span>-&gt;texture_name = tex;</span><br><span class="line">		<span class="keyword">this</span>-&gt;distance = dis;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	~<span class="built_in">Planet</span>()</span><br><span class="line">	&#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p>对于planet构造函数的实现，其实和我们之前画地球的步骤差不多，这里直接上代码。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">draw_planet</span><span class="params">(Planet &amp;p,GLuint tex)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//std::cout &lt;&lt; all_texture[1] &lt;&lt; std::endl;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="built_in">glPushMatrix</span>();</span><br><span class="line">	<span class="built_in">material_planet</span>();</span><br><span class="line">	<span class="built_in">glEnable</span>(GL_LIGHTING);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">glRotatef</span>(p.counter_a, <span class="number">0.0f</span>, <span class="number">1.0f</span>, <span class="number">0.0f</span>);</span><br><span class="line">	<span class="built_in">glTranslatef</span>(p.distance, <span class="number">0.0f</span>, <span class="number">0.0f</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//lean</span></span><br><span class="line">	<span class="built_in">glRotatef</span>(<span class="number">90</span>, <span class="number">1.0f</span>, <span class="number">0.0f</span>, <span class="number">0.0f</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">glRotatef</span>(p.counter_s, <span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">1.0f</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">gluQuadricTexture</span>(e_tex, GLU_TRUE);</span><br><span class="line">	<span class="built_in">glPushAttrib</span>(GL_ENABLE_BIT | GL_TEXTURE_BIT);</span><br><span class="line">	<span class="built_in">glEnable</span>(GL_TEXTURE_2D);</span><br><span class="line">	<span class="comment">//glTexEnvf(GL_TEXTURE_2D, GL_TEXTURE_EVN_MODE, GL_REPLACE);</span></span><br><span class="line">	<span class="built_in">glBindTexture</span>(GL_TEXTURE_2D, tex);</span><br><span class="line">	<span class="comment">//std::cout &lt;&lt; all_texture[4] &lt;&lt; std::endl;</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">//glColor3ub(0, 0, 255);</span></span><br><span class="line"></span><br><span class="line">	<span class="built_in">gluSphere</span>(e_tex, p.radius, <span class="number">15.0f</span>, <span class="number">15.0f</span>);</span><br><span class="line">	<span class="built_in">glBindTexture</span>(GL_TEXTURE_2D, <span class="number">0</span>);</span><br><span class="line">	<span class="comment">//glDisable(GL_TEXTURE_2D);</span></span><br><span class="line"></span><br><span class="line">	<span class="built_in">glPopAttrib</span>();</span><br><span class="line">	<span class="built_in">gluQuadricTexture</span>(e_tex, GLU_FALSE);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	p.counter_a += <span class="number">360.0</span>/(p.arot*<span class="number">24.0</span>);</span><br><span class="line">	<span class="keyword">if</span> (p.counter_a &gt;= <span class="number">360.0f</span>)</span><br><span class="line">		p.counter_a = <span class="built_in">int</span>(p.counter_a)%<span class="number">360</span>;</span><br><span class="line">	p.counter_s += (<span class="number">360.0</span>/p.srot) * <span class="number">0.2</span>;</span><br><span class="line">	<span class="comment">//std::cout &lt;&lt; p.srot &lt;&lt; std::endl;</span></span><br><span class="line">	<span class="keyword">if</span> (p.counter_s &gt;= <span class="number">360.0f</span>)</span><br><span class="line">		p.counter_s = <span class="built_in">int</span>(p.counter_s) % <span class="number">360</span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">glPopMatrix</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接着我们只要在主函数中定义好八大行星的各个参数并绘制他们就可以了(PS: 这里的参数是以地球的参数作为基本单位的，并且为了方便观察做出了一些比例上的调整)</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Planet mars =  <span class="built_in">Planet</span>(<span class="number">25.19f</span>, <span class="number">686.0f</span>, <span class="number">15</span> * <span class="number">0.532</span>, all_texture[<span class="number">4</span>], <span class="number">300.0</span>*<span class="number">1.52</span>);</span><br><span class="line">Planet mercury = <span class="built_in">Planet</span>(<span class="number">58.64f</span>, <span class="number">87.0f</span>, <span class="number">15</span> * <span class="number">0.382</span>, all_texture[<span class="number">5</span>], <span class="number">300.0</span>*<span class="number">0.38</span>);</span><br><span class="line">Planet venus = <span class="built_in">Planet</span>(<span class="number">-243.0f</span>, <span class="number">224.7f</span>, <span class="number">15</span> * <span class="number">0.95</span>, all_texture[<span class="number">6</span>], <span class="number">300.0</span>*<span class="number">0.72</span>);</span><br><span class="line">Planet jupiter = <span class="built_in">Planet</span>(<span class="number">12.13f</span>, <span class="number">433.6f</span>, <span class="number">15</span> * <span class="number">11</span>, all_texture[<span class="number">7</span>], <span class="number">300.0</span>*<span class="number">5.2</span>);</span><br><span class="line">Planet saturn = <span class="built_in">Planet</span>(<span class="number">26.73f</span>, <span class="number">1075.2f</span>, <span class="number">15</span> * <span class="number">9.14</span>, all_texture[<span class="number">8</span>], <span class="number">300.0</span>*<span class="number">9.5</span>);</span><br><span class="line">Planet uranus = <span class="built_in">Planet</span>(<span class="number">97.73f</span>, <span class="number">3068.0f</span>, <span class="number">15</span> * <span class="number">4.0</span>, all_texture[<span class="number">9</span>], <span class="number">300.0</span>*<span class="number">19.2</span>);</span><br><span class="line">Planet neptune = <span class="built_in">Planet</span>(<span class="number">28.32f</span>, <span class="number">6018.0f</span>, <span class="number">15</span> * <span class="number">3.8</span>, all_texture[<span class="number">10</span>], <span class="number">300.0</span>* <span class="number">25</span>);</span><br></pre></td></tr></table></figure>
+<p>BTW，我们知道土星最出名的就是漂亮的土星环，那么就可以使用gluDisk()这个内置函数来实现，只要在画球体的地方顺便画一个环就可以了。</p>
+<h2 id="优化内存"><a href="#优化内存" class="headerlink" title="优化内存"></a>优化内存</h2><p>上次留下来的一个很大的问题就是每次我们加载纹理贴图的时候都是动态从图片中加载数据的，这样就导致当我们使用的贴图数量比较多或者图片比较大的时候，运行效率非常低下，画面一顿一顿的，不能忍啊。解决方法就是在绘制之前先把纹理数据存起来，然后释放图片资源。因为在OpenGL里每一份贴图数据都是用一个GLuint类型的数来标识的，而这些数存在一个数组里。对于贴图数据，我们自定义一个texture_data数据结构，只需要保存图片的宽和高，以及其中的字节数据即可，然后依次为每一份数据绑定到唯一的id上，每次根据不同的贴图id找到对应的数据就行了。具体实现如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">texture_data</span> &#123;</span><br><span class="line">	<span class="type">unsigned</span> <span class="type">char</span>* data;</span><br><span class="line">	<span class="type">int</span> width, height;</span><br><span class="line">&#125; texture_data;</span><br><span class="line"></span><br><span class="line"><span class="function">texture_data <span class="title">load_texture2</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *path)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	texture_data t;</span><br><span class="line">	<span class="comment">//unsigned char* image;</span></span><br><span class="line">	<span class="type">int</span> width, height;</span><br><span class="line">	t.data = <span class="built_in">SOIL_load_image</span>(path, &amp;width, &amp;height, <span class="number">0</span>, SOIL_LOAD_RGB);</span><br><span class="line">	t.width = width;</span><br><span class="line">	t.height = height;</span><br><span class="line">	<span class="comment">//SOIL_free_image_data(image);</span></span><br><span class="line">	<span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">GLUquadricObj* e_tex = <span class="built_in">gluNewQuadric</span>();<span class="comment">//texture</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> img_num = <span class="number">11</span>;</span><br><span class="line">GLuint all_texture[img_num];</span><br><span class="line">texture_data TextureImage[img_num];<span class="comment">// 创建纹理的存储空间</span></span><br><span class="line"><span class="comment">//memset(TextureImage,0,sizeof(void *) * 4);</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add_textures</span><span class="params">()</span> <span class="comment">// 载入位图(调用上面的代码)并转换成纹理</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//int Status = FALSE; // 状态指示器</span></span><br><span class="line">	</span><br><span class="line">	<span class="built_in">memset</span>(TextureImage, <span class="number">0</span>, <span class="built_in">sizeof</span>(<span class="type">void</span> *) * img_num); <span class="comment">// 将指针设为 NULL</span></span><br><span class="line">	TextureImage[<span class="number">0</span>] = <span class="built_in">load_texture2</span>(<span class="string">&quot;sun.jpg&quot;</span>);</span><br><span class="line">	TextureImage[<span class="number">1</span>] = <span class="built_in">load_texture2</span>(<span class="string">&quot;earth.jpg&quot;</span>);</span><br><span class="line">	TextureImage[<span class="number">2</span>] = <span class="built_in">load_texture2</span>(<span class="string">&quot;moon.jpg&quot;</span>);</span><br><span class="line">	TextureImage[<span class="number">3</span>] = <span class="built_in">load_texture2</span>(<span class="string">&quot;sky.png&quot;</span>);</span><br><span class="line">	TextureImage[<span class="number">4</span>] = <span class="built_in">load_texture2</span>(<span class="string">&quot;mars.jpg&quot;</span>);</span><br><span class="line">	TextureImage[<span class="number">5</span>] = <span class="built_in">load_texture2</span>(<span class="string">&quot;mercury.jpg&quot;</span>);</span><br><span class="line">	TextureImage[<span class="number">6</span>] = <span class="built_in">load_texture2</span>(<span class="string">&quot;venus.jpg&quot;</span>);</span><br><span class="line">	TextureImage[<span class="number">7</span>] = <span class="built_in">load_texture2</span>(<span class="string">&quot;jupiter.jpg&quot;</span>);</span><br><span class="line">	TextureImage[<span class="number">8</span>] = <span class="built_in">load_texture2</span>(<span class="string">&quot;saturn.jpg&quot;</span>);</span><br><span class="line">	TextureImage[<span class="number">9</span>] = <span class="built_in">load_texture2</span>(<span class="string">&quot;uranus.jpg&quot;</span>);</span><br><span class="line">	TextureImage[<span class="number">10</span>] = <span class="built_in">load_texture2</span>(<span class="string">&quot;neptune.jpg&quot;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="built_in">glGenTextures</span>(img_num, &amp;all_texture[<span class="number">0</span>]); <span class="comment">// 创建纹理</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; img_num; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">glBindTexture</span>(GL_TEXTURE_2D, all_texture[i]);<span class="comment">// 生成纹理</span></span><br><span class="line">		<span class="built_in">glTexImage2D</span>(GL_TEXTURE_2D, <span class="number">0</span>, <span class="number">3</span>, TextureImage[i].width, TextureImage[i].height, <span class="number">0</span>, GL_RGB, GL_UNSIGNED_BYTE, TextureImage[i].data);</span><br><span class="line">		<span class="built_in">glTexParameteri</span>(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); <span class="comment">// 线形滤波</span></span><br><span class="line">		<span class="built_in">glTexParameteri</span>(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); <span class="comment">// 线形滤波</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; img_num; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">SOIL_free_image_data</span>(TextureImage[i].data);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="相机漫游"><a href="#相机漫游" class="headerlink" title="相机漫游"></a>相机漫游</h2><p>上一次我们已经实现了一种相机，即视觉中心固定在太阳，使用鼠标拖动可以改变观察角度。但是在三维场景中更为普遍的是漫游相机，也就是所谓的第一人称视角，我们可以通过鼠标拖动观察四周，同时键盘控制移动。这一部分较多的涉及了数学中空间向量的概念。我们知道OpenGL大多数的关于相机的操作都是归于gluLookAt()这个函数来实现的。这个函数接受9个参数，也即三个三维向量eye、at、和up，分别代表相机在空间中的位置，相机注视的点，以及相机朝上的方向。我们要做的就是计算得到这些向量的值来更改相机的位置和角度。对于相机位置的移动，我们使用键盘进行控制，只需对eye向量的x、z分量做修改即可，不做垂直方向的变化，于是在camera类中我们实现两个方法moveCamera()和yawCamera()：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Camera::moveCamera</span><span class="params">(<span class="type">float</span> speed)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">/** 计算方向向量 */</span></span><br><span class="line">	vec3 vector = at - eye;</span><br><span class="line">	vector = <span class="built_in">normalize</span>(vector);         <span class="comment">/**&lt; 单位化 */</span></span><br><span class="line"></span><br><span class="line">										 <span class="comment">/** 更新摄像机 */</span></span><br><span class="line">	eye.x += vector.x * speed;    <span class="comment">/**&lt; 根据速度更新位置 */</span></span><br><span class="line">	eye.z += vector.z * speed;</span><br><span class="line">	eye.y += vector.y * speed;</span><br><span class="line">	at.x += vector.x * speed;        <span class="comment">/**&lt; 根据速度更新方向 */</span></span><br><span class="line">	at.z += vector.z * speed;</span><br><span class="line">	at.y += vector.y * speed;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Camera::yawCamera</span><span class="params">(<span class="type">float</span> speed)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	vec3 yaw;</span><br><span class="line">	vec3 crossProduct = at - eye;</span><br><span class="line">	crossProduct = <span class="built_in">cross</span>(crossProduct, up);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Normalize the strafe vector</span></span><br><span class="line">	yaw = <span class="built_in">normalize</span>(crossProduct);</span><br><span class="line"></span><br><span class="line">	eye.x += yaw.x * speed;</span><br><span class="line">	eye.z += yaw.z * speed;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Add the strafe vector to our view</span></span><br><span class="line">	at.x += yaw.x * speed;</span><br><span class="line">	at.z += yaw.z * speed;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">keyboard</span><span class="params">(<span class="type">unsigned</span> <span class="type">char</span> key, <span class="type">int</span> x, <span class="type">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">	rad = <span class="built_in">float</span>(PI*s_angle / <span class="number">180.0f</span>);                    <span class="comment">//计算SIN和COS函数中需要的参数。</span></span><br><span class="line">															   <span class="comment">// 前进,后退请求</span></span><br><span class="line">	<span class="keyword">switch</span> (key) &#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">&#x27;w&#x27;</span>:</span><br><span class="line">		cam.<span class="built_in">moveCamera</span>(<span class="number">10</span>);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">&#x27;s&#x27;</span>:</span><br><span class="line">		cam.<span class="built_in">moveCamera</span>(<span class="number">-10</span>);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">&#x27;a&#x27;</span>:</span><br><span class="line">		cam.<span class="built_in">yawCamera</span>(<span class="number">-10</span>);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">&#x27;d&#x27;</span>:</span><br><span class="line">		cam.<span class="built_in">yawCamera</span>(<span class="number">10</span>);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">&#x27;m&#x27;</span>:</span><br><span class="line">		camera_mode = !camera_mode;</span><br><span class="line">		<span class="comment">//std::cout &lt;&lt; camera_mode &lt;&lt; std::endl;</span></span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> <span class="number">033</span>:</span><br><span class="line">		<span class="comment">// Esc按键</span></span><br><span class="line">		<span class="built_in">exit</span>(EXIT_SUCCESS);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">glutPostWindowRedisplay</span>(mainWindow);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来使用鼠标修改相机看向的方向，首先是获得鼠标在窗口中的点击位置，然后固定这一位置计算每一时刻鼠标与这一初始位置的偏移量，然后根据偏移的角度和方向去更新at向量，由于这里我段位还不够高，于是借鉴了网上一些其他文章的做法<br><a class="link" href="https://blog.csdn.net/u010223072/article/details/53379231">https://blog.csdn.net/u010223072/article/details/53379231<i class="fas fa-external-link-alt"></i></a> 来实现这个功能，虽然看不太懂但是意外地巧妙且可行，做了一些修改之后代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Camera::rotateView</span><span class="params">(<span class="type">float</span> angle, <span class="type">float</span> x, <span class="type">float</span> y, <span class="type">float</span> z)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	vec3 newView;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/** 计算方向向量 */</span></span><br><span class="line">	vec3 view = at - eye;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//std::cout &lt;&lt; &quot;eye:&quot; &lt;&lt; eye &lt;&lt; std::endl;</span></span><br><span class="line">	<span class="comment">/** 计算 sin 和cos值 */</span></span><br><span class="line">	<span class="type">float</span> cosTheta = (<span class="type">float</span>)<span class="built_in">cos</span>(angle);</span><br><span class="line">	<span class="type">float</span> sinTheta = (<span class="type">float</span>)<span class="built_in">sin</span>(angle);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/** 计算旋转向量的x值 */</span></span><br><span class="line">	newView.x = (cosTheta + (<span class="number">1</span> - cosTheta) * x * x)        * view.x;</span><br><span class="line">	newView.x += ((<span class="number">1</span> - cosTheta) * x * y - z * sinTheta)    * view.y;</span><br><span class="line">	newView.x += ((<span class="number">1</span> - cosTheta) * x * z + y * sinTheta)    * view.z;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/** 计算旋转向量的y值 */</span></span><br><span class="line">	newView.y = ((<span class="number">1</span> - cosTheta) * x * y + z * sinTheta)    * view.x;</span><br><span class="line">	newView.y += (cosTheta + (<span class="number">1</span> - cosTheta) * y * y)        * view.y;</span><br><span class="line">	newView.y += ((<span class="number">1</span> - cosTheta) * y * z - x * sinTheta)    * view.z;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/** 计算旋转向量的z值 */</span></span><br><span class="line">	newView.z = ((<span class="number">1</span> - cosTheta) * x * z - y * sinTheta)    * view.x;</span><br><span class="line">	newView.z += ((<span class="number">1</span> - cosTheta) * y * z + x * sinTheta)    * view.y;</span><br><span class="line">	newView.z += (cosTheta + (<span class="number">1</span> - cosTheta) * z * z)        * view.z;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/** 更新摄像机的方向 */</span></span><br><span class="line">	at = eye + newView;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Camera::setViewByMouse</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	POINT mousePos;                                   <span class="comment">/**&lt; 保存当前鼠标位置 */</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">//int middleX = GetSystemMetrics(SM_CXSCREEN) &gt;&gt; 1; /**&lt; 得到屏幕宽度的一半 */</span></span><br><span class="line">	<span class="comment">//int middleY = GetSystemMetrics(SM_CYSCREEN) &gt;&gt; 1; /**&lt; 得到屏幕高度的一半 */</span></span><br><span class="line">	<span class="type">float</span> angleY = <span class="number">0.0f</span>;                              <span class="comment">/**&lt; 摄像机左右旋转角度 */</span></span><br><span class="line">	<span class="type">float</span> angleZ = <span class="number">0.0f</span>;                              <span class="comment">/**&lt; 摄像机上下旋转角度 */</span></span><br><span class="line">	<span class="type">static</span> <span class="type">float</span> currentRotX = <span class="number">0.0f</span>;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> middleX = x;</span><br><span class="line">	<span class="type">int</span> middleY = y;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/** 得到当前鼠标位置 */</span></span><br><span class="line">	<span class="built_in">GetCursorPos</span>(&amp;mousePos);</span><br><span class="line">	<span class="built_in">ShowCursor</span>(TRUE);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/** 如果鼠标没有移动,则不用更新 */</span></span><br><span class="line">	<span class="keyword">if</span> ((mousePos.x == middleX) &amp;&amp; (mousePos.y == middleY))</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	<span class="comment">//std::cout &lt;&lt; &quot;x:&quot; &lt;&lt; x &lt;&lt; &quot; y&quot;&lt;&lt;y&lt;&lt;std::endl;</span></span><br><span class="line">	<span class="comment">/** 设置鼠标位置在屏幕中心 */</span></span><br><span class="line">	<span class="built_in">SetCursorPos</span>(x, y);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**&lt; 得到鼠标移动方向 */</span></span><br><span class="line">	angleY = (<span class="type">float</span>)((middleX - mousePos.x)) / <span class="number">1000.0f</span>;</span><br><span class="line">	angleZ = (<span class="type">float</span>)((middleY - mousePos.y)) / <span class="number">1000.0f</span>;</span><br><span class="line"></span><br><span class="line">	<span class="type">static</span> <span class="type">float</span> lastRotX = <span class="number">0.0f</span>;      <span class="comment">/**&lt; 用于保存旋转角度 */</span></span><br><span class="line">	lastRotX = currentRotX;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/** 跟踪摄像机上下旋转角度 */</span></span><br><span class="line">	currentRotX += angleZ;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/** 如果上下旋转弧度大于1.0,我们截取到1.0并旋转 */</span></span><br><span class="line">	<span class="keyword">if</span> (currentRotX &gt; <span class="number">1.0f</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		currentRotX = <span class="number">1.0f</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">/** 根据保存的角度旋转方向 */</span></span><br><span class="line">		<span class="keyword">if</span> (lastRotX != <span class="number">1.0f</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">/** 找到与旋转方向垂直向量 */</span></span><br><span class="line">			vec3 vAxis = at - eye;</span><br><span class="line">			vec3 vAxis2 = <span class="built_in">cross</span>(vAxis, up);</span><br><span class="line">			vec3 vAxis3 = <span class="built_in">normalize</span>(vAxis2);</span><br><span class="line"></span><br><span class="line">			<span class="comment">///旋转</span></span><br><span class="line">			<span class="built_in">rotateView</span>(angleZ, vAxis<span class="number">3.</span>x, vAxis<span class="number">3.</span>y, vAxis<span class="number">3.</span>z);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/** 如果旋转弧度小于-1.0,则也截取到-1.0并旋转 */</span></span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (currentRotX &lt; <span class="number">-1.0f</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		currentRotX = <span class="number">-1.0f</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (lastRotX != <span class="number">-1.0f</span>)</span><br><span class="line">		&#123;</span><br><span class="line"></span><br><span class="line">			<span class="comment">/** 找到与旋转方向垂直向量 */</span></span><br><span class="line">			vec3 vAxis = at - eye;</span><br><span class="line">			vec3 vAxis2 = <span class="built_in">cross</span>(vAxis, up);</span><br><span class="line">			vec3 vAxis3 = <span class="built_in">normalize</span>(vAxis2);</span><br><span class="line"></span><br><span class="line">			<span class="comment">///旋转</span></span><br><span class="line">			<span class="built_in">rotateView</span>(angleZ, vAxis<span class="number">3.</span>x, vAxis<span class="number">3.</span>y, vAxis<span class="number">3.</span>z);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/** 否则就旋转angleZ度 */</span></span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">/** 找到与旋转方向垂直向量 */</span></span><br><span class="line">		vec3 vAxis = at - eye;</span><br><span class="line">		vec3 vAxis2 = <span class="built_in">cross</span>(vAxis, up);</span><br><span class="line">		vec3 vAxis3 = <span class="built_in">normalize</span>(vAxis2);</span><br><span class="line"></span><br><span class="line">		<span class="comment">///旋转</span></span><br><span class="line">		<span class="built_in">rotateView</span>(angleZ, vAxis<span class="number">3.</span>x, vAxis<span class="number">3.</span>y, vAxis<span class="number">3.</span>z);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/** 总是左右旋转摄像机 */</span></span><br><span class="line">	<span class="built_in">rotateView</span>(angleY, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后把所有变化后的值给到gluLookAt()：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Camera::view2</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">glLoadIdentity</span>();</span><br><span class="line">	<span class="built_in">gluLookAt</span>(eye.x, eye.y, eye.z, at.x, at.y, at.z, up.x, up.y, up.z);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样就可以像游戏中一样在场景中漫游了。</p>
+<p>下一次打算实现的内容是物体的选取和UI制作，可能吧:P<br><img src="https://github.com/iluvrachel/SolarSystem/raw/master/img/result.PNG" alt="solar system" title="Solar System"></p>
+
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/CG/">CG</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/OpenGL/">OpenGL</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/C/">C++</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2019/12/11/%E5%81%8F%E6%89%A7%E7%9A%84%E6%B5%AA%E6%BC%AB-%E5%9C%A8%E4%B8%96%E7%95%8C%E5%B0%BD%E5%A4%B4%E7%9B%B8%E9%81%87/"
+                                   title="名为偏执的浪漫--在世界尽头相遇"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">名为偏执的浪漫--在世界尽头相遇</span>
+                                        <span class="post-nav-item">Prev posts</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2019/10/25/OpenGL%E7%BB%98%E5%88%B6%E5%A4%AA%E9%98%B3%E7%B3%BB/"
+                                   title="OpenGL绘制太阳系"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">OpenGL绘制太阳系</span>
+                                        <span class="post-nav-item">Next posts</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2024
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Linzz</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+
+    
+        <div class="count-info info-item">
+            
+
+            
+                <span class="count-item border-box uv">
+                    <span class="item-type border-box">Unique Visitor</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-item border-box pv">
+                    <span class="item-type border-box">Page View</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

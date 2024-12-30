@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="浅い眠りの中を　猫が歩いている">
+    <meta name="author" content="Linzz">
+    
+    <title>
+        
+            关于《空洞骑士》中的优秀设计 |
+        
+        Linzz&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"en"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#70a1ff","title":"Linzz's blog","author":"Linzz","logo":null,"favicon":"/images/logo.svg","mode":"light"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"浅い眠りの中を 猫が歩いている","hitokoto":false},"social_contact":{"enable":false,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":false,"hide_header":true},"home":{"announcement":null,"category":false,"tag":false,"post_datetime":"created"},"post":{"author_badge":{"enable":false,"level_badge":false,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"toc":{"enable":false,"number":false,"expand_all":false,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":false,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+            <a class="site-name border-box" href="/">
+               Linzz&#39;s blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                HOME
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                ARCHIVES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
+                                
+                                TAGS
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
+                                
+                                CATEGORIES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
+                                
+                                ABOUT
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                            TAGS
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                            CATEGORIES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                            ABOUT
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        关于《空洞骑士》中的优秀设计
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Linzz</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2020-05-06 13:56:18</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Fri Oct 04 2024 19:27:59 GMT+0800">2024-10-04 19:27:59</span>
+                </span>
+            
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E6%B8%B8%E6%88%8F%E8%AF%84%E4%BB%B7/">游戏评价</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+
+        
+        
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <p>宅家无聊又适逢steam打折史低，入手了空洞骑士，尽管还没有通关，但是20h+的游戏时间还是能拿出点东西来写一写。</p>
+<span id="more"></span>
+<h1 id="Metroidvania-like复兴-与-Soul-like传承"><a href="#Metroidvania-like复兴-与-Soul-like传承" class="headerlink" title="Metroidvania-like复兴 与 Soul-like传承"></a>Metroidvania-like复兴 与 Soul-like传承</h1><p>老实说，这是我第一次亲手体验类银河恶魔城游戏，即使这一玩法的源起作品《银河战士》比我年纪还大。<br>一来是众人皆知的手残，二来是当年Ori发售时太穷体验不起。<br>扯远了。虽然纯正的银河恶魔城游戏们在各种3A开放世界游戏和多人竞技游戏冲击下渐渐淡出人们的视野，但近年来也涌现了不少精神续作，Metroidvania-like作为一种多房间（银河战士）+平台跳跃（恶魔城）的地图设计理念迎来复兴，包括但不限于《死亡细胞》、《奥日》、《黑魂》以及《空洞骑士》。在地图探索和道具收集方面，这些游戏都是一脉相承的。<br>而至于黑魂，又凭借其优秀的战斗设计（受苦）和独特的碎片化叙事而自成一派，启发了许多魂like游戏设计。众多类魂游戏中，可以说空洞骑士是最具备黑魂气质的，无论是boss战的设计还是如出一辙的叙事风格。没有冗长的过场剧情，没有详备的背景介绍，剧情与世界观的设定，暗藏在NPC的对话、石碑上的文字、猎人的日志乃至每一块路标。这些碎片化的信息，驱使着玩家自发地进行探索，也填补了跑图时的空暇，甚至于打通了游戏之后，依旧会有人为这只言片语构建的世界津津乐道（魂学家们）。<br>在魂like游戏的世界里，故事从来不是由主角开启的，无论为人所在意与否，一段历史始终静静躺在那里。这样的世界，与其说是镜中花、水中月，不如说是黄沙中的楼兰、火山灰中的庞贝，是飘渺虚无的真实存在。</p>
+<h1 id="润物细无声的引导"><a href="#润物细无声的引导" class="headerlink" title="润物细无声的引导"></a>润物细无声的引导</h1><h2 id="Talk-is-cheap，just-do-it"><a href="#Talk-is-cheap，just-do-it" class="headerlink" title="Talk is cheap，just do it"></a>Talk is cheap，just do it</h2><p>游戏教程是任何游戏都必不可少的一环，同时也代表着玩家对一款游戏的最初体验，其设计好坏的重要性不言而喻。见过太多设计得很鸡肋的游戏教学关卡，倒也不是说体验很差，就是要么破坏沉浸式体验，要么冗长乏味把玩家当小学生。<br>远古时期，游戏卡带小得可怜的容量，催生了马里奥这种将教学关做得细心而隐蔽的优秀设计。<br>回想一下经典的马里奥第一关，玩家学到的第一个操作是跳跃，接下来，遇到敌人，几乎所有玩家都会出于本能地使用跳跃去躲避敌人，或者在跳跃的时候落到敌人身上，此时玩家就了解了击败敌人的方法，那么随后的撞击方块吃到蘑菇，整个游戏所需要了解的操作和交互要素，都在短短的第一关中顺理成章地展示。<br>这样的游戏设计方法，一直在马里奥系列中延续下来，并深远地影响着一众游戏。包括魂系列、只狼，包括本作空洞骑士。<br>在空洞骑士中，在简单的指引下，玩家需要执行的第一个操作是挥剑击破墙壁，这一设计展示了两个关键的东西，一是挥剑是玩家的主要攻击手段，二是这游戏中会有可破坏的地形和隐藏门。接着，击破了墙壁的玩家马上就会遇到第一个敌人，这时候出于惯性和本能，玩家就会挥剑去攻击。人总是善于学习、创造和模仿的，于是举一反三，接下来的一些其他操作如向上攻击和空中下劈，即使没有教程，也能自然而然地联系在一起。<br>就连看似是融于背景中的各种路标，也被设计成可以砍断的。于是当玩家第一次找到鹿角车站时，会自然而然地挥剑去敲击铃铛。<br>没有了强制性的教学和生硬的文字引导，玩家在这样的学习过程中体验到的是自由感与得到新发现的成就感。当玩家习惯于拿剑乱砍的“陋习”，就很容易在旅途中开启一些意想不到的路线。<br>说到这里不得不提一下，在《风之旅人》中这种引导理念更是体现得淋漓尽致。玩家所扮演的角色在一片荒漠中苏醒，然后没有任何文字上的介绍和指引，环顾四周目光可及的仅仅是远处的几块石碑，尽管对于许多人来说此情此景都是各种程度上的“意味不明”，但是无一例外的，所有人都会自发的走向石碑所在的方向。然后，豁然开朗。<br>纵观历史，人之所以可以成就伟大，是亘古不变的<strong>好奇心</strong>啊。<br>当然，我在此夸赞鼓吹这种设计，并不是意味着所有游戏都必须朝着这个方向去发展，像是《文明》系列或者p社四萌，不够充分的游戏说明只会造成灾难性结果。</p>
+<h2 id="练习-考试"><a href="#练习-考试" class="headerlink" title="练习+考试"></a>练习+考试</h2><p>此外，空洞骑士中，丰富的敌人种类和较难的boss战是其一大特色。尽管boss初见都怪吓人的，但是其实仔细研究会发现，boss不过是加强版的小怪，他们的攻击模式与前面见到过的小怪其实如出一辙。<br>也就是说，整个游戏从简单开始，先通过不同的小怪教会玩家如何应对不同的攻击模式，然后再在boss关中去检验玩家对学习到的技巧的掌握程度，任何阶段遇到的boss都不会超出玩家应当掌握的范围。譬如打假骑士之前遇到的龙牙哥展示的是莽撞的连续攻击，打小姐姐之前遇到的蚊子（阿斯匹德猎手）展示了俯冲攻击。经历了前面的小怪之后，在boss的对战中遇到似曾相识的招式，马上就能反应过来对应的打法。<br>在另一个游戏《只狼》中也可以体会到这样的设计，一开始的敌人都是弹反教官和忍杀教官，后面遇到的长枪哥让玩家熟悉看破，胖哥哥让玩家学习空中忍杀，诸如此类，等到打屑一郎的时候，玩家其实已经掌握所有应对的操作了，这时候就好像是一场考试，考验的是玩家对这些技能的熟练程度。</p>
+<h2 id="所见所闻"><a href="#所见所闻" class="headerlink" title="所见所闻"></a>所见所闻</h2><p>空洞骑士中的视效音效，也在潜移默化中帮助玩家进行判断。亮橙色的被感染区域，冒着泡泡的酸液池，以及看上去就很危险的尖刺，让玩家一眼看到就敬而远之。<br>而那些看不到的陷阱，都会在启动之前发出异样的声响。友好中立的NPC们，往往都会哼着小调，无论何时地图师的歌声，都会给迷路的玩家们打上一针强心剂，而嘤嘤嘤的声音，总是可以帮助玩家找到藏在某个地方的幼虫们。<br>游戏的音乐烘托着气氛，每到达一个新的地图，色调和bgm都会恰到好处地发生变化，而没有丝毫突兀之感。<br>在与boss或者精英怪进行战斗时，bgm也会顺势变得激昂，调动起玩家的热血。<br>随着游戏进程的推进，当玩家开始更深入的了解了这个世界被感染的事实之后，氛围也开始变得沉重，再次遇到那个喜欢唱歌的矿工妹的时候，会发现她也不再唱歌了。</p>
+<h1 id="从线性到非线性"><a href="#从线性到非线性" class="headerlink" title="从线性到非线性"></a>从线性到非线性</h1><p>游戏的前期，看似地图很大，哪哪都能去，但实际上会发现，很多地方不收集某些特定技能或者打败某些敌人是无法通过的。这就将玩家们的探索路线做了一个线性的限制。<br>当玩家学到几个实用技能之后，接下来可以选择的方向就会一下子多了起来，游戏从线性流程展开为非线性。<br>并且，地图精妙的设计，使得到达同一地点可以有多条不同的路线，而且游戏初期即使没能掌握一些关键技能，也可以通过巧妙的骚操作（自杀劈魂）来到达一些看似到不了的地方。游戏因此而有了更多可能性。<br>这种多路线多流程的设计，非常适合多种玩法的开发，比如多周目、速通、全收集等，更重要的是体现玩家的<strong>自主感</strong>，就像其他一些开放世界游戏一样，游戏的通关之路是由好奇心驱使的，不同的玩家会有他们自己希望实现的目标。没有强制的要求，就减少了玩家的受挫感。<br>丰富的地图路线让玩家经常在误打误撞中发现新的东西，无论是游戏或者现实，新发现总是会带来一种奇妙的<strong>成就感</strong>。</p>
+<p>说到底，这个游戏的美妙体验，在于误入某地，发现某物，聆听某段故事。</p>
+
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2020/05/14/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84%E8%BD%AF%E6%B8%B2%E6%9F%93%E7%94%9F%E6%B4%BB-%E7%AC%AC%E5%9B%9B%E8%AF%9D/"
+                                   title="从零开始的软渲染生活-第四话"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">从零开始的软渲染生活-第四话</span>
+                                        <span class="post-nav-item">Prev posts</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2020/04/24/%E4%BD%95%E6%97%B6%E5%A4%B1%E5%8E%BB%E4%BA%86%E5%A5%BD%E5%A5%BD%E8%AF%BB%E4%B9%A6%E7%9A%84%E8%83%BD%E5%8A%9B/"
+                                   title="何时失去了好好读书的能力"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">何时失去了好好读书的能力</span>
+                                        <span class="post-nav-item">Next posts</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2024
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Linzz</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+
+    
+        <div class="count-info info-item">
+            
+
+            
+                <span class="count-item border-box uv">
+                    <span class="item-type border-box">Unique Visitor</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-item border-box pv">
+                    <span class="item-type border-box">Page View</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

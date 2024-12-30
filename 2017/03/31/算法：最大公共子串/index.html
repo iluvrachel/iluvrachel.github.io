@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="浅い眠りの中を　猫が歩いている">
+    <meta name="author" content="Linzz">
+    
+    <title>
+        
+            算法：最大公共子串 |
+        
+        Linzz&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"en"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#70a1ff","title":"Linzz's blog","author":"Linzz","logo":null,"favicon":"/images/logo.svg","mode":"light"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"浅い眠りの中を 猫が歩いている","hitokoto":false},"social_contact":{"enable":false,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":false,"hide_header":true},"home":{"announcement":null,"category":false,"tag":false,"post_datetime":"created"},"post":{"author_badge":{"enable":false,"level_badge":false,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"toc":{"enable":false,"number":false,"expand_all":false,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":false,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+            <a class="site-name border-box" href="/">
+               Linzz&#39;s blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                HOME
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                ARCHIVES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
+                                
+                                TAGS
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
+                                
+                                CATEGORIES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
+                                
+                                ABOUT
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                            TAGS
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                            CATEGORIES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                            ABOUT
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        算法：最大公共子串
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Linzz</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2017-03-31 01:04:45</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Fri Oct 04 2024 19:28:27 GMT+0800">2024-10-04 19:28:27</span>
+                </span>
+            
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/algorithm/">algorithm</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <blockquote>
+<p>作者：万仓一黍<br>出处：<a class="link" href="http://grenet.cnblogs.com/">http://grenet.cnblogs.com/<i class="fas fa-external-link-alt"></i></a></p>
+<p>本文版权归作者和博客园共有，欢迎转载，但未经作者同意必须保留此段声明，且在文章页面明显位置给出原文连接，否则保留追究法律责任的权利。</p>
+<p>非常具有借鉴意义的算法</p>
+</blockquote>
+<span id="more"></span>
+
+<p>本文介绍基于最长公共子串的文本比较算法——Needleman&#x2F;Wunsch算法。</p>
+<p>　　还是以实例说明：字符串A&#x3D;kitten，字符串B&#x3D;sitting</p>
+<p>　　那他们的最长公共子串为ittn（注：最长公共子串不需要连续出现，但一定是出现的顺序一致），最长公共子串长度为4。</p>
+<p>　　</p>
+<p>　　定义：</p>
+<p>　　LCS(A,B)表示字符串A和字符串B的最长公共子串的长度。很显然，LSC(A,B)&#x3D;0表示两个字符串没有公共部分。</p>
+<p>　　Rev(A)表示反转字符串A</p>
+<p>　　Len(A)表示字符串A的长度</p>
+<p>　　A+B表示连接字符串A和字符串B</p>
+<p>　　性质：</p>
+<p>　　LCS(A,A)&#x3D;Len(A)</p>
+<p>　　LCS(A,””)&#x3D;0</p>
+<p>　　LCS(A,B)&#x3D;LCS(B,A)</p>
+<p>　　0≤LCS(A,B)≤Min(Len(A),Len(B))</p>
+<p>　　LCS(A,B)&#x3D;LCS(Rev(A),Rev(B))</p>
+<p>　　LCS(A+C,B+C)&#x3D;LCS(A,B)+Len(C)</p>
+<p>　　LCS(A+B,A+C)&#x3D;Len(A)+LCS(B,C)</p>
+<p>　　LCS(A,B)≥LCS(A,C)+LCS(B,C)</p>
+<p>　　LCS(A+C,B)≥LCS(A,B)+LCS(B,C)</p>
+<p>　　为了讲解计算LCS(A,B)，特给予以下几个定义</p>
+<p>　　A&#x3D;a1a2……aN，表示A是由a1a2……aN这N个字符组成，Len(A)&#x3D;N</p>
+<p>　　B&#x3D;b1b2……bM，表示B是由b1b2……bM这M个字符组成，Len(B)&#x3D;M</p>
+<p>　　定义LCS(i,j)&#x3D;LCS(a1a2……ai,b1b2……bj)，其中0≤i≤N，0≤j≤M</p>
+<p>　　故：　　LCS(N,M)&#x3D;LCS(A,B)</p>
+<p>　　　　　　LCS(0,0)&#x3D;0</p>
+<p>　　　　　　LCS(0,j)&#x3D;0</p>
+<p>　　　　　　LCS(i,0)&#x3D;0</p>
+<p>　　对于1≤i≤N，1≤j≤M，有公式一</p>
+<p>　　若ai&#x3D;bj，则LCS(i,j)&#x3D;LCS(i-1,j-1)+1</p>
+<p>　　若ai≠bj，则LCS(i,j)&#x3D;Max(LCS(i-1,j-1),LCS(i-1,j),LCS(i,j-1))</p>
+<p>　　计算LCS(A,B)的算法有很多，下面介绍的Needleman&#x2F;Wunsch算法是其中的一种。和LD算法类似，Needleman&#x2F;Wunsch算法用的都是动态规划的思想。在Needleman&#x2F;Wunsch算法中还设定了一个权值，用以区分三种操作（插入、删除、更改）的优先级。在下面的算法中，认为三种操作的优先级都一样。故权值默认为1。</p>
+<p>　　</p>
+<p>　　举例说明：A&#x3D;GGATCGA，B&#x3D;GAATTCAGTTA，计算LCS(A,B)</p>
+<p>　　第一步：初始化LCS矩阵</p>
+<p>Needleman&#x2F;Wunsch算法矩阵<br>        G   A   A   T   T   C   A   G   T   T   A<br>    0   0   0   0   0   0   0   0   0   0   0   0<br>G   0<br>G   0<br>A   0<br>T   0<br>C   0<br>G   0<br>A   0<br>　　第二步：利用公式一，计算矩阵的第一行</p>
+<p>Needleman&#x2F;Wunsch算法矩阵<br>        G   A   A   T   T   C   A   G   T   T   A<br>    0   0   0   0   0   0   0   0   0   0   0   0<br>G   0   1   1   1   1   1   1   1   1   1   1   1<br>G   0<br>A   0<br>T   0<br>C   0<br>G   0<br>A   0<br> 　　第三步：利用公式一，计算矩阵的其余各行</p>
+<p>Needleman&#x2F;Wunsch算法矩阵<br>        G   A   A   T   T   C   A   G   T   T   A<br>    0   0   0   0   0   0   0   0   0   0   0   0<br>G   0   1   1   1   1   1   1   1   1   1   1   1<br>G   0   1   1   1   1   1   1   1   2   2   2   2<br>A   0   1   2   2   2   2   2   2   2   2   2   2<br>T   0   1   2   2   3   3   3   3   3   3   3   3<br>C   0   1   2   2   3   3   4   4   4   4   4   4<br>G   0   1   2   2   3   3   3   4   5   5   5   5<br>A   0   1   2   3   3   3   3   4   5   5   5   6<br>　　则，LCS(A,B)&#x3D;LCS(7,11)&#x3D;6</p>
+<p>　　可以看出，Needleman&#x2F;Wunsch算法实际上和LD算法是非常接近的。故他们的时间复杂度和空间复杂度也一样。时间复杂度为O(MN)，空间复杂度为O(MN)。空间复杂度经过优化，可以优化到O(M)，但是一旦优化就丧失了计算匹配字串的机会了。由于代码和LD算法几乎一样。这里就不再贴代码了。</p>
+<p>　　</p>
+<p>　　还是以上面为例A&#x3D;GGATCGA，B&#x3D;GAATTCAGTTA，LCS(A,B)&#x3D;6</p>
+<p>　　他们的匹配为：</p>
+<p>　　　　A：GGA_TC_G__A</p>
+<p>　　　　B：GAATTCAGTTA</p>
+<p>　　如上面所示，蓝色表示完全匹配，黑色表示编辑操作，_表示插入字符或者是删除字符操作。如上面所示，蓝色字符有6个，表示最长公共子串长度为6。</p>
+<p>　　利用上面的Needleman&#x2F;Wunsch算法矩阵，通过回溯，能找到匹配字串</p>
+<p>　　第一步：定位在矩阵的右下角</p>
+<p>Needleman&#x2F;Wunsch算法矩阵<br>        G   A   A   T   T   C   A   G   T   T   A<br>    0   0   0   0   0   0   0   0   0   0   0   0<br>G   0   1   1   1   1   1   1   1   1   1   1   1<br>G   0   1   1   1   1   1   1   1   2   2   2   2<br>A   0   1   2   2   2   2   2   2   2   2   2   2<br>T   0   1   2   2   3   3   3   3   3   3   3   3<br>C   0   1   2   2   3   3   4   4   4   4   4   4<br>G   0   1   2   2   3   3   3   4   5   5   5   5<br>A   0   1   2   3   3   3   3   4   5   5   5   6<br>　　第二步：回溯单元格，至矩阵的左上角</p>
+<p>　　　　若ai&#x3D;bj，则回溯到左上角单元格</p>
+<p>Needleman&#x2F;Wunsch算法矩阵<br>        G   A   A   T   T   C   A   G   T   T   A<br>    0   0   0   0   0   0   0   0   0   0   0   0<br>G   0   1   1   1   1   1   1   1   1   1   1   1<br>G   0   1   1   1   1   1   1   1   2   2   2   2<br>A   0   1   2   2   2   2   2   2   2   2   2   2<br>T   0   1   2   2   3   3   3   3   3   3   3   3<br>C   0   1   2   2   3   3   4   4   4   4   4   4<br>G   0   1   2   2   3   3   3   4   5   5   5   5<br>A   0   1   2   3   3   3   3   4   5   5   5   6<br> 　　　　若ai≠bj，回溯到左上角、上边、左边中值最大的单元格，若有相同最大值的单元格，优先级按照左上角、上边、左边的顺序</p>
+<p>Needleman&#x2F;Wunsch算法矩阵<br>        G   A   A   T   T   C   A   G   T   T   A<br>    0   0   0   0   0   0   0   0   0   0   0   0<br>G   0   1   1   1   1   1   1   1   1   1   1   1<br>G   0   1   1   1   1   1   1   1   2   2   2   2<br>A   0   1   2   2   2   2   2   2   2   2   2   2<br>T   0   1   2   2   3   3   3   3   3   3   3   3<br>C   0   1   2   2   3   3   4   4   4   4   4   4<br>G   0   1   2   2   3   3   3   4   5   5   5   5<br>A   0   1   2   3   3   3   3   4   5   5   5   6<br>　　　　若当前单元格是在矩阵的第一行，则回溯至左边的单元格</p>
+<p>　　　　若当前单元格是在矩阵的第一列，则回溯至上边的单元格</p>
+<p>Needleman&#x2F;Wunsch算法矩阵<br>        G   A   A   T   T   C   A   G   T   T   A<br>    0   0   0   0   0   0   0   0   0   0   0   0<br>G   0   1   1   1   1   1   1   1   1   1   1   1<br>G   0   1   1   1   1   1   1   1   2   2   2   2<br>A   0   1   2   2   2   2   2   2   2   2   2   2<br>T   0   1   2   2   3   3   3   3   3   3   3   3<br>C   0   1   2   2   3   3   4   4   4   4   4   4<br>G   0   1   2   2   3   3   3   4   5   5   5   5<br>A   0   1   2   3   3   3   3   4   5   5   5   6<br>　　　　依照上面的回溯法则，回溯到矩阵的左上角</p>
+<p>　　第三步：根据回溯路径，写出匹配字串</p>
+<p>　　　　若回溯到左上角单元格，将ai添加到匹配字串A，将bj添加到匹配字串B</p>
+<p>　　　　若回溯到上边单元格，将ai添加到匹配字串A，将_添加到匹配字串B</p>
+<p>　　　　若回溯到左边单元格，将_添加到匹配字串A，将bj添加到匹配字串B</p>
+<p>　　　　搜索晚整个匹配路径，匹配字串也就完成了</p>
+<p>　　可以看出，LD算法和Needleman&#x2F;Wunsch算法的回溯路径是一样的。这样找到的匹配字串也是一样的。</p>
+<p>　　不过，Needleman&#x2F;Wunsch算法和LD算法一样，若要找出匹配字串，空间的复杂度就一定是O(MN)，在文本比较长的时候，是极为耗用存储空间的。故若要计算出匹配字串，还得用其他的算法，留待后文介绍。</p>
+
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/algorithm/">algorithm</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2017/04/06/%E7%94%A8C-%E5%86%99%E4%B8%AA%E5%B0%8F%E6%B8%B8%E6%88%8F%EF%BC%9A%E5%86%B3%E6%96%97%E5%90%A7%E5%A4%A7%E9%AD%94%E7%8E%8B/"
+                                   title="用C#写个小游戏：决斗吧大魔王"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">用C#写个小游戏：决斗吧大魔王</span>
+                                        <span class="post-nav-item">Prev posts</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2017/03/30/Java-Web%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98-%E5%9B%9B/"
+                                   title="Java Web项目实战-四"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Java Web项目实战-四</span>
+                                        <span class="post-nav-item">Next posts</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2024
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Linzz</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+
+    
+        <div class="count-info info-item">
+            
+
+            
+                <span class="count-item border-box uv">
+                    <span class="item-type border-box">Unique Visitor</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-item border-box pv">
+                    <span class="item-type border-box">Page View</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

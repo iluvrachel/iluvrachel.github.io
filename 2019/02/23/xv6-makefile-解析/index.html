@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="浅い眠りの中を　猫が歩いている">
+    <meta name="author" content="Linzz">
+    
+    <title>
+        
+            xv6 makefile 解析 |
+        
+        Linzz&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"en"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#70a1ff","title":"Linzz's blog","author":"Linzz","logo":null,"favicon":"/images/logo.svg","mode":"light"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"浅い眠りの中を 猫が歩いている","hitokoto":false},"social_contact":{"enable":false,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":false,"hide_header":true},"home":{"announcement":null,"category":false,"tag":false,"post_datetime":"created"},"post":{"author_badge":{"enable":false,"level_badge":false,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"toc":{"enable":false,"number":false,"expand_all":false,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":false,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+            <a class="site-name border-box" href="/">
+               Linzz&#39;s blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                HOME
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                ARCHIVES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
+                                
+                                TAGS
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
+                                
+                                CATEGORIES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
+                                
+                                ABOUT
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                            TAGS
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                            CATEGORIES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                            ABOUT
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        xv6 makefile 解析
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Linzz</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2019-02-23 22:58:38</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Fri Oct 04 2024 19:27:55 GMT+0800">2024-10-04 19:27:55</span>
+                </span>
+            
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/xv6/">xv6</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <p>xv6操作系统安装的makefile文件逐行分析</p>
+<span id="more"></span>
+
+
+<p>目标描述：xv6 Makefile分析<br>Xv6 的Makefile是用于组织源代码的编译流程的文件，Makefile文件描述了各个源文件之间的相互依赖关系，把原本繁琐的编译过程简化为makefile文件与make指令的配合使用。<br>Makefile大体结构是树形结构，即把一个目标分为多个子目标。make将makefile的第一个target作为作为最终的target，凡是这个规则依赖的规则都将被执行。<br>编译流程：<br>（一）首先OBJS指定需要编译的.c文件<br>（二）然后配置一些环境和工具信息<br>（三）xv6.img、bootblock、kernel相互依赖，生成系统内核与镜像<br>（四）生成文件系统以及系统内部可执行文件<br>（五）配置启动信息</p>
+<p>源代码注释及分析：<br>（1）编译目标定义</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">OBJS = \</span><br><span class="line">	bio.o\</span><br><span class="line">	console.o\</span><br><span class="line">	exec.o\</span><br><span class="line">	file.o\</span><br><span class="line">	fs.o\</span><br><span class="line">	ide.o\</span><br><span class="line">	ioapic.o\</span><br><span class="line">	kalloc.o\</span><br><span class="line">	kbd.o\</span><br><span class="line">	lapic.o\</span><br><span class="line">	log.o\</span><br><span class="line">	main.o\</span><br><span class="line">	mp.o\</span><br><span class="line">	picirq.o\</span><br><span class="line">	pipe.o\</span><br><span class="line">	proc.o\</span><br><span class="line">	sleeplock.o\</span><br><span class="line">	spinlock.o\</span><br><span class="line">	string.o\</span><br><span class="line">	swtch.o\</span><br><span class="line">	syscall.o\</span><br><span class="line">	sysfile.o\</span><br><span class="line">	sysproc.o\</span><br><span class="line">	trapasm.o\</span><br><span class="line">	trap.o\</span><br><span class="line">	uart.o\</span><br><span class="line">	vectors.o\</span><br><span class="line">	vm.o\</span><br></pre></td></tr></table></figure>
+<p>只要make查到某个 .o 文件，它就自动把相关的 .c 加到依赖关系中</p>
+<p>（2）配置编译工具gcc</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ifndef</span> TOOLPREFIX</span><br><span class="line">TOOLPREFIX := <span class="variable">$(<span class="built_in">shell</span> <span class="built_in">if</span> i386-jos-elf-objdump -i 2&gt;&amp;1 | grep &#x27;^elf32-i386$$&#x27; &gt;/dev/null 2&gt;&amp;1; \</span></span><br><span class="line"><span class="variable">	then echo &#x27;i386-jos-elf-&#x27;; \</span></span><br><span class="line"><span class="variable">	elif objdump -i 2&gt;&amp;1 | grep &#x27;elf32-i386&#x27; &gt;/dev/null 2&gt;&amp;1; \</span></span><br><span class="line"><span class="variable">	then echo &#x27;&#x27;; \</span></span><br><span class="line"><span class="variable">	else echo <span class="string">&quot;***&quot;</span> 1&gt;&amp;2; \</span></span><br><span class="line"><span class="variable">	echo <span class="string">&quot;*** Error: Couldn&#x27;t find an i386-*-elf version of GCC/binutils.&quot;</span> 1&gt;&amp;2; \</span></span><br><span class="line"><span class="variable">	echo <span class="string">&quot;*** Is the directory with i386-jos-elf-gcc in your PATH?&quot;</span> 1&gt;&amp;2; \</span></span><br><span class="line"><span class="variable">	echo <span class="string">&quot;*** If your i386-*-elf toolchain is installed with a command&quot;</span> 1&gt;&amp;2; \</span></span><br><span class="line"><span class="variable">	echo <span class="string">&quot;*** prefix other than &#x27;i386-jos-elf-&#x27;, set your TOOLPREFIX&quot;</span> 1&gt;&amp;2; \</span></span><br><span class="line"><span class="variable">	echo <span class="string">&quot;*** environment variable to that prefix and run &#x27;make&#x27; again.&quot;</span> 1&gt;&amp;2; \</span></span><br><span class="line"><span class="variable">	echo <span class="string">&quot;*** To turn off this error, run &#x27;gmake TOOLPREFIX= ...&#x27;.&quot;</span> 1&gt;&amp;2; \</span></span><br><span class="line"><span class="variable">	echo <span class="string">&quot;***&quot;</span> 1&gt;&amp;2; exit 1; fi)</span></span><br><span class="line"><span class="keyword">endif</span></span><br></pre></td></tr></table></figure>
+<p>若找不到合适的版本，输出错误信息</p>
+<p>（3）配置模拟器qemu</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ifndef</span> QEMU</span><br><span class="line">QEMU = <span class="variable">$(<span class="built_in">shell</span> <span class="built_in">if</span> which qemu &gt; /dev/null; \</span></span><br><span class="line"><span class="variable">	then echo qemu; exit; \</span></span><br><span class="line"><span class="variable">	elif which qemu-system-i386 &gt; /dev/null; \</span></span><br><span class="line"><span class="variable">	then echo qemu-system-i386; exit; \</span></span><br><span class="line"><span class="variable">	elif which qemu-system-x86_64 &gt; /dev/null; \</span></span><br><span class="line"><span class="variable">	then echo qemu-system-x86_64; exit; \</span></span><br><span class="line"><span class="variable">	else \</span></span><br><span class="line"><span class="variable">	qemu=/Applications/Q.app/Contents/MacOS/i386-softmmu.app/Contents/MacOS/i386-softmmu; \</span></span><br><span class="line"><span class="variable">	<span class="built_in">if</span> test -x $$qemu; then echo $$qemu; exit; fi; fi; \</span></span><br><span class="line"><span class="variable">	echo <span class="string">&quot;***&quot;</span> 1&gt;&amp;2; \</span></span><br><span class="line"><span class="variable">	echo <span class="string">&quot;*** Error: Couldn&#x27;t find a working QEMU executable.&quot;</span> 1&gt;&amp;2; \</span></span><br><span class="line"><span class="variable">	echo <span class="string">&quot;*** Is the directory containing the qemu binary in your PATH&quot;</span> 1&gt;&amp;2; \</span></span><br><span class="line"><span class="variable">	echo <span class="string">&quot;*** or have you tried setting the QEMU variable in Makefile?&quot;</span> 1&gt;&amp;2; \</span></span><br><span class="line"><span class="variable">	echo <span class="string">&quot;***&quot;</span> 1&gt;&amp;2; exit 1)</span></span><br><span class="line"><span class="keyword">endif</span></span><br></pre></td></tr></table></figure>
+<p>检索QEMU路径为变量QEMU赋值，若前面已定义则跳过这一步，若没有可用的QEMU，尝试使用i386-softmmu（针对MacOS），否则输出错误信息</p>
+<p>（3）配置编译器、汇编器、链接器、copy工具和dump工具（反编译）</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">CC = <span class="variable">$(TOOLPREFIX)</span>gcc</span><br><span class="line"><span class="comment"># i386-jos-elf-gcc编译器</span></span><br><span class="line">AS = <span class="variable">$(TOOLPREFIX)</span>gas</span><br><span class="line"><span class="comment"># i386-jos-elf-gas汇编器</span></span><br><span class="line">LD = <span class="variable">$(TOOLPREFIX)</span>ld</span><br><span class="line"><span class="comment"># i386-jos-elf-ld链接器</span></span><br><span class="line"><span class="comment"># 通过shell指令为CC、AS和LD添加附加参数，指定copy工具和dump工具</span></span><br><span class="line">OBJCOPY = <span class="variable">$(TOOLPREFIX)</span>objcopy</span><br><span class="line">OBJDUMP = <span class="variable">$(TOOLPREFIX)</span>objdump</span><br><span class="line">CFLAGS = -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -fno-omit-frame-pointer</span><br><span class="line"><span class="comment"># -fno-pic不使用PIC（位置无关代码），-static将依赖的动态库编译为静态，</span></span><br><span class="line"><span class="comment"># -fno-builtin不使用C语言自身的内建函数，因为是要写一个完整的操作系统，防止重名，</span></span><br><span class="line"><span class="comment"># -fno-strict-aliasing编译器规则优化，使一些规则（-O1，-O2，-O3）可以混淆使用。</span></span><br><span class="line"><span class="comment"># -Wall显示警告 -MD编译并保存代码依赖性 -ggdb产生GDB所需的调试信息 -m32生成32位汇编代码（默认64）-Werror遇到警告也停止编译</span></span><br><span class="line"><span class="comment"># -fno-omit-frame-pointer保留函数调用产生的frame pointer，方便调试时的回溯</span></span><br><span class="line">CFLAGS += <span class="variable">$(<span class="built_in">shell</span> <span class="variable">$(CC)</span> -fno-stack-protector -E -x c /dev/null &gt;/dev/null 2&gt;&amp;1 &amp;&amp; echo -fno-stack-protector)</span></span><br><span class="line"><span class="comment"># -fno-stack-protector 禁用栈保护，使编译器不会对局部变量的组织方式进行重新布局</span></span><br><span class="line"><span class="comment"># -E -x c对后缀c的文件进行预处理而不编译</span></span><br><span class="line">ASFLAGS = -m32 -gdwarf-2 -Wa,-divide</span><br><span class="line"><span class="comment"># FreeBSD ld wants ``elf_i386_fbsd&#x27;&#x27;指定ELF文件系统格式和x86架构</span></span><br><span class="line">LDFLAGS += -m <span class="variable">$(<span class="built_in">shell</span> <span class="variable">$(LD)</span> -V | grep elf_i386 2&gt;/dev/null | head -n 1)</span></span><br><span class="line"><span class="comment"># LDFLAGS即链接到相应版本的模拟器，grep管道查看匹配elf_i386架构的模拟器</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Disable PIE when possible (for Ubuntu 16.10 toolchain) PIE用于将程序装载到随机的地址，这里选择禁用PIE机制</span></span><br><span class="line"><span class="keyword">ifneq</span> (<span class="variable">$(<span class="built_in">shell</span> <span class="variable">$(CC)</span> -dumpspecs 2&gt;/dev/null | grep -e &#x27;[^f]no-pie&#x27;)</span>,)</span><br><span class="line">CFLAGS += -fno-pie -no-pie</span><br><span class="line"><span class="keyword">endif</span></span><br><span class="line"><span class="keyword">ifneq</span> (<span class="variable">$(<span class="built_in">shell</span> <span class="variable">$(CC)</span> -dumpspecs 2&gt;/dev/null | grep -e &#x27;[^f]nopie&#x27;)</span>,)</span><br><span class="line">CFLAGS += -fno-pie -nopie</span><br><span class="line"><span class="keyword">endif</span></span><br></pre></td></tr></table></figure>
+
+<p>（3）生成xv6镜像（即最终装载到模拟器的）</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">xv6.img: bootblock kernel</span></span><br><span class="line">	dd if=/dev/zero of=xv6.img count=10000</span><br><span class="line">	dd if=bootblock of=xv6.img conv=notrunc</span><br><span class="line">	dd if=kernel of=xv6.img seek=1 conv=notrunc</span><br><span class="line">需要启动块引导程序bootblock和系统内核kernel</span><br><span class="line"><span class="comment"># dd指令：把指定的输入文件拷贝到指定的输出文件中，并且在拷贝的过程中可以进行格式转换。</span></span><br><span class="line"><span class="comment"># conv=notrunc防止文件被截断（用于虚拟软盘）</span></span><br></pre></td></tr></table></figure>
+
+<p>（4）生成xv6memfs镜像</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">xv6memfs.img: bootblock kernelmemfs</span></span><br><span class="line">	dd if=/dev/zero of=xv6memfs.img count=10000</span><br><span class="line">	dd if=bootblock of=xv6memfs.img conv=notrunc</span><br><span class="line">dd if=kernelmemfs of=xv6memfs.img seek=1 conv=notrunc</span><br></pre></td></tr></table></figure>
+
+<p>（5）生成启动引导块bootblock</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">bootblock: bootasm.S bootmain.c</span></span><br><span class="line">	<span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> -fno-pic -O -nostdinc -I. -c bootmain.c</span><br><span class="line">	<span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> -fno-pic -nostdinc -I. -c bootasm.S</span><br><span class="line">	<span class="variable">$(LD)</span> <span class="variable">$(LDFLAGS)</span> -N -e start -Ttext 0x7C00 -o bootblock.o bootasm.o bootmain.o</span><br><span class="line">	<span class="variable">$(OBJDUMP)</span> -S bootblock.o &gt; bootblock.asm</span><br><span class="line">	<span class="variable">$(OBJCOPY)</span> -S -O binary -j .text bootblock.o bootblock</span><br><span class="line">	./sign.pl bootblock</span><br><span class="line"><span class="comment"># 主引导记录存入0x7C00地址</span></span><br><span class="line"><span class="comment"># 链接bootasm.o bootmain.o生成bootblock.o文件，objdump反编译输出到bootblock.asm，使用工具objcopy把bootblock.o的.text段(该段包含程序的可执行指令)拷贝出来生成bootblock</span></span><br><span class="line"><span class="comment"># 执行sign.pl，为bootblock设置大小512，得到BIOS之后执行的BootLoader</span></span><br></pre></td></tr></table></figure>
+
+<p>（6）生成entryother</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">entryother: entryother.S</span></span><br><span class="line">	<span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> -fno-pic -nostdinc -I. -c entryother.S</span><br><span class="line">	<span class="variable">$(LD)</span> <span class="variable">$(LDFLAGS)</span> -N -e start -Ttext 0x7000 -o bootblockother.o entryother.o</span><br><span class="line">	<span class="variable">$(OBJCOPY)</span> -S -O binary -j .text bootblockother.o entryother</span><br><span class="line">	<span class="variable">$(OBJDUMP)</span> -S bootblockother.o &gt; entryother.asm</span><br></pre></td></tr></table></figure>
+<p>用于多核启动</p>
+<p>（7）生成initcode</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">initcode: initcode.S</span></span><br><span class="line">	<span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> -nostdinc -I. -c initcode.S</span><br><span class="line">	<span class="variable">$(LD)</span> <span class="variable">$(LDFLAGS)</span> -N -e start -Ttext 0 -o initcode.out initcode.o</span><br><span class="line">	<span class="variable">$(OBJCOPY)</span> -S -O binary initcode.out initcode</span><br><span class="line">	<span class="variable">$(OBJDUMP)</span> -S initcode.o &gt; initcode.asm</span><br></pre></td></tr></table></figure>
+<p>用于启动系统第一个进程</p>
+<p>（8）生成内核</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">kernel: <span class="variable">$(OBJS)</span> entry.o entryother initcode kernel.ld</span></span><br><span class="line">	<span class="variable">$(LD)</span> <span class="variable">$(LDFLAGS)</span> -T kernel.ld -o kernel entry.o <span class="variable">$(OBJS)</span> -b binary initcode entryother</span><br><span class="line">	<span class="variable">$(OBJDUMP)</span> -S kernel &gt; kernel.asm</span><br><span class="line">	<span class="variable">$(OBJDUMP)</span> -t kernel | sed &#x27;1,/SYMBOL TABLE/d; s/ .* / /; /^$$/d&#x27; &gt; kernel.sym</span><br></pre></td></tr></table></figure>
+<p>输出到二进制文件initcode entryother，用于指定系统启动的第一个进程</p>
+<p>（9）tags工具，用于emac阅读代码</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">tags: <span class="variable">$(OBJS)</span> entryother.S _init</span></span><br><span class="line">	etags *.S *.c</span><br></pre></td></tr></table></figure>
+
+<p>（10）生成可供系统调用的可执行文件</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">UPROGS=\</span><br><span class="line">	_cat\</span><br><span class="line">	_echo\</span><br><span class="line">	_forktest\</span><br><span class="line">	_grep\</span><br><span class="line">	_init\</span><br><span class="line">	_kill\</span><br><span class="line">	_ln\</span><br><span class="line">	_ls\</span><br><span class="line">	_mkdir\</span><br><span class="line">	_rm\</span><br><span class="line">	_sh\</span><br><span class="line">	_stressfs\</span><br><span class="line">	_usertests\</span><br><span class="line">	_wc\</span><br><span class="line">	_zombie\</span><br></pre></td></tr></table></figure>
+
+<p>（11）生成文件系统镜像</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">fs.img: mkfs README <span class="variable">$(UPROGS)</span></span></span><br><span class="line">	./mkfs fs.img README <span class="variable">$(UPROGS)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">-include</span> *.d</span><br></pre></td></tr></table></figure>
+
+<p>（12）若运行make clean指令则删除原始文件以外的生成文件</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">clean: </span></span><br><span class="line">	rm -f *.tex *.dvi *.idx *.aux *.log *.ind *.ilg \</span><br><span class="line">	*.o *.d *.asm *.sym vectors.S bootblock entryother \</span><br><span class="line">	initcode initcode.out kernel xv6.img fs.img kernelmemfs \</span><br><span class="line">	xv6memfs.img mkfs .gdbinit \</span><br><span class="line">	<span class="variable">$(UPROGS)</span></span><br></pre></td></tr></table></figure>
+
+<p>（13）生成pdf</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">xv6.pdf: <span class="variable">$(PRINT)</span></span></span><br><span class="line">	./runoff</span><br><span class="line">	ls -l xv6.pdf</span><br><span class="line"></span><br><span class="line"><span class="section">print: xv6.pdf</span></span><br></pre></td></tr></table></figure>
+
+<p>（14）一个虚拟机broch的配置</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bochs : fs.img xv6.img</span><br><span class="line">	if [ ! -e .bochsrc ]; then ln -s dot-bochsrc .bochsrc; fi</span><br><span class="line">	bochs -q</span><br></pre></td></tr></table></figure>
+
+<p>（15）配置GDB调试器</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># try to generate a unique GDB port</span></span><br><span class="line">GDBPORT = <span class="variable">$(<span class="built_in">shell</span> expr `id -u` % 5000 + 25000)</span></span><br><span class="line"><span class="comment"># QEMU&#x27;s gdb stub command line changed in 0.11</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># QEMUGDB为qemu模拟器中关于GDB的帮助信息</span></span><br><span class="line">QEMUGDB = <span class="variable">$(<span class="built_in">shell</span> <span class="built_in">if</span> <span class="variable">$(QEMU)</span> -help | grep -q &#x27;^-gdb&#x27;; \</span></span><br><span class="line"><span class="variable">	then echo <span class="string">&quot;-gdb tcp::<span class="variable">$(GDBPORT)</span>&quot;</span>; \</span></span><br><span class="line"><span class="variable">	else echo <span class="string">&quot;-s -p <span class="variable">$(GDBPORT)</span>&quot;</span>; fi)</span></span><br></pre></td></tr></table></figure>
+
+<p>（16）qemu的一些设置</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ifndef</span> CPUS</span><br><span class="line">CPUS := 2</span><br><span class="line"><span class="keyword">endif</span></span><br><span class="line"><span class="comment"># 配置硬件信息</span></span><br><span class="line"><span class="comment"># -drive定义驱动器 file=指定镜像文件，磁盘类型raw -smp指定cpu -m指定内存</span></span><br><span class="line">QEMUOPTS = -drive file=fs.img,index=1,media=disk,format=raw -drive file=xv6.img,index=0,media=disk,format=raw -smp <span class="variable">$(CPUS)</span> -m 512 <span class="variable">$(QEMUEXTRA)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># qemu加载fs xv6镜像，-serial指定串口号mon:stdio，以及配置驱动器</span></span><br><span class="line"><span class="section">qemu: fs.img xv6.img</span></span><br><span class="line">	<span class="variable">$(QEMU)</span> -serial mon:stdio <span class="variable">$(QEMUOPTS)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># qemu-memfs加载xv6memfs镜像，配置驱动器</span></span><br><span class="line"><span class="section">qemu-memfs: xv6memfs.img</span></span><br><span class="line">	<span class="variable">$(QEMU)</span> -drive file=xv6memfs.img,index=0,media=disk,format=raw -smp <span class="variable">$(CPUS)</span> -m 256</span><br><span class="line"></span><br><span class="line"><span class="comment"># -nographic非图形界面</span></span><br><span class="line"><span class="section">qemu-nox: fs.img xv6.img</span></span><br><span class="line">	<span class="variable">$(QEMU)</span> -nographic <span class="variable">$(QEMUOPTS)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化调试器</span></span><br><span class="line"><span class="section">.gdbinit: .gdbinit.tmpl</span></span><br><span class="line">	sed <span class="string">&quot;s/localhost:1234/localhost:<span class="variable">$(GDBPORT)</span>/&quot;</span> &lt; <span class="variable">$^</span> &gt; <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line"><span class="section">qemu-gdb: fs.img xv6.img .gdbinit</span></span><br><span class="line">	@echo <span class="string">&quot;*** Now run &#x27;gdb&#x27;.&quot;</span> 1&gt;&amp;2</span><br><span class="line">	<span class="variable">$(QEMU)</span> -serial mon:stdio <span class="variable">$(QEMUOPTS)</span> -S <span class="variable">$(QEMUGDB)</span></span><br><span class="line"></span><br><span class="line"><span class="section">qemu-nox-gdb: fs.img xv6.img .gdbinit</span></span><br><span class="line">	@echo <span class="string">&quot;*** Now run &#x27;gdb&#x27;.&quot;</span> 1&gt;&amp;2</span><br><span class="line">	<span class="variable">$(QEMU)</span> -nographic <span class="variable">$(QEMUOPTS)</span> -S <span class="variable">$(QEMUGDB)</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<p>（17）文件整理打包为tar</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">tar:</span></span><br><span class="line">	rm -rf /tmp/xv6</span><br><span class="line">	mkdir -p /tmp/xv6</span><br><span class="line">	cp dist/* dist/.gdbinit.tmpl /tmp/xv6</span><br><span class="line">	(cd /tmp; tar cf - xv6) | gzip &gt;xv6-rev10.tar.gz  <span class="comment"># the next one will be 10 (9/17)</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/xv6/">xv6</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2019/02/23/xv6%E5%AE%9E%E7%8E%B0FIFO%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6/"
+                                   title="xv6实现FIFO进程调度"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">xv6实现FIFO进程调度</span>
+                                        <span class="post-nav-item">Prev posts</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2019/02/21/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%B0%83%E8%AF%95%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+                                   title="记一次调试神经网络"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">记一次调试神经网络</span>
+                                        <span class="post-nav-item">Next posts</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2024
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Linzz</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+
+    
+        <div class="count-info info-item">
+            
+
+            
+                <span class="count-item border-box uv">
+                    <span class="item-type border-box">Unique Visitor</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-item border-box pv">
+                    <span class="item-type border-box">Page View</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

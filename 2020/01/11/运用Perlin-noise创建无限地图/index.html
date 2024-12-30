@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="浅い眠りの中を　猫が歩いている">
+    <meta name="author" content="Linzz">
+    
+    <title>
+        
+            运用Perlin noise创建无限地图 |
+        
+        Linzz&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"en"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#70a1ff","title":"Linzz's blog","author":"Linzz","logo":null,"favicon":"/images/logo.svg","mode":"light"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"浅い眠りの中を 猫が歩いている","hitokoto":false},"social_contact":{"enable":false,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":false,"hide_header":true},"home":{"announcement":null,"category":false,"tag":false,"post_datetime":"created"},"post":{"author_badge":{"enable":false,"level_badge":false,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"toc":{"enable":false,"number":false,"expand_all":false,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":false,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+            <a class="site-name border-box" href="/">
+               Linzz&#39;s blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                HOME
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                ARCHIVES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
+                                
+                                TAGS
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
+                                
+                                CATEGORIES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
+                                
+                                ABOUT
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                            TAGS
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                            CATEGORIES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                            ABOUT
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        运用Perlin noise创建无限地图
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Linzz</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2020-01-11 22:25:02</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Fri Oct 04 2024 19:28:45 GMT+0800">2024-10-04 19:28:45</span>
+                </span>
+            
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/CG/">CG</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Unity/">Unity</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <p>Perlin Noise对于随机样式的创建有多大的贡献不必多言，网路上随便一搜就知道。游戏中地形的生成是Perlin Noise的一项重要应用，我们所熟知的大名鼎鼎的Minecraft的地图创建就依赖于这种方法。这回就在Unity中来实作一下，用Perlin Noise来生成无限地图。</p>
+<span id="more"></span>
+
+<h1 id="实现Perlin-Noise"><a href="#实现Perlin-Noise" class="headerlink" title="实现Perlin Noise"></a>实现Perlin Noise</h1><p>Perlin Noise的原理其实并不复杂，只不过要解释清楚也是需要不少篇幅的，我不认为我有讲得比各种百科更透彻的能力，于是这里就不展开讲了。直接来看看在Unity中怎样利用Perlin Noise来生产随机地形。Perlin Noise的功能Mathf里其实已经集成好了，我们需要做的是先创建一个plane作为地块，对于这个地块上的每一个顶点，我们将其position的x和z值传入PerlinNoise函数作为参数，生成的随机值作为这个顶点新的高度值y。顶点我们可以从gameObject中的mesh里获得，然后遍历mesh。那么代码如下：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">GenerateTerrain</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> heightScale = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">float</span> detailScale = <span class="number">5.0f</span>;</span><br><span class="line">    <span class="comment">// Start is called before the first frame update</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        Mesh mesh = <span class="keyword">this</span>.GetComponent&lt;MeshFilter&gt;().mesh;</span><br><span class="line">        Vector3[] vertices = mesh.vertices;</span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> v = <span class="number">0</span>; v &lt; vertices.Length; v++)</span><br><span class="line">        &#123;</span><br><span class="line">            vertices[v].y = Mathf.PerlinNoise((vertices[v].x + <span class="keyword">this</span>.transform.position.x)/detailScale,</span><br><span class="line">                                              (vertices[v].z + <span class="keyword">this</span>.transform.position.z)/detailScale)*heightScale;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        mesh.vertices = vertices;</span><br><span class="line">        mesh.RecalculateBounds();</span><br><span class="line">        mesh.RecalculateNormals();</span><br><span class="line">        <span class="keyword">this</span>.gameObject.AddComponent&lt;MeshCollider&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Update is called once per frame</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>值得注意的是，由于顶点位置被拔高，平面的形状也会随之改变，我们需要使用**mesh.RecalculateBounds();和mesh.RecalculateNormals();**这两行，来保证边缘不变并且重置法线，否则会产生相当奇怪的结果。</p>
+<h1 id="产生无限地形"><a href="#产生无限地形" class="headerlink" title="产生无限地形"></a>产生无限地形</h1><p>将以上代码挂到plane上，如此一来我们便有了第一块地形。如同Minecraft里堆叠立方体产生地形那样，我们要使用这样的地形块来拼接得到大地图（或许某种程度上讲更类似于2d里的tile map）。于是将其先制作成prefab。<br>由于Perlin Noise的特性，我们拼接得到的地图必定是平滑无缝连接并且随机的。（尽管是伪随机，也就是输入固定的值就会生成固定的输出，所以在空间中固定位置生成的地形每次都会是一样的）<br>生成大地图，首先第一步我们以角色为中心向半径为5的四周铺上地块，然后根据角色移动产生的相对位置，来决定接下来产生地形的方向。譬如，我向x正方向走过了一个地块的距离，那么在x正方向当前的地图边缘我就要延展出新的一排地块，来保证我永远不会走到头。而至于我们背后，即x负方向的方块，我们就可以将其消除，来保持资源总数不会突破天际。具体的做法就是在每一次生成周围地块的时候，为其添加一个时间戳（或者更新现有的时间戳），我们可以用一个哈希表来存储这些地形块，然后我们检查哈希表里的每一个地形块，如果不为当前时间，就将其删除，因为已经超出角色周围的范围了。于是有代码如下：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title">Tile</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> GameObject theTile;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">float</span> creationTime;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Tile</span>(<span class="params">GameObject t, <span class="built_in">float</span> ct</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        theTile = t;</span><br><span class="line">        creationTime = ct;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">GenerateInfinite</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> GameObject plane;</span><br><span class="line">    <span class="keyword">public</span> GameObject player;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">int</span> planeSize = <span class="number">10</span>;</span><br><span class="line">    <span class="built_in">int</span> halfTileX = <span class="number">5</span>;</span><br><span class="line">    <span class="built_in">int</span> halfTileZ = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line">    Vector3 startPos;</span><br><span class="line"></span><br><span class="line">    Hashtable tiles = <span class="keyword">new</span> Hashtable();</span><br><span class="line">    <span class="comment">// Start is called before the first frame update</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>.gameObject.transform.position = Vector3.zero;</span><br><span class="line">        startPos = Vector3.zero;</span><br><span class="line">        <span class="built_in">float</span> updateTime = Time.realtimeSinceStartup;</span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> x = -halfTileX; x &lt; halfTileX; x++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> z = -halfTileZ; z &lt; halfTileZ; z++)</span><br><span class="line">            &#123;</span><br><span class="line">                Vector3 pos = <span class="keyword">new</span> Vector3((x*planeSize + startPos.x),<span class="number">0</span>,(z*planeSize + startPos.z));</span><br><span class="line">                GameObject t = (GameObject) Instantiate(plane,pos,Quaternion.identity); <span class="comment">//object,position,rotation</span></span><br><span class="line">                <span class="built_in">string</span> tilename = <span class="string">&quot;Tile_&quot;</span> + ((<span class="built_in">int</span>)(pos.x)).ToString() + <span class="string">&quot;_&quot;</span> + ((<span class="built_in">int</span>)(pos.z)).ToString();</span><br><span class="line">                t.name = tilename;</span><br><span class="line">                Tile tile = <span class="keyword">new</span> Tile(t,updateTime);</span><br><span class="line">                tiles.Add(tilename, tile);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Update is called once per frame</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">int</span> xMove = (<span class="built_in">int</span>)(player.transform.position.x - startPos.x);</span><br><span class="line">        <span class="built_in">int</span> zMove = (<span class="built_in">int</span>)(player.transform.position.z - startPos.z);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (Mathf.Abs(xMove) &gt;= planeSize || Mathf.Abs(zMove) &gt;= planeSize)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">float</span> updateTime = Time.realtimeSinceStartup;</span><br><span class="line"></span><br><span class="line">            <span class="built_in">int</span> playerX = (<span class="built_in">int</span>)(Mathf.Floor(player.transform.position.x/planeSize)*planeSize);</span><br><span class="line">            <span class="built_in">int</span> playerZ = (<span class="built_in">int</span>)(Mathf.Floor(player.transform.position.z/planeSize)*planeSize);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> x = -halfTileX; x &lt; halfTileX; x++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="built_in">int</span> z = -halfTileZ; z &lt; halfTileZ; z++)</span><br><span class="line">                &#123;</span><br><span class="line">                    Vector3 pos = <span class="keyword">new</span> Vector3((x*planeSize + playerX),<span class="number">0</span>,(z*planeSize + playerZ));</span><br><span class="line">                    <span class="built_in">string</span> tilename = <span class="string">&quot;Tile_&quot;</span> + ((<span class="built_in">int</span>)(pos.x)).ToString() + <span class="string">&quot;_&quot;</span> + ((<span class="built_in">int</span>)(pos.z)).ToString();</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">if</span> (!tiles.ContainsKey(tilename))</span><br><span class="line">                    &#123;</span><br><span class="line">                        GameObject t = (GameObject) Instantiate(plane,pos,Quaternion.identity);</span><br><span class="line">                        t.name = tilename;</span><br><span class="line">                        Tile tile = <span class="keyword">new</span> Tile(t, updateTime);</span><br><span class="line">                        tiles.Add(tilename,tile);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span></span><br><span class="line">                    &#123;</span><br><span class="line">                        (tiles[tilename] <span class="keyword">as</span> Tile).creationTime = updateTime;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            Hashtable newTerrain = <span class="keyword">new</span> Hashtable();</span><br><span class="line">            <span class="keyword">foreach</span> (Tile tls <span class="keyword">in</span> tiles.Values)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(tls.creationTime != updateTime)</span><br><span class="line">                &#123;</span><br><span class="line">                    Destroy(tls.theTile);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    newTerrain.Add(tls.theTile.name,tls);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            tiles = newTerrain;</span><br><span class="line">            startPos = player.transform.position;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="亿点细节"><a href="#亿点细节" class="headerlink" title="亿点细节"></a>亿点细节</h1><p>其实做到这里基本的Perlin Noise的应用就做完了。可以看到在上面的代码里我们用了height scale 和 detail scale两个值来控制地形的变化。前者控制高度，后者控制起伏。但是可以看到虽然地形都是随机的，但是总体的样式是很相似的，也就是当前还没有办法生成更多样的地形比如山峰峡谷，对此我们可以将不同频率和振幅的Perlin Noise多次叠加，于是如果恰好波峰遇上波峰，就会生成更高的峰，这样山就形成了。不过这一部分我还没有实作的打算，暂时打上一个TODO tag吧。<br><img src="/.com//1.png" alt="1"><br><img src="/.com//2.png" alt="2"><br>但是现在由于我们的周围只有5x5的地图大小，所以有时候还是可以看到边缘并且挺不自然的，所以接下去就是添加贴图和雾效，雾效可以有效的帮助我们隐藏地图边缘，在许多开放世界游戏中也是这么做的。<br>对于贴图，我找到了一个不错的网站TextureHaven，在这里可以下载到最高8k的免费材质图，我们将其用在地形prefab的材质球上即可。<br>至于雾效，直接在菜单栏windows下找到rendering中的lighting setting，把里面fog一项打勾并设置好恰当的颜色和浓度值，把相机从skybox改为solid color，颜色与雾的颜色一致。这里我遇到了一点小小障碍，打上fog的钩之后并没有雾出现，即使将浓度调到最大颜色调到最深也是一样。求助于万能的StackOverflow，发现需要把相机的rendering path设置为forward（原先是deffered）。</p>
+<p>于是大功告成，后面也许会在地图上添加随机资源，插个flag先，不一定有时间。</p>
+
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/CG/">CG</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Unity/">Unity</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2020/01/30/%E6%9D%82%E8%B0%88%EF%BC%9A%E6%89%8D%E8%83%BD/"
+                                   title="杂谈：才能"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">杂谈：才能</span>
+                                        <span class="post-nav-item">Prev posts</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2019/12/31/2019%EF%BC%8C%E6%88%91%E6%89%80%E7%9C%8B%E8%A7%81%E7%9A%84%E4%B8%96%E7%95%8C/"
+                                   title="2019，我所看见的世界"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">2019，我所看见的世界</span>
+                                        <span class="post-nav-item">Next posts</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2024
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Linzz</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+
+    
+        <div class="count-info info-item">
+            
+
+            
+                <span class="count-item border-box uv">
+                    <span class="item-type border-box">Unique Visitor</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-item border-box pv">
+                    <span class="item-type border-box">Page View</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>
