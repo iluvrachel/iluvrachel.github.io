@@ -320,18 +320,18 @@
 <ol>
 <li><p>安装可以运行xv6的模拟器，qemu或者broch，这里选择qemu</p>
  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install qemu</span><br></pre></td></tr></table></figure>
-<p> 输入qemu-system-i386，出现qemu的GUI界面则安装成功<br> <img src="/.com//1.png" alt="success"></p>
+<p> 输入qemu-system-i386，出现qemu的GUI界面则安装成功<br> <img src="/xv6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/1.png" alt="success"></p>
 </li>
 <li><p>下载并编译xv6源码</p>
  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/mit-pdos/xv6-public.git</span><br></pre></td></tr></table></figure>
-<p> 一定要使用git clone 而不是直接在github下载代码压缩包，这里有个小插曲后面再说。把代码git下来之后，进入xv6的根目录，打开终端输入指令make，如果没有报错则一切顺利。如果出现了boot block too large这种错误<br> <img src="/.com//2.png" alt="error"><br> google一下<br> <img src="/.com//xv6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/3.png" alt="&quot;google&quot;"><br> 内核的编译往往依赖于特定的gcc版本，按照它的建议，降低系统gcc版本到3.x</p>
+<p> 一定要使用git clone 而不是直接在github下载代码压缩包，这里有个小插曲后面再说。把代码git下来之后，进入xv6的根目录，打开终端输入指令make，如果没有报错则一切顺利。如果出现了boot block too large这种错误<br> <img src="/xv6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/2.png" alt="error"><br> google一下<br> <img src="/_posts/xv6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/3.png" alt="&quot;google&quot;"><br> 内核的编译往往依赖于特定的gcc版本，按照它的建议，降低系统gcc版本到3.x</p>
  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gcc-3.4</span><br></pre></td></tr></table></figure>
 <p> 再make一次就可以了</p>
 </li>
-<li><p>运行xv6<br> 在xv6-master目录中找到并打开Makefile文件，删掉“QEMU&#x3D; qemu-system-i386”前面的“#”注释，然后在xv6根目录使用make qemu命令，运行成功<br> <img src="/.com//4.png" alt="make qemu"></p>
+<li><p>运行xv6<br> 在xv6-master目录中找到并打开Makefile文件，删掉“QEMU&#x3D; qemu-system-i386”前面的“#”注释，然后在xv6根目录使用make qemu命令，运行成功<br> <img src="/xv6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/4.png" alt="make qemu"></p>
 </li>
 </ol>
-<p>关于小插曲：<br>一开始直接在github上下载zip压缩包然后解压得到源代码，在make的时候报了这样的错误<br><img src="/.com//5.png" alt="failed"><br>就很奇怪，一个成熟的产品不应该有这样的低级错误啊<br>去翻xv6的github看ioapic.c这个文件<br>？？？tmd居然和我电脑上的不一样，可是我明明是在github上download下来的啊<br>联想起github被微软收购后的不止一次挂掉等种种骚操作，严重怀疑download zip下载下来的是旧的版本，尽管它只有一个branch，于是直接在Ubuntu使用git clone<br>然后再make，成功了。。。<br>fine。。。</p>
+<p>关于小插曲：<br>一开始直接在github上下载zip压缩包然后解压得到源代码，在make的时候报了这样的错误<br><img src="/xv6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/5.png" alt="failed"><br>就很奇怪，一个成熟的产品不应该有这样的低级错误啊<br>去翻xv6的github看ioapic.c这个文件<br>？？？tmd居然和我电脑上的不一样，可是我明明是在github上download下来的啊<br>联想起github被微软收购后的不止一次挂掉等种种骚操作，严重怀疑download zip下载下来的是旧的版本，尽管它只有一个branch，于是直接在Ubuntu使用git clone<br>然后再make，成功了。。。<br>fine。。。</p>
 
                     
                 </div>

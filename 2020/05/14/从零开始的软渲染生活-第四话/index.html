@@ -310,7 +310,7 @@
 
                     
                          <p>（又过了一个多月。。）</p>
-<p>前情提要：上一话总算是正确地把贴图之后的模型显示出来了，那么这一回要做的就是一些矩阵计算的东西了，具体的说就是使用view matrix调节相机视角，并实现perspective project，就像这样：<br><img src="/.com//1.png" alt="效果图"></p>
+<p>前情提要：上一话总算是正确地把贴图之后的模型显示出来了，那么这一回要做的就是一些矩阵计算的东西了，具体的说就是使用view matrix调节相机视角，并实现perspective project，就像这样：<br><img src="/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84%E8%BD%AF%E6%B8%B2%E6%9F%93%E7%94%9F%E6%B4%BB-%E7%AC%AC%E5%9B%9B%E8%AF%9D/1.png" alt="效果图"></p>
 <span id="more"></span>
 
 <p>（加了透视投影之后，近大远小）<br>这一部分涉及到比较多的数学推导，原repo里解释得很细致，这里我就不再卖弄了。</p>
@@ -325,7 +325,7 @@
 
 <p>经过这一波变换之后，我们的模型已经投影到了画布上了，所以不需要再像之前一样对顶点做坐标映射。</p>
 <p>既然到了变换矩阵这一块，那么接着往下就是MVPW里的M（Model）和V（View）</p>
-<p>ModelView这一组合用更常见的说法就是模视变换矩阵，控制着相机以怎样的角度和方向去观察模型，当然，在我们的例子中，相机是虚拟的，我们所要做的是通过对模型进行旋转和平移，反过来体现相机视角的变化。（旋转模型和旋转相机视角其实就是互为一对逆变换的关系）<br><img src="/.com//2.png" alt="效果图"></p>
+<p>ModelView这一组合用更常见的说法就是模视变换矩阵，控制着相机以怎样的角度和方向去观察模型，当然，在我们的例子中，相机是虚拟的，我们所要做的是通过对模型进行旋转和平移，反过来体现相机视角的变化。（旋转模型和旋转相机视角其实就是互为一对逆变换的关系）<br><img src="/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84%E8%BD%AF%E6%B8%B2%E6%9F%93%E7%94%9F%E6%B4%BB-%E7%AC%AC%E5%9B%9B%E8%AF%9D/2.png" alt="效果图"></p>
 <p>现在假设我们要实现相机在e点的效果，那么实际操作并不是移动相机而是求解原始模型的坐标系（x,y,z）到（x’,y’,z’）的一个反向变换，其中z’指向e点（有点绕，你细品）（关于相机理论，还是需要去图形学里的书里面熟悉相关概念，即相机的三个指标向量eye，at，up）</p>
 <p>这一操作的变换矩阵的求解其实非常方便，我们已知的是z’其实就是ce向量，u是我们事先指定的相机垂直方向up，由z’叉乘u可以求得x’，进而再由z’叉乘x’求得y’。</p>
 <p>那么代码也显而易见了：</p>
@@ -334,7 +334,7 @@
 <p>最后，把之前的变换操作补充完整</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vec3f p0_proj =  <span class="built_in">m2v</span>(ViewPort*Projection*ModelView*<span class="built_in">v2m</span>(p0));</span><br></pre></td></tr></table></figure>
 <p>就可以得到这样的结果了：</p>
-<p><img src="/.com//3.png" alt="效果图"></p>
+<p><img src="/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84%E8%BD%AF%E6%B8%B2%E6%9F%93%E7%94%9F%E6%B4%BB-%E7%AC%AC%E5%9B%9B%E8%AF%9D/3.png" alt="效果图"></p>
 
                     
                 </div>
