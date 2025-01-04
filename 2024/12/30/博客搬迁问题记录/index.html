@@ -257,7 +257,7 @@
             
                 <span class="meta-info-item post-update-date">
                     <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                    <span class="datetime" data-updated="Mon Dec 30 2024 02:16:22 GMT+0800">2024-12-30 02:16:22</span>
+                    <span class="datetime" data-updated="Tue Dec 31 2024 01:04:51 GMT+0800">2024-12-31 01:04:51</span>
                 </span>
             
         
@@ -320,6 +320,7 @@
 <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>不出意外的出意外了，在上面hexo g s d的步骤中，报错了<br>Error: Cannot find module ‘G:\blog\node_modules&#x2F;lodash&#x2F;merge’<br>一通折腾发现是node.js和hexo版本不匹配，我安装的是最新的node20，而hexo版本只有3.9.0，最新是7.1.0<br>那么理论上把hexo更新到最新就可以了，但是执行npm update hexo-cli hexo –latest指令发现版本没有发生任何变化，这就很奇怪了<br>好在找到了<a class="link" href="https://ephen.me/2022/blog-updates-plus/">参考的解决方案<i class="fas fa-external-link-alt"></i></a>，简单来说就是：<br>先安装 npm-check 和 npm-upgrade ：npm install -g npm-check npm-upgrade<br>安装完后，执行 npm-check 即可检查本地各插件版本情况。</p>
 <p>执行 npm-upgrade 可根据当前版本和最新版本比较，让用户确认和选择是否升级。<br>若用户确认升级，则会自动把 package-lock.json 和 package.json 文件内容进行更新后保存，然后执行：<br>npm update -g –save<br>上述命令执行完毕，则所有通过 npm-upgrade 确认的插件全部都升级到最新</p>
 <h2 id="其他小问题"><a href="#其他小问题" class="headerlink" title="其他小问题"></a>其他小问题</h2><p>本以为万事大吉，结果正式部署后发现，网站打开是乱码，我贫瘠的知识告诉我应该是我用的旧主题不兼容新hexo版本了，遂改之<br>虽然换了主题之后很多小细节还需要再修修补补，但总之还算是能再次跑起来了</p>
+<p>然后又发现了图片不显示的问题，排查之后发现是hexo asset image 这个插件不再维护了，里面的资源路径转换代码有bug，转出来的路径是错的<br>所以改用另一个插件hexo-asset-img，安装指令是 npm install hexo-asset-img –save<br>然后重新hexo clean hexo g 就解决了</p>
 
                     
                 </div>
@@ -347,6 +348,22 @@
 
                 
                     <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2025/01/05/2024%EF%BC%8C%E7%AB%99%E5%9C%A8%E7%8E%B0%E5%AE%9E%E8%A2%AD%E6%9D%A5%E7%9A%84%E6%97%B6%E9%97%B4%E5%B7%AE%E9%87%8C/"
+                                   title="2024，站在现实袭来的时间差里"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">2024，站在现实袭来的时间差里</span>
+                                        <span class="post-nav-item">Prev posts</span>
+                                    </span>
+                                </a>
+                            </div>
                         
                         
                             <div class="next-post">
@@ -393,7 +410,7 @@
             
 <footer class="footer border-box">
     <div class="copyright-info info-item">
-    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2024
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2025
     
             &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Linzz</a>
         
