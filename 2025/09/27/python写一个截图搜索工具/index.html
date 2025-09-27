@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="浅い眠りの中を　猫が歩いている">
+    <meta name="author" content="Linzz">
+    
+    <title>
+        
+            python写一个截图搜索工具 |
+        
+        Linzz&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"en"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#70a1ff","title":"Linzz's blog","author":"Linzz","logo":null,"favicon":"/images/logo.svg","mode":"light"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"浅い眠りの中を 猫が歩いている","hitokoto":false},"social_contact":{"enable":false,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":false,"hide_header":true},"home":{"announcement":null,"category":false,"tag":false,"post_datetime":"created"},"post":{"author_badge":{"enable":false,"level_badge":false,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null},"img_align":"center"},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"toc":{"enable":false,"number":false,"expand_all":false,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":false,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+            <a class="site-name border-box" href="/">
+               Linzz&#39;s blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                HOME
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                ARCHIVES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
+                                
+                                TAGS
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
+                                
+                                CATEGORIES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
+                                
+                                ABOUT
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                            TAGS
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                            CATEGORIES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                            ABOUT
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        python写一个截图搜索工具
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Linzz</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2025-09-27 23:35:46</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Sun Sep 28 2025 00:04:39 GMT+0800">2025-09-28 00:04:39</span>
+                </span>
+            
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3/">编程相关</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/python/">python</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <p>好久没写代码了，不务正业一下。</p>
+<p>一直以来我有个奇怪的习惯，是很喜欢在看影视动漫的时候，把一些经典台词截图保存下来，然后当自己社交媒体上打算发表一些内容的时候，在截图库里找一些应景的配图。<br>随着图片越来越多，已经很难只凭借记忆力和肉眼去找了，于是自然而然催生了一个需求——我需要一个搜索工具，它有如下功能：<br>1.识别出所有图片中的文字<br>2.给定一个关键词，匹配所有包含该关键词的图片</p>
+<p>因为需求非常定制化，所以只能自己动手写代码，好在思路都非常清晰简单：<br>1.使用ocr遍历识别所有图片文本，并建立索引；这里我用的是EasyOCR这个库<br>2.把所有识别结果保存起来，这样后面即使有新图片增加，也只需要跑一遍增量的部分就行<br>3.搜索功能，简单的字符串匹配<br>4.创建UI界面，包含文件夹选择部分、搜索功能部分、搜索结果及展示</p>
+<span id="more"></span>
+
+<p>大致的代码如下，勉强够用，但实际识别效果还挺差的，不过暂时没找到特别好的优化方案，就现这样吧</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tkinter <span class="keyword">as</span> tk</span><br><span class="line"><span class="keyword">from</span> tkinter <span class="keyword">import</span> filedialog, messagebox</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> easyocr</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> webbrowser</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ImageTextRecognizer</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, root</span>):</span><br><span class="line">        <span class="variable language_">self</span>.root = root</span><br><span class="line">        <span class="variable language_">self</span>.root.title(<span class="string">&quot;图片文本识别与搜索&quot;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 存储识别结果</span></span><br><span class="line">        <span class="variable language_">self</span>.image_text_dict = &#123;&#125;</span><br><span class="line">        <span class="comment"># 初始化EasyOCR阅读器</span></span><br><span class="line">        <span class="variable language_">self</span>.reader = easyocr.Reader([<span class="string">&#x27;ch_sim&#x27;</span>, <span class="string">&#x27;en&#x27;</span>])  <span class="comment"># 支持简体中文和繁体中文</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 创建界面</span></span><br><span class="line">        <span class="variable language_">self</span>.setup_ui()</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">setup_ui</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># 文件夹选择部分</span></span><br><span class="line">        <span class="variable language_">self</span>.folder_label = tk.Label(<span class="variable language_">self</span>.root, text=<span class="string">&quot;选择图片文件夹:&quot;</span>)</span><br><span class="line">        <span class="variable language_">self</span>.folder_label.grid(row=<span class="number">0</span>, column=<span class="number">0</span>, padx=<span class="number">10</span>, pady=<span class="number">10</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">self</span>.folder_entry = tk.Entry(<span class="variable language_">self</span>.root, width=<span class="number">50</span>)</span><br><span class="line">        <span class="variable language_">self</span>.folder_entry.grid(row=<span class="number">0</span>, column=<span class="number">1</span>, padx=<span class="number">10</span>, pady=<span class="number">10</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">self</span>.folder_button = tk.Button(<span class="variable language_">self</span>.root, text=<span class="string">&quot;浏览&quot;</span>, command=<span class="variable language_">self</span>.select_folder)</span><br><span class="line">        <span class="variable language_">self</span>.folder_button.grid(row=<span class="number">0</span>, column=<span class="number">2</span>, padx=<span class="number">10</span>, pady=<span class="number">10</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 识别按钮</span></span><br><span class="line">        <span class="variable language_">self</span>.recognize_button = tk.Button(<span class="variable language_">self</span>.root, text=<span class="string">&quot;识别图片文本&quot;</span>, command=<span class="variable language_">self</span>.start_recognition)</span><br><span class="line">        <span class="variable language_">self</span>.recognize_button.grid(row=<span class="number">1</span>, column=<span class="number">0</span>, columnspan=<span class="number">3</span>, pady=<span class="number">10</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 搜索功能</span></span><br><span class="line">        <span class="variable language_">self</span>.search_label = tk.Label(<span class="variable language_">self</span>.root, text=<span class="string">&quot;搜索文本:&quot;</span>)</span><br><span class="line">        <span class="variable language_">self</span>.search_label.grid(row=<span class="number">2</span>, column=<span class="number">0</span>, padx=<span class="number">10</span>, pady=<span class="number">10</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">self</span>.search_entry = tk.Entry(<span class="variable language_">self</span>.root, width=<span class="number">50</span>)</span><br><span class="line">        <span class="variable language_">self</span>.search_entry.grid(row=<span class="number">2</span>, column=<span class="number">1</span>, padx=<span class="number">10</span>, pady=<span class="number">10</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">self</span>.search_button = tk.Button(<span class="variable language_">self</span>.root, text=<span class="string">&quot;搜索&quot;</span>, command=<span class="variable language_">self</span>.search_text)</span><br><span class="line">        <span class="variable language_">self</span>.search_button.grid(row=<span class="number">2</span>, column=<span class="number">2</span>, padx=<span class="number">10</span>, pady=<span class="number">10</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 结果显示区域</span></span><br><span class="line">        <span class="variable language_">self</span>.results_label = tk.Label(<span class="variable language_">self</span>.root, text=<span class="string">&quot;识别结果:&quot;</span>)</span><br><span class="line">        <span class="variable language_">self</span>.results_label.grid(row=<span class="number">3</span>, column=<span class="number">0</span>, padx=<span class="number">10</span>, pady=<span class="number">10</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">self</span>.results_text = tk.Text(<span class="variable language_">self</span>.root, width=<span class="number">80</span>, height=<span class="number">15</span>)</span><br><span class="line">        <span class="variable language_">self</span>.results_text.grid(row=<span class="number">4</span>, column=<span class="number">0</span>, columnspan=<span class="number">3</span>, padx=<span class="number">10</span>, pady=<span class="number">10</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 搜索功能结果显示</span></span><br><span class="line">        <span class="variable language_">self</span>.search_results_label = tk.Label(<span class="variable language_">self</span>.root, text=<span class="string">&quot;搜索结果:&quot;</span>)</span><br><span class="line">        <span class="variable language_">self</span>.search_results_label.grid(row=<span class="number">5</span>, column=<span class="number">0</span>, padx=<span class="number">10</span>, pady=<span class="number">10</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">self</span>.search_results_listbox = tk.Listbox(<span class="variable language_">self</span>.root, width=<span class="number">80</span>, height=<span class="number">10</span>)</span><br><span class="line">        <span class="variable language_">self</span>.search_results_listbox.grid(row=<span class="number">6</span>, column=<span class="number">0</span>, columnspan=<span class="number">3</span>, padx=<span class="number">10</span>, pady=<span class="number">10</span>)</span><br><span class="line">        <span class="variable language_">self</span>.search_results_listbox.bind(<span class="string">&#x27;&lt;Double-1&gt;&#x27;</span>, <span class="variable language_">self</span>.open_image)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 状态栏</span></span><br><span class="line">        <span class="variable language_">self</span>.status_bar = tk.Label(<span class="variable language_">self</span>.root, text=<span class="string">&quot;就绪&quot;</span>, bd=<span class="number">1</span>, relief=tk.SUNKEN, anchor=tk.W)</span><br><span class="line">        <span class="variable language_">self</span>.status_bar.grid(row=<span class="number">7</span>, column=<span class="number">0</span>, columnspan=<span class="number">3</span>, sticky=tk.W+tk.E)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">select_folder</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;选择文件夹&quot;&quot;&quot;</span></span><br><span class="line">        folder_selected = filedialog.askdirectory()</span><br><span class="line">        <span class="keyword">if</span> folder_selected:</span><br><span class="line">            <span class="variable language_">self</span>.folder_entry.delete(<span class="number">0</span>, tk.END)</span><br><span class="line">            <span class="variable language_">self</span>.folder_entry.insert(<span class="number">0</span>, folder_selected)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">recognize_text_in_image</span>(<span class="params">self, image_path</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;使用EasyOCR识别单张图片中的文本&quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="comment"># 读取图片</span></span><br><span class="line">            image = np.array(Image.<span class="built_in">open</span>(image_path))</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># 识别文本</span></span><br><span class="line">            results = <span class="variable language_">self</span>.reader.readtext(image, detail=<span class="number">0</span>)</span><br><span class="line">            text = <span class="string">&#x27;\n&#x27;</span>.join(results)</span><br><span class="line">            <span class="keyword">return</span> text.strip()</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="variable language_">self</span>.status_bar.config(text=<span class="string">f&quot;识别图片 <span class="subst">&#123;image_path&#125;</span> 时出错: <span class="subst">&#123;<span class="built_in">str</span>(e)&#125;</span>&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">process_images_in_folder</span>(<span class="params">self, folder_path</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;处理文件夹中的所有图片&quot;&quot;&quot;</span></span><br><span class="line">        supported_extensions = [<span class="string">&#x27;.jpg&#x27;</span>, <span class="string">&#x27;.jpeg&#x27;</span>, <span class="string">&#x27;.png&#x27;</span>, <span class="string">&#x27;.bmp&#x27;</span>, <span class="string">&#x27;.gif&#x27;</span>]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> root, dirs, files <span class="keyword">in</span> os.walk(folder_path):</span><br><span class="line">            <span class="keyword">for</span> file <span class="keyword">in</span> files:</span><br><span class="line">                <span class="keyword">if</span> <span class="built_in">any</span>(file.lower().endswith(ext) <span class="keyword">for</span> ext <span class="keyword">in</span> supported_extensions):</span><br><span class="line">                    file_path = os.path.join(root, file)</span><br><span class="line">                    text = <span class="variable language_">self</span>.recognize_text_in_image(file_path)</span><br><span class="line">                    <span class="variable language_">self</span>.image_text_dict[file_path] = text</span><br><span class="line">                    <span class="variable language_">self</span>.update_results_display(file_path, text)</span><br><span class="line">                    <span class="variable language_">self</span>.root.update()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">start_recognition</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;开始识别过程&quot;&quot;&quot;</span></span><br><span class="line">        folder_path = <span class="variable language_">self</span>.folder_entry.get()</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> folder_path:</span><br><span class="line">            messagebox.showwarning(<span class="string">&quot;警告&quot;</span>, <span class="string">&quot;请选择图片文件夹&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">self</span>.image_text_dict.clear()</span><br><span class="line">        <span class="variable language_">self</span>.results_text.delete(<span class="number">1.0</span>, tk.END)</span><br><span class="line">        <span class="variable language_">self</span>.search_results_listbox.delete(<span class="number">0</span>, tk.END)</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">self</span>.status_bar.config(text=<span class="string">&quot;正在识别文本...&quot;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 使用线程避免界面卡顿</span></span><br><span class="line">        threading.Thread(target=<span class="variable language_">self</span>.process_images_in_folder, args=(folder_path,), daemon=<span class="literal">True</span>).start()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">update_results_display</span>(<span class="params">self, file_path, text</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;更新结果显示&quot;&quot;&quot;</span></span><br><span class="line">        <span class="variable language_">self</span>.results_text.insert(tk.END, <span class="string">f&quot;图片: <span class="subst">&#123;file_path&#125;</span>\n&quot;</span>)</span><br><span class="line">        <span class="variable language_">self</span>.results_text.insert(tk.END, <span class="string">&quot;文本:\n&quot;</span>)</span><br><span class="line">        <span class="variable language_">self</span>.results_text.insert(tk.END, text + <span class="string">&quot;\n\n&quot;</span>)</span><br><span class="line">        <span class="variable language_">self</span>.results_text.see(tk.END)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">search_text</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;搜索文本&quot;&quot;&quot;</span></span><br><span class="line">        search_term = <span class="variable language_">self</span>.search_entry.get().strip().lower()</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> search_term:</span><br><span class="line">            messagebox.showwarning(<span class="string">&quot;警告&quot;</span>, <span class="string">&quot;请输入搜索文本&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">self</span>.search_results_listbox.delete(<span class="number">0</span>, tk.END)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> file_path, text <span class="keyword">in</span> <span class="variable language_">self</span>.image_text_dict.items():</span><br><span class="line">            <span class="keyword">if</span> search_term <span class="keyword">in</span> text.lower():</span><br><span class="line">                <span class="variable language_">self</span>.search_results_listbox.insert(tk.END, file_path)</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">self</span>.status_bar.config(text=<span class="string">f&quot;找到 <span class="subst">&#123;self.search_results_listbox.size()&#125;</span> 个匹配项&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">open_image</span>(<span class="params">self, event</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;双击搜索结果条目打开对应的图片文件&quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            selection = <span class="variable language_">self</span>.search_results_listbox.curselection()</span><br><span class="line">            <span class="keyword">if</span> selection:</span><br><span class="line">                index = selection[<span class="number">0</span>]</span><br><span class="line">                file_path = <span class="variable language_">self</span>.search_results_listbox.get(index)</span><br><span class="line">                <span class="comment"># 在Windows上使用os.startfile打开图片</span></span><br><span class="line">                <span class="keyword">if</span> os.name == <span class="string">&#x27;nt&#x27;</span>:</span><br><span class="line">                    os.startfile(file_path)</span><br><span class="line">                <span class="comment"># 在macOS和Linux上使用webbrowser.open打开图片</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    webbrowser.<span class="built_in">open</span>(<span class="string">&#x27;file://&#x27;</span> + file_path)</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="variable language_">self</span>.status_bar.config(text=<span class="string">f&quot;打开图片时出错: <span class="subst">&#123;<span class="built_in">str</span>(e)&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    root = tk.Tk()</span><br><span class="line">    app = ImageTextRecognizer(root)</span><br><span class="line">    root.mainloop()</span><br></pre></td></tr></table></figure>
+
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/python/">python</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2025/08/31/%E5%9C%A8%E5%93%88%E5%B0%94%E6%BB%A8%E5%BA%A6%E8%BF%87%E7%9F%AD%E6%9A%82%E5%86%AC%E5%A4%A9/"
+                                   title="在哈尔滨度过短暂冬天"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">在哈尔滨度过短暂冬天</span>
+                                        <span class="post-nav-item">Next posts</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2025
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Linzz</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+
+    
+        <div class="count-info info-item">
+            
+
+            
+                <span class="count-item border-box uv">
+                    <span class="item-type border-box">Unique Visitor</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-item border-box pv">
+                    <span class="item-type border-box">Page View</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>
