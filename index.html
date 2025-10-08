@@ -53,157 +53,32 @@
 <main class="page-container border-box">
     <!-- home first screen  -->
     
-        if (hexo-config('first_screen')) {
-  $temp-fs-bg-img-light = hexo-config('first_screen.background_img')
-  $temp-fs-bg-img-dark = hexo-config('first_screen.background_img_dark')
-}
-else {
-  $temp-fs-bg-img-light = ''
-  $temp-fs-bg-img-dark = ''
-}
+        
+<div class="first-screen-container border-box flex-center fade-in-down-animation">
+    <div class="first-screen-content border-box">
+        <div class="top-placeholder border-box"></div>
 
-$fs-bg-img-light = $temp-fs-bg-img-light ? $temp-fs-bg-img-light : '/images/bg.svg'
-$fs-bg-img-dark = $temp-fs-bg-img-dark ? $temp-fs-bg-img-dark : $fs-bg-img-light
+        <div class="middle-placeholder border-box">
+            
+                <div class="description border-box">
+                    
+                        
+                            
+                                <div class="desc-item border-box"><span class="desc">浅い眠りの中を 猫が歩いている</span><span class="cursor">｜</span></div>
+                            
+                        
+                    
+                </div>
+            
 
-$root = hexo-config('root')
+            
+        </div>
 
-.first-screen-container {
-  width 100%
-  height 100vh
-  overflow hidden
-  background-image url($root + $fs-bg-img-light)
-  background-position-x center
-  background-position-y center
-  background-size cover
-  background-repeat-x no-repeat
-  background-repeat-y no-repeat
-
-
-  .dark-mode & {
-    background-image url($root + $fs-bg-img-dark)
-  }
-
-  .first-screen-content {
-    display flex
-    flex-direction column
-    align-items center
-    justify-content space-between
-    width 80%
-    height 90%
-    padding-top calc(var(--header-height) * 0.5)
-
-    +keep-tablet() {
-      padding-top calc(var(--header-height) * 0.5 * 0.9)
-    }
-
-    +keep-mobile() {
-      padding-top calc(var(--header-height) * 0.5 * 0.8)
-    }
-
-    .description {
-      display var(--first-screen-display)
-      color var(--first-screen-font-color-light)
-      font-weight bold
-      font-size var(--first-screen-font-size)
-      font-family var(--first-screen-font-family)
-      line-height 1.8
-      text-align center
-      transform translateY(var(--first-screen-font-offset))
-      opacity 0
-
-      .dark-mode & {
-        color var(--first-screen-font-color-dark)
-
-        .desc-item {
-          .desc
-          .cursor {
-            color var(--first-screen-font-color-dark)
-          }
-        }
-      }
-
-
-      .desc-item {
-        .desc {
-          color var(--first-screen-font-color-light)
-        }
-
-        .cursor {
-          color var(--first-screen-font-color-light)
-          animation blink-caret 0.8s step-end infinite
-        }
-      }
-
-
-      +keep-tablet() {
-        font-size calc(var(--first-screen-font-size) * 0.9)
-      }
-    }
-
-
-    .bottom-placeholder {
-      width 100%
-
-      .sc-icon-list {
-        display flex
-        justify-content center
-
-        .sc-icon-item {
-          display flex
-          align-items center
-          margin 0 1rem
-          cursor pointer
-
-          i {
-            color var(--first-screen-icon-color-light)
-            font-size var(--first-screen-icon-size)
-          }
-
-
-          svg {
-            width var(--first-screen-icon-size)
-            height var(--first-screen-icon-size)
-
-            path {
-              fill var(--first-screen-icon-color-light)
-            }
-          }
-
-
-          .dark-mode & {
-            i {
-              color var(--first-screen-icon-color-dark)
-            }
-
-            svg {
-              path {
-                fill var(--first-screen-icon-color-dark)
-              }
-            }
-          }
-
-
-          +keep-tablet() {
-            i {
-              font-size calc(var(--first-screen-icon-size) * 0.9)
-            }
-
-            svg {
-              width calc(var(--first-screen-icon-size) * 0.9)
-              height calc(var(--first-screen-icon-size) * 0.9)
-            }
-          }
-
-
-          a {
-            display flex !important
-            align-items center !important
-          }
-        }
-      }
-    }
-  }
-}
+        <div class="bottom-placeholder border-box">
+            
+        </div>
+    </div>
+</div>
 
     
 
@@ -390,8 +265,9 @@ $root = hexo-config('root')
                     <div class="home-post-content keep-markdown-body">
                         
                             <blockquote>
-<p>世界上只有一种真正的英雄主义，那就是看清生活的真相之后，依然热爱生活。<br>7月份的时候，去电影院看了《浪浪山小妖怪》，笑着笑着就看哭了，好像是我今年来第一次流泪。<br>故事本身是非常典型的英雄之旅的模板，浪浪山四只小妖怪，伪装成唐僧师徒，走上西行取经的道路。<br>路遇强敌，认识本心，一路顺利之后遭遇挫折，情况急转直下，重整之后挑战最后boss。<br>但就是这么套路化的故事，却让年近30的我，在影院昏暗的角落里，偷偷抹眼泪。</p>
+<p>世界上只有一种真正的英雄主义，那就是看清生活的真相之后，依然热爱生活。</p>
 </blockquote>
+<p>7月份的时候，去电影院看了《浪浪山小妖怪》，笑着笑着就看哭了，好像是我今年来第一次流泪。<br>故事本身是非常典型的英雄之旅的模板，浪浪山四只小妖怪，伪装成唐僧师徒，走上西行取经的道路。<br>路遇强敌，认识本心，一路顺利之后遭遇挫折，情况急转直下，重整之后挑战最后boss。<br>但就是这么套路化的故事，却让年近30的我，在影院昏暗的角落里，偷偷抹眼泪。</p>
                         
                     </div>
 
